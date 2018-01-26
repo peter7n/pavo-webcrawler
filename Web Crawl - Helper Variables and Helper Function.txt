@@ -15,7 +15,7 @@ bft
 numSites
 # Type: integer
 # Default Value: 0
-# Description: The user-specified num
+# Description: The user-specified numeric limit for the crawl
 
 kWord
 # Type: string
@@ -26,7 +26,7 @@ kWordWebsite
 # Type: string
 # Default Value: None
 # Description: The URL for the website where the keyword was found. If the keyword was not found or no keyword
-               was specifiied, the value is None.
+#              was specified, the value is None.
 
 srcValid
 # Type: boolean
@@ -41,20 +41,20 @@ destValid
 #              error-checking function.
 
 webcrawlRes
-# Type: string in JSON format
-# Default Value: "{}"
-# Description: This string holds the results of the webcrawl in JSON format.
+# Type: dictionary
+# Default Value: {}
+# Description: This dictionary holds the results of the webcrawl in JSON format.
 
 ##################################################################################################################
 
 Functions:
 
-addSite(source, destination)
+addSite(source, destination, webcrawlRes)
 # Parameters: source - The website that contains the link
 #             destination - The website to which the link is directed. If there are no links available, then None
 #                           should be passed for the destination.
 # Returns: Nothing
-# Description: This function adds a source/destination pair to the "webcrawlRes" JSON string. It checks to see if 
-#              the source is a new source or if it has already been included, and will update the JSON accordingly.
+# Description: This function adds a source/destination pair to the "webcrawlRes" dictionary. It checks to see if 
+#              the source is a new source or if it has already been included and will update the JSON accordingly.
 # Note: This function is optional for use. The web crawl program has the option to implement the JSON formatting
 #       using another method.
