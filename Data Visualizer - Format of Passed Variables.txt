@@ -1,0 +1,18 @@
+Description of web crawler output sent to data visualizer
+
+Output Format: {"websites" : ["URL_1": ["URL_2", "URL_3"], "URL_2" : ["URL_4"], etc.],
+                "traversalType" : "DFT" OR "BFT"
+                "keywordWebsite" : "URL_KEYWORD_WEBSITE"}
+
+Description of key/value pairs:
+
+"websites" is a JSON-formatted list of websites listed in the following way:
+first_source_site: [list of destination sites from first source], 
+second_source_site: [list of destination sites from second source], etc.
+
+"traversalType" has two possible values, "DFT" or "BFT". "DFT" indicates that the user chose depth-first 
+traversal, whole "BFT" indicates the user chose breadth-first traversal.
+
+"keywordWebsite" is the URL of the website where the user-entered keyword was found. If the user did not enter a
+keyword or the keyword was not found, then this parameter will have null value.
+

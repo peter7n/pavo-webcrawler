@@ -1,0 +1,60 @@
+Variables and functions for web crawl input/output
+##################################################################################################################
+Global Variables:
+
+dft
+# Type: boolean
+# Default Value: False
+# Description: Indicates whether or not the user chose to do a depth-first traversal
+
+bft
+# Type: boolean
+# Default Value: False
+# Description: Indicates whether or not the user chose to do a breadth-first traversal
+
+numSites
+# Type: integer
+# Default Value: 0
+# Description: The user-specified num
+
+kWord
+# Type: string
+# Default Value: None
+# Description: The keyword provided by the user. If the user does not specify a keyword, the value is None.
+
+kWordWebsite
+# Type: string
+# Default Value: None
+# Description: The URL for the website where the keyword was found. If the keyword was not found or no keyword
+               was specifiied, the value is None.
+
+srcValid
+# Type: boolean
+# Default Value: True
+# Description: Indicates whether the source website URL represents a valid URL as can be determined by the
+#              error-checking function.
+
+destValid
+# Type: boolean
+# Default Value: True
+# Description: Indicates whether the destination website URL represents a valid URL as can be determined by the
+#              error-checking function.
+
+webcrawlRes
+# Type: string in JSON format
+# Default Value: "{}"
+# Description: This string holds the results of the webcrawl in JSON format.
+
+##################################################################################################################
+
+Functions:
+
+addSite(source, destination)
+# Parameters: source - The website that contains the link
+#             destination - The website to which the link is directed. If there are no links available, then None
+#                           should be passed for the destination.
+# Returns: Nothing
+# Description: This function adds a source/destination pair to the "webcrawlRes" JSON string. It checks to see if 
+#              the source is a new source or if it has already been included, and will update the JSON accordingly.
+# Note: This function is optional for use. The web crawl program has the option to implement the JSON formatting
+#       using another method.
