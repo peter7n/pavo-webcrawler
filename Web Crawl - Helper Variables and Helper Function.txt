@@ -12,6 +12,11 @@ bft
 # Default Value: False
 # Description: Indicates whether or not the user chose to do a breadth-first traversal
 
+startingSite
+# Type: string
+# Default Value: None
+# Description: The starting site for the traversal
+
 numSites
 # Type: integer
 # Default Value: 0
@@ -28,18 +33,6 @@ kWordWebsite
 # Description: The URL for the website where the keyword was found. If the keyword was not found or no keyword
 #              was specified, the value is None.
 
-srcValid
-# Type: boolean
-# Default Value: True
-# Description: Indicates whether the source website URL represents a valid URL as can be determined by the
-#              error-checking function.
-
-destValid
-# Type: boolean
-# Default Value: True
-# Description: Indicates whether the destination website URL represents a valid URL as can be determined by the
-#              error-checking function.
-
 webcrawlRes
 # Type: dictionary
 # Default Value: {}
@@ -53,6 +46,7 @@ addSite(source, destination, webcrawlRes)
 # Parameters: source - The website that contains the link
 #             destination - The website to which the link is directed. If there are no links available, then None
 #                           should be passed for the destination.
+#             webcrawlRes - The dictionary containing the current results from the webcrawl
 # Returns: Nothing
 # Description: This function adds a source/destination pair to the "webcrawlRes" dictionary. It checks to see if 
 #              the source is a new source or if it has already been included and will update the JSON accordingly.
