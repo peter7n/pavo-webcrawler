@@ -121,9 +121,8 @@ def addSite(source, destination, webcrawlRes):
 formData = cgi.FieldStorage()
 dft, bft, startingSite, numSites, kWord = getFormData(formData)
 
-# Call the webcrawler, passing it the starting site and the webcrawlRes 
-# dictionary to update
-webcrawler(startingSite, webcrawlRes)
+# Call the webcrawler
+webcrawler(dft, bft, startingSite, numSites, kWord, webcrawlRes)
 
 # Call the data transfer tool to transfer data to the Visualizer
 dataTransfer()
