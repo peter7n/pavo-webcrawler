@@ -1,12 +1,24 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+import cgi
+import cgitb
 import json
 
-# Define global variables
+# Enable debugging
+cgitb.enable()
 
+###############################################################################
+# Define global variables
+###############################################################################
 # Indicates whether or not the user chose to do a depth-first traversal    
 dft = False
 
 # Indicates whether or not the user chose to do a breadth-first traversal
 bft = False
+
+# The starting site for the web traversal
+startingSite = None
 
 # The user-specified numeric limit for the crawl
 numSites = 0
@@ -21,6 +33,45 @@ kWordWebsite = None
 
 # This dictionary holds the results of the webcrawl in JSON format.
 webcrawlRes = {}
+
+def getFormData():
+###############################################################################
+# Paramters:   None
+# Returns:     A tuple to populate the following global variables in the order
+#              specified - dft, bft, numSites, kWord
+# Description: This function reads the form data submitted by the user and
+#              sets the global variables linked to that data
+###############################################################################
+    formData = cgi.FieldStorage()
+
+    if formData.getvalue('traversalType'):
+        traversalType = formData.getvalue('traversalType')
+        if traversalType == "depth-first":
+            dft = True
+            bft = False # Redundant, but included just in case
+        else:
+            bft = True
+            dft = False # Redundant, but included just in case
+    else:
+        dft = False
+        bft = False
+    
+    if formData.getvalue('startingSite'):
+        startingSite = formData.getvalue('startingSite')
+    else:
+        startingSite = None
+    
+    if formData.getvalue('numSites'):
+        numSites = int(formData.getvalue('numSites'))
+    else:
+        numSites = 0
+    
+    if formData.getvalue('kWord'):
+        kWord = formData.getvalue('kWord')
+    else:
+        kWord = None
+    
+    return dft, bft, startingSite, numSites, kWord
 
 # Define a class to hold the list of source websites
 class SourceWebsites:
@@ -71,8 +122,12 @@ def addSite(source, destination, webcrawlRes):
 ###############################################################################
 # Main Function
 ###############################################################################
-# Call the webcrawler and pass it the empty webcrawlRes dictionary
-webcrawler(webcrawlRes)
+# Get the data from the user-submitted form and set the global variable values
+dft, bft, startingSite, numSites, kWord = getFormData()
+
+# Call the webcrawler, passing it the starting site and the webcrawlRes 
+# dictionary to update
+webcrawler(startingSite, webcrawlRes)
 
 # Call the data transfer tool
 dataTransfer()

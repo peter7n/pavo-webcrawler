@@ -1,0 +1,36 @@
+<!-- For styling, I will use Bootstrap implementation --> 
+<!-- https://www.w3schools.com/bootstrap/bootstrap_get_started.asp -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Web Crawl</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="google-site-verification" content="GDwqse5Lu0-tb6ZxsNzBiCgsGBj1WPpm_V7b_4f9pWg" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    
+    <body>
+        <div class = "container">
+            <form action="http://web.engr.oregonstate.edu/cgi-bin/cgiwrap/~konturf/webcrawlProg.py" method="post">
+                
+                Type of traversal<br>
+                <input type="radio" name="traversalType" value="depth-first" required> Depth-First<br>
+                <input type="radio" name="traversalType" value="breadth-first"> Breadth-First<br>
+                <br>
+                Starting Site:
+                <input type="text" name="startingSite" required><br>
+                <br>
+                Number Limit for Traversal:
+                <input type="number" name="numSites" required><br>
+                <br>
+                Keyword To Stop Traversal (Optional):
+                <input type="text" name="kWord"><br>
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </body>
+</html>
