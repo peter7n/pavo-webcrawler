@@ -34,16 +34,15 @@ kWordWebsite = None
 # This dictionary holds the results of the webcrawl in JSON format.
 webcrawlRes = {}
 
-def getFormData():
+def getFormData(formData):
 ###############################################################################
-# Paramters:   None
+# Paramters:   formData  The data pulled from the form using 
+#              cgi.FieldStorage()
 # Returns:     A tuple to populate the following global variables in the order
 #              specified - dft, bft, numSites, kWord
 # Description: This function reads the form data submitted by the user and
 #              sets the global variables linked to that data
 ###############################################################################
-    formData = cgi.FieldStorage()
-
     if formData.getvalue('traversalType'):
         traversalType = formData.getvalue('traversalType')
         if traversalType == "depth-first":
@@ -73,9 +72,8 @@ def getFormData():
     
     return dft, bft, startingSite, numSites, kWord
 
-# Define a class to hold the list of source websites
-class SourceWebsites:
-    sourceList = []
+# Define a variable to hold the list of source websites
+sourceList = []
 
 def addSite(source, destination, webcrawlRes):
 ###############################################################################
@@ -96,13 +94,10 @@ def addSite(source, destination, webcrawlRes):
 ###############################################################################
     srcFound = False # Variable to see if source was already added to JSON
 
-    # Instantiate the class SourceWebsites to access the list of source 
-    # websites
-    srcSites = SourceWebsites()
-    if source in srcSites.sourceList:
+    if source in sourceList:
         srcFound = True
     else:
-        srcSites.sourceList.append(source)
+        sourceList.append(source)
     
     # If the source already exists and the destination is not None, then add
     # the destination to the list of the source's destinations
@@ -123,11 +118,12 @@ def addSite(source, destination, webcrawlRes):
 # Main Function
 ###############################################################################
 # Get the data from the user-submitted form and set the global variable values
-dft, bft, startingSite, numSites, kWord = getFormData()
+formData = cgi.FieldStorage()
+dft, bft, startingSite, numSites, kWord = getFormData(formData)
 
 # Call the webcrawler, passing it the starting site and the webcrawlRes 
 # dictionary to update
 webcrawler(startingSite, webcrawlRes)
 
-# Call the data transfer tool
+# Call the data transfer tool to transfer data to the Visualizer
 dataTransfer()
