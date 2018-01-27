@@ -1,0 +1,32 @@
+Test Cases for Webcrawl Input
+
+Test Case #1: Depth-first traversal, no keyword
+dft = True
+bft = False
+startingSite = "http://www.yahoo.com"
+numSites = 5
+kWord = None
+
+Test Case #2: Depth-first traversal, non-existent starting site
+dft = True
+bft = False
+startingSite = "http://www.jxdrewmbs.com"
+numSites = 3
+kWord = None
+
+Test Case #2: Depth-first traversal, commonly-used keyword
+dft = True
+bft = False
+startingSite = "https://www.vox.com"
+numSites = 10
+kWord = "country"
+
+Test Case #3: Depth-first traversal, little-used keyword
+dft = True
+bft = False
+startingSite = "https://stackoverflow.com"
+numSites = 4
+kWord = "hodiernal"
+
+
+
