@@ -1,0 +1,85 @@
+Webcrawl Input Test Cases
+
+Test Case #1: Depth-first traversal, no keyword
+dft = True
+bft = False
+startingSite = "http://www.yahoo.com"
+numSites = 5
+kWord = None
+
+Test Case #2: Depth-first traversal, non-existent starting site
+dft = True
+bft = False
+startingSite = "http://www.jxdrewmbs.com"
+numSites = 3
+kWord = None
+
+Test Case #3: Depth-first traversal, starting site with no links
+dft = True
+bft = False
+startingSite = "http://web.engr.oregonstate.edu/~konturf/test.html"
+numSites = 6
+kWord = None
+
+Test Case #4: Depth-first traversal, FTP starting site with zip file links
+dft = True
+bft = False
+startingSite = "ftp://speedtest.tele2.net/"
+numSites = 7
+kWord = None
+
+Test Case #5: Depth-first traversal, 1 level
+dft = True
+bft = False
+startingSite = "http://www.gocomics.com/"
+numSites = 1
+kWord = None
+
+Test Case #6: Depth-first traversal, commonly-used keyword
+dft = True
+bft = False
+startingSite = "https://www.vox.com"
+numSites = 10
+kWord = "country"
+
+Test Case #7: Depth-first traversal, little-used keyword
+dft = True
+bft = False
+startingSite = "https://stackoverflow.com"
+numSites = 4
+kWord = "hodiernal"
+
+Test Case #8: Depth-first traversal, non-word keyword
+dft = True
+bft = False
+startingSite = "http://www.hitbullseye.com/acad/quant/Percentage-and-Fraction.php"
+numSites = 8
+kWord = "12.5%"
+
+Test Case #9: Breadth-first traversal, 1 level
+dft = False
+bft = True
+startingSite = "https://news.google.com"
+numSites = 1
+kWord = None
+
+Test Case #10: Breadth-first traversal, 2 levels
+dft = False
+bft = True
+startingSite = "https://www.amazon.com"
+numSites = 2
+kWord = None
+
+Test Case #11: Breadth-first traversal, FTP starting site with zip file links
+dft = False
+bft = True
+startingSite = "ftp://speedtest.tele2.net/"
+numSites = 2
+kWord = None
+
+Test Case #12: Breadth-first traversal with keywords
+dft = False
+bft = True
+startingSite = "https://longform.org"
+numSites = 2
+kWord = "crime"

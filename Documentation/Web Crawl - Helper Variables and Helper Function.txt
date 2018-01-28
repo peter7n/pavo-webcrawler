@@ -17,10 +17,12 @@ startingSite
 # Default Value: None
 # Description: The starting site for the traversal
 
-numSites
+crawlLimit
 # Type: integer
 # Default Value: 0
-# Description: The user-specified numeric limit for the crawl
+# Description: The user-specified numeric limit for the crawl. The minimum value for crawlLimit is 0. The proposed
+#              maximum values are 25 (for DFT) and 2 (for BFT). The minimum and maximum values will be enforced on
+#              the front end.
 
 kWord
 # Type: string
@@ -37,6 +39,12 @@ webcrawlRes
 # Type: dictionary
 # Default Value: {}
 # Description: This dictionary holds the results of the webcrawl in JSON format.
+
+errorMsg
+# Type: string
+# Default Value: None
+# Description: This string will contain a description of any error that occurred during the webcrawl or at any
+#              other part of the program. This description will be sent to the Data Visualizer.
 
 ##################################################################################################################
 

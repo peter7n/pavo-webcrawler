@@ -21,7 +21,7 @@ bft = False
 startingSite = None
 
 # The user-specified numeric limit for the crawl
-numSites = 0
+crawlLimit = 0
 
 # The keyword provided by the user. If the user does not specify a keyword, 
 # the value is None.
@@ -34,12 +34,15 @@ kWordWebsite = None
 # This dictionary holds the results of the webcrawl in JSON format.
 webcrawlRes = {}
 
+# Any error message is passed in this variable.
+errorMsg = None
+
 def getFormData(formData):
 ###############################################################################
 # Paramters:   formData  The data pulled from the form using 
 #              cgi.FieldStorage()
 # Returns:     A tuple to populate the following global variables in the order
-#              specified - dft, bft, numSites, kWord
+#              specified - dft, bft, crawlLimit, kWord
 # Description: This function reads the form data submitted by the user and
 #              sets the global variables linked to that data
 ###############################################################################
@@ -60,17 +63,17 @@ def getFormData(formData):
     else:
         startingSite = None
     
-    if formData.getvalue('numSites'):
-        numSites = int(formData.getvalue('numSites'))
+    if formData.getvalue('crawlLimit'):
+        crawlLimit = int(formData.getvalue('crawlLimit'))
     else:
-        numSites = 0
+        crawlLimit = 0
     
     if formData.getvalue('kWord'):
         kWord = formData.getvalue('kWord')
     else:
         kWord = None
     
-    return dft, bft, startingSite, numSites, kWord
+    return dft, bft, startingSite, crawlLimit, kWord
 
 # Define a variable to hold the list of source websites
 sourceList = []
@@ -99,10 +102,12 @@ def addSite(source, destination, webcrawlRes):
     else:
         sourceList.append(source)
     
-    # If the source already exists and the destination is not None, then add
-    # the destination to the list of the source's destinations
+    # If the source already exists and the destination is not None, then check
+    # if the destination is already in the source's destination list. If not, 
+    # add the destination to the list of the source's destinations
     if srcFound and destination is not None:
-        webcrawlRes[source].append(destination)
+        if destination not in webcrawlRes[source]:
+            webcrawlRes[source].append(destination)
     
     # If the source does not already exist and the destination is not None,
     # then create a new key/value pair with the source and destination
@@ -119,10 +124,10 @@ def addSite(source, destination, webcrawlRes):
 ###############################################################################
 # Get the data from the user-submitted form and set the global variable values
 formData = cgi.FieldStorage()
-dft, bft, startingSite, numSites, kWord = getFormData(formData)
+dft, bft, startingSite, crawlLimit, kWord = getFormData(formData)
 
 # Call the webcrawler
-webcrawler(dft, bft, startingSite, numSites, kWord, webcrawlRes)
+webcrawler(dft, bft, startingSite, crawlLimit, kWord, webcrawlRes)
 
 # Call the data transfer tool to transfer data to the Visualizer
 dataTransfer()

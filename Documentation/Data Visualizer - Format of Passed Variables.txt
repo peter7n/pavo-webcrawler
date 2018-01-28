@@ -1,8 +1,10 @@
 Description of web crawler output sent to data visualizer
 
-Output Format: {"websites" : ["URL_1": ["URL_2", "URL_3"], "URL_2" : ["URL_4"], etc.],
-                "traversalType" : "DFT" OR "BFT"
-                "keywordWebsite" : "URL_KEYWORD_WEBSITE"}
+Variable name containing the JSON web crawler output: webcrawlResults
+
+Output Format: {"websites" : ["URL_1" : ["URL_2", "URL_3"], "URL_2" : ["URL_4"], etc.],
+                "keywordWebsite" : "URL_KEYWORD_WEBSITE",
+                "errorMessage" : "Description of any error that occurred"}
 
 Description of key/value pairs:
 
@@ -10,9 +12,10 @@ Description of key/value pairs:
 first_source_site: [list of destination sites from first source], 
 second_source_site: [list of destination sites from second source], etc.
 
-"traversalType" has two possible values, "DFT" or "BFT". "DFT" indicates that the user chose depth-first 
-traversal, whole "BFT" indicates the user chose breadth-first traversal.
-
 "keywordWebsite" is the URL of the website where the user-entered keyword was found. If the user did not enter a
 keyword or the keyword was not found, then this parameter will have null value.
+
+"errorMessage" contains a description of any error that occurred during the webcrawl. If no error occurred, then
+this parameter will have null value. If an error did occur, then it should be assumed that the other key/value 
+pairs contain corrupt data.
 
