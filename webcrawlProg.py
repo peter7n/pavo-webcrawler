@@ -127,7 +127,46 @@ formData = cgi.FieldStorage()
 dft, bft, startingSite, crawlLimit, kWord = getFormData(formData)
 
 # Call the webcrawler
-webcrawler(dft, bft, startingSite, crawlLimit, kWord, webcrawlRes)
+#webcrawler(dft, bft, startingSite, crawlLimit, kWord, webcrawlRes)
 
 # Call the data transfer tool to transfer data to the Visualizer
-dataTransfer()
+#dataTransfer()
+
+print "Content-Type: text/plain;charset=utf-8"
+print
+print "This page runs the Python code"
+print "You can test your output by putting it in a Python print statement"
+
+print
+
+print "Here are the variables that have been set based on the form data that was passed:"
+print "dft = ",
+print dft
+print "bft = ",
+print bft
+print "startingSite = ",
+print startingSite
+print "crawlLimit = ",
+print crawlLimit
+print "kWord = ",
+print kWord
+
+print
+
+print "Test the code for creating the JSON format for the output of the webcrawler:"
+print 'addSite("http://www.google.com", "http://www.yahoo.com", webcrawlRes)'
+addSite("http://www.google.com", "http://www.yahoo.com", webcrawlRes)
+print "Result: ",
+print webcrawlRes
+print 'addSite("http://www.google.com", "http://www.espn.com", webcrawlRes)'
+addSite("http://www.google.com", "http://www.espn.com", webcrawlRes)
+print "Result: ",
+print webcrawlRes
+print 'addSite("http://www.yahoo.com", "http://www.wikipedia.org", webcrawlRes)'
+addSite("http://www.yahoo.com", "http://www.wikipedia.org", webcrawlRes)
+print "Result: ",
+print webcrawlRes
+print 'addSite("http://www.espn.com", None, webcrawlRes)'
+addSite("http://www.espn.com", None, webcrawlRes)
+print "Result: ",
+print webcrawlRes
