@@ -2,7 +2,7 @@ Description of web crawler output sent to data visualizer
 
 Variable name containing the JSON web crawler output: webcrawlResults
 
-Output Format: {"websites" : ["URL_1" : ["URL_2", "URL_3"], "URL_2" : ["URL_4"], etc.],
+Output Format: {"websites" : {"URL_1" : ["URL_2", "URL_3"], "URL_2" : ["URL_4"], etc.},
                 "keywordWebsite" : "URL_KEYWORD_WEBSITE",
                 "errorMessage" : "Description of any error that occurred"}
 
