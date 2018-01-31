@@ -6,16 +6,21 @@ Output Format: {"websites" : ["URL_1" : ["URL_2", "URL_3"], "URL_2" : ["URL_4"],
                 "keywordWebsite" : "URL_KEYWORD_WEBSITE",
                 "errorMessage" : "Description of any error that occurred"}
 
+Proposed Output Format: {"websites" : [ {"source" : "URL_1", "destinations" : ["URL_2", "URL_3"], "title" : "URL_1_TITLE"
+}, {"source" : "URL_2", "destinations" : ["URL_4", "URL_5"], "title" : "URL_2_TITLE" 
+}, etc. ],
+               "keywordWebsite" : "URL_KEYWORD_WEBSITE",
+               "errorMessage" : "Description of any error that occurred"}
+
 Description of key/value pairs:
 
 "websites" is a JSON-formatted list of websites listed in the following way:
-first_source_site: [list of destination sites from first source], 
+first_source_site: [list of destination sites from first source],
 second_source_site: [list of destination sites from second source], etc.
 
 "keywordWebsite" is the URL of the website where the user-entered keyword was found. If the user did not enter a
 keyword or the keyword was not found, then this parameter will have null value.
 
 "errorMessage" contains a description of any error that occurred during the webcrawl. If no error occurred, then
-this parameter will have null value. If an error did occur, then it should be assumed that the other key/value 
+this parameter will have null value. If an error did occur, then it should be assumed that the other key/value
 pairs contain corrupt data.
-
