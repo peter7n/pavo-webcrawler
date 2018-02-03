@@ -1,0 +1,213 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<style>
+			div.outer {
+				position: relative;
+				/*top: 50px;*/
+				display: block;
+				/*float: left;*/
+				clear: both;
+				left: 200px;
+				top: 30px;
+				/*margin-left: 4em;
+				margin-right: 10em;*/
+				margin-bottom: 4em;
+				/*border: 1px solid red;*/
+				/*background: #f00;*/
+				/*width: 30px;
+				height: 30px;*/
+				/*border-radius: 50%;*/
+			}
+
+			div.inner {
+				display: inline-block;
+				background: #f00;
+				width: 20px;
+				height: 20px;
+				border-radius: 50%;
+			}
+
+			#overlay {
+				position: absolute;
+				top:0px;
+				bottom:0px;
+				left:0px;
+				right:0px;
+			}
+
+		}
+
+		</style>
+	</head>
+	<body>
+		<div id="drawing"></div>
+		<div id="overlay"></div>
+	</body>
+
+	<script type="text/javascript">
+		function appendDom(container, jsonData) {
+			for (var i = 0; i < jsonData.length; i++) {
+				var $divParent = $("<div class='outer'></div>");
+				var $divChild = $("<a><div class='inner'></div></a>");
+				$divParent.attr('id', jsonData[i].id);
+				$divChild.attr('href', jsonData[i].source);
+				$divChild.attr('title', jsonData[i].title);
+				$divParent.append($divChild);
+				if (jsonData[i].destinations) {
+					appendDom($divParent, jsonData[i].destinations);
+				}
+				container.append($divParent);
+				counter++;
+			}
+		}
+
+		var breadthFirstCase =
+		{
+			"websites":[
+		 		{ 	
+		 			"id":"ID-1",
+		 			"source":"URL_1",
+		 			"title":"TITLE_1",
+		 			"destinations":[
+		 				{
+		 					"id":"ID-2",
+		 					"source":"URL_2",
+		 					"title":"TITLE_2",
+		 					"destinations":[
+		 						{
+		 							"id":"ID-3",
+		 							"source":"URL_3",
+		 							"title":"TITLE_3",
+		 							"destinations":[]
+		 						},
+		 						{
+		 							"id":"ID-4",
+		 							"source":"URL_4",
+		 							"title":"TITLE_4",
+		 							"destinations":[]
+		 						}
+		 					]
+		 				},
+		 				{
+		 					"id":"ID-5",
+		 					"source":"URL_5",
+		 					"title":"TITLE_5",
+		 					"destinations":[]
+		 				}
+		 			],
+		 		},
+			],
+         "keywordWebsite":"ID_KEYWORD_WEBSITE",
+         "errorMessage":"Description of any error that occurred"
+      }
+
+		var breadthFirstCase2 =
+		{
+			"websites":[
+		 		{ 	
+		 			"id":"ID-1",
+		 			"source":"http://google.com",
+		 			"title":"TITLE_1",
+		 			"destinations":[
+		 				{
+		 					"id":"ID-2",
+		 					"source":"http://yahoo.com",
+		 					"title":"TITLE_2",
+		 					"destinations":[
+		 						{
+		 							"id":"ID-3",
+		 							"source":"http://github.com",
+		 							"title":"TITLE_3",
+		 							"destinations":[]
+		 						},
+		 						{
+		 							"id":"ID-4",
+		 							"source":"http://oregonstate.edu",
+		 							"title":"TITLE_4",
+		 							"destinations":[]
+		 						}
+		 					]
+		 				},
+		 				{
+		 					"id":"ID-5",
+		 					"source":"http://rottentomatoes.com",
+		 					"title":"TITLE_5",
+		 					"destinations":[]
+		 				}
+		 			],
+		 		},
+			],
+         "keywordWebsite":"ID_KEYWORD_WEBSITE",
+         "errorMessage":"Description of any error that occurred"
+      }
+
+		var depthFirstCase =
+		{
+			"websites":[
+		 		{ 	
+		 			"id":"ID-1",
+		 			"source":"http://google.com",
+		 			"title":"TITLE_1",
+		 			"destinations":[
+		 				{
+		 					"id":"ID-2",
+		 					"source":"http://yahoo.com",
+		 					"title":"TITLE_2",
+		 					"destinations":[
+		 						{
+		 							"id":"ID-3",
+		 							"source":"http://github.com",
+		 							"title":"TITLE_3",
+		 							"destinations":[
+		 								{
+		 									"id":"ID-4",
+				 							"source":"http://oregonstate.edu",
+				 							"title":"TITLE_4",
+				 							"destinations":[]
+		 								}
+	 								]
+		 						}
+				 			]
+				 		}
+					]
+				}
+			],
+         "keywordWebsite":"ID_KEYWORD_WEBSITE",
+         "errorMessage":"Description of any error that occurred"
+      }
+
+		var ns = "http://www.w3.org/2000/svg";
+		var div = document.getElementById("drawing");
+		var svg = document.createElementNS(ns, "svg");
+		svg.setAttributeNS(null, "width", "100%");
+		svg.setAttributeNS(null, "height", "100%");
+		div.appendChild(svg);
+
+		// var counter = { "ct": "test" };
+		var counter = 0;
+		
+		appendDom($("#overlay"), breadthFirstCase2.websites);
+
+		// Draw lines
+		for (var j = 1; j < counter; j++) {
+			var urlNode = $("#ID-" + (j + 1));
+			var offset = urlNode.offset();
+			var parent = $(urlNode.parent());
+			var parentOffset = parent.offset();
+			console.log("******");
+			console.log(offset.left);
+			console.log(offset.top);
+			console.log(parentOffset.left);
+			console.log(parentOffset.top);
+			var line = document.createElementNS(ns, "line");
+			line.setAttributeNS(null, "x1", offset.left);
+			line.setAttributeNS(null, "y1", offset.top);
+			line.setAttributeNS(null, "x2", parentOffset.left);
+			line.setAttributeNS(null, "y2", parentOffset.top);
+			line.setAttributeNS(null, "stroke", "green");
+			svg.appendChild(line);
+		}
+	</script>
+
+</html>
