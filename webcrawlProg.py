@@ -7,6 +7,7 @@
 import cgi
 import cgitb
 import json
+import crawler
 
 # Enable debugging
 cgitb.enable()
