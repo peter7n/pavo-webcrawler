@@ -2,25 +2,54 @@ Description of web crawler output sent to data visualizer
 
 Variable name containing the JSON web crawler output: webcrawlResults
 
-Output Format: {"websites" : {"URL_1" : ["URL_2", "URL_3"], "URL_2" : ["URL_4"], etc.},
-                "keywordWebsite" : "URL_KEYWORD_WEBSITE",
-                "errorMessage" : "Description of any error that occurred"}
-
-Proposed Output Format: {"websites" : [ {"source" : "URL_1", "destinations" : ["URL_2", "URL_3"], "title" : "URL_1_TITLE"
-}, {"source" : "URL_2", "destinations" : ["URL_4", "URL_5"], "title" : "URL_2_TITLE" 
-}, etc. ],
-               "keywordWebsite" : "URL_KEYWORD_WEBSITE",
-               "errorMessage" : "Description of any error that occurred"}
+Format of webcrawlResults:
+{
+	"websites":[
+ 		{ 	
+ 			"id":"ID-1",
+ 			"source":"URL_1",
+ 			"title":"TITLE_1",
+ 			"destinations":[
+ 				{
+ 					"id":"ID-2",
+ 					"source":"URL_2",
+ 					"title":"TITLE_2",
+ 					"destinations":[
+ 						{
+ 							"id":"ID-3",
+ 							"source":"URL_3",
+ 							"title":"TITLE_3",
+ 							"destinations":[]
+ 						},
+ 						{
+ 							"id":"ID-4",
+ 							"source":"URL_4",
+ 							"title":"TITLE_4",
+ 							"destinations":[]
+ 						}
+ 					]
+ 				},
+ 				{
+ 					"id":"ID-5",
+ 					"source":"URL_5",
+ 					"title":"TITLE_5",
+ 					"destinations":[]
+ 				}
+ 			],
+ 		},
+	],
+   "keywordWebsite":"ID_KEYWORD_WEBSITE",
+   "errorMessage":"Description of any error that occurred"
+}
 
 Description of key/value pairs:
 
-"websites" is a JSON-formatted list of websites listed in the following way:
-first_source_site: [list of destination sites from first source],
-second_source_site: [list of destination sites from second source], etc.
+"websites" is a list of JSON objects containing the source website's unique ID, URL, title, and a nested list of
+destination websites.
 
-"keywordWebsite" is the URL of the website where the user-entered keyword was found. If the user did not enter a
+"keywordWebsite" is the ID of the website where the user-entered keyword was found. If the user did not enter a
 keyword or the keyword was not found, then this parameter will have null value.
 
 "errorMessage" contains a description of any error that occurred during the webcrawl. If no error occurred, then
-this parameter will have null value. If an error did occur, then it should be assumed that the other key/value
-pairs contain corrupt data.
+this parameter will have null value. If an error did occur, then it should be assumed that the othe key/value pairs
+contain corrupt data.

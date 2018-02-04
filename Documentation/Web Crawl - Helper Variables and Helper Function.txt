@@ -1,7 +1,7 @@
 Variables and functions for web crawl input/output
 ##################################################################################################################
-Global Variables:
-
+Global Variables
+##################################################################################################################
 dft
 # Type: boolean
 # Default Value: False
@@ -37,8 +37,8 @@ kWordWebsite
 
 webcrawlRes
 # Type: dictionary
-# Default Value: {}
-# Description: This dictionary holds the results of the webcrawl in JSON format.
+# Default Value: []
+# Description: This list of dictionaries holds the results of the web crawl in JSON format.
 
 errorMsg
 # Type: string
@@ -47,16 +47,19 @@ errorMsg
 #              other part of the program. This description will be sent to the Data Visualizer.
 
 ##################################################################################################################
-
-Functions:
-
-addSite(source, destination, webcrawlRes)
-# Parameters: source - The website that contains the link
-#             destination - The website to which the link is directed. If there are no links available, then None
-#                           should be passed for the destination.
-#             webcrawlRes - The dictionary containing the current results from the webcrawl
-# Returns: Nothing
-# Description: This function adds a source/destination pair to the "webcrawlRes" dictionary. It checks to see if 
-#              the source is a new source or if it has already been included and will update the JSON accordingly.
-# Note: This function is optional for use. The web crawl program has the option to implement the JSON formatting
-#       using another method.
+Functions
+##################################################################################################################
+addSite(srcID, srcURL, srcTitle, destID, destURL, destTitle, webcrawlRes)
+# Parameters:  srcID        The unique ID for the source website
+#              srcURL       The URL for the source website
+#              srcTitle     The title for the source website
+#              destID       The unique ID for the destination website
+#              destURL      The URL for the destination website
+#              destTitle    The title for the destination website
+#              webcrawlRes  The list of dictionaries that holds the results of the web crawl in JSON format
+# Returns:     Nothing
+# Description: This function adds a source/destination pair to the "webcrawlRes" list. It checks to see if the 
+#              destination is a new one for the source or if it has already been included, and it will update the
+#              list of websites accordingly.
+# Note:        This function is optional for use. The web crawl program has the option to implement the JSON
+#              formatting using another method.

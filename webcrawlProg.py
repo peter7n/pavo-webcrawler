@@ -1,6 +1,9 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
+# To load this code on your account, follow the guidance on
+# https://it.engineering.oregonstate.edu/setup-publichtml-cgi-scripting
+
 import cgi
 import cgitb
 import json
@@ -31,8 +34,8 @@ kWord = None
 # found or no keyword was specifiied, the value is None.
 kWordWebsite = None
 
-# This dictionary holds the results of the webcrawl in JSON format.
-webcrawlRes = {}
+# This list of dictionaries holds the results of the web crawl in JSON format.
+webcrawlRes = []
 
 # Any error message is passed in this variable.
 errorMsg = None
@@ -75,49 +78,105 @@ def getFormData(formData):
     
     return dft, bft, startingSite, crawlLimit, kWord
 
-# Define a variable to hold the list of source websites
-sourceList = []
 
-def addSite(source, destination, webcrawlRes):
+def addSite(srcID, srcURL, srcTitle, destID, destURL, destTitle, webcrawlRes):
 ###############################################################################
-# Parameters:  source       The website that contains the link
-#              destination  The website to which the link is directed. If
-#                           there are no links available, then None should be
-#                           passed for the destination.
-#              webcrawlRes  The dictionary containing the current results from
-#                           the webcrawl
+# Parameters:  srcID        The unique ID for the source website
+#              srcURL       The URL for the source website
+#              srcTitle     The title for the source website
+#              destID       The unique ID for the destination website
+#              destURL      The URL for the destination website
+#              destTitle    The title for the destination website
+#              webcrawlRes  The list of dictionaries that holds the results of 
+#                           the web crawl in JSON format
 # Returns:     Nothing
 # Description: This function adds a source/destination pair to the 
-#              "webcrawlRes" dictionary. It checks to see if the source is a
-#              new source or if it has already been included and will update
-#              the JSON accordingly.
+#              "webcrawlRes" list. It checks to see if the destination is a
+#              new one for the source or if it has already been included, and
+#              it will update the list of websites accordingly.
 # Note:        This function is optional for use. The web crawl program has
 #              the option to implement the JSON formatting using another
 #              method.
 ###############################################################################
-    srcFound = False # Variable to see if source was already added to JSON
+    if not webcrawlRes:
+        srcInfo = {
+            "id" :           srcID,
+            "source" :       srcURL,
+            "title" :        srcTitle,
+            "destinations" : []
+        } 
+        webcrawlRes.append(srcInfo)
+        if destID:
+            destInfo = {
+                "id" :           destID,
+                "source" :       destURL,
+                "title" :        destTitle,
+                "destinations" : []
+            }
+            webcrawlRes[0]["destinations"].append(destInfo)
+        return
+    
+    # Find the source website
+    srcWebsite, found = findSrc(srcID, webcrawlRes)
+    if not found:
+        # The source website should have been found
+        print "Site not found"
+    
+    if destID:
+        # Make sure the destination site was not already added
+        alreadyAdded = findDest(destID, srcWebsite["destinations"])
+        if not alreadyAdded:
+            destInfo = {
+                "id" :           destID,
+                "source" :       destURL,
+                "title" :        destTitle,
+                "destinations" : []
+            }
+            srcWebsite["destinations"].append(destInfo)
+    
 
-    if source in sourceList:
-        srcFound = True
-    else:
-        sourceList.append(source)
-    
-    # If the source already exists and the destination is not None, then check
-    # if the destination is already in the source's destination list. If not, 
-    # add the destination to the list of the source's destinations
-    if srcFound and destination is not None:
-        if destination not in webcrawlRes[source]:
-            webcrawlRes[source].append(destination)
-    
-    # If the source does not already exist and the destination is not None,
-    # then create a new key/value pair with the source and destination
-    elif not srcFound and destination is not None:
-        webcrawlRes[source] = [destination]
-    
-    # If the source does not exist and the destination is None, then create a
-    # new key/value pair with an empty list as the value
-    elif not srcFound and destination is None:
-        webcrawlRes[source] = []
+def findSrc(srcID, webcrawlRes):
+###############################################################################
+# Parameters:  srcID        The unique ID for the source website
+#              webcrawlRes  The list of dictionaries that holds the results of 
+#                          the web crawl in JSON format
+# Returns:     The dictionary corresponding the the source website and a 
+#              boolean indicating whether the source website was found.
+# Description: This function recursively searches the webcrawlRes list of
+#              dictionaries to find the dictionary corresponding the the
+#              source website.
+###############################################################################
+    found = False
+    for x in webcrawlRes:
+        if x["id"] == srcID:
+            found = True
+            return x, found
+        else:
+            # make a recursive call on the current website's destination list
+            y, found = findSrc(srcID, x["destinations"])
+            if found:
+                return y, found
+    # if site was not found, then return nothing
+    return found, None
+
+
+def findDest(destID, destList):
+###############################################################################
+# Parameters:  destID    The unique ID for the destination website
+#              destList  The list of destination websites for the current 
+#                        source website
+# Returns:     True if the destination ID was found in the list of destination
+#              websites and false if not.
+# Description: This function determines if a destination website has already
+#              been added to the list of destination websites.
+###############################################################################
+    found = False
+    for x in destList:
+        if x["id"] == destID:
+            found = True
+            return found
+    return found
+
 
 ###############################################################################
 # Main Function
@@ -132,6 +191,7 @@ dft, bft, startingSite, crawlLimit, kWord = getFormData(formData)
 # Call the data transfer tool to transfer data to the Visualizer
 #dataTransfer()
 
+# Testing code
 print "Content-Type: text/plain;charset=utf-8"
 print
 print "This page runs the Python code"
@@ -154,19 +214,19 @@ print kWord
 print
 
 print "Test the code for creating the JSON format for the output of the webcrawler:"
-print 'addSite("http://www.google.com", "http://www.yahoo.com", webcrawlRes)'
-addSite("http://www.google.com", "http://www.yahoo.com", webcrawlRes)
+print 'addSite("ID-0", "http://www.google.com", "Google", "ID-1", "http://www.yahoo.com", "Yahoo", webcrawlRes)'
+addSite("ID-0", "http://www.google.com", "Google", "ID-1", "http://www.yahoo.com", "Yahoo", webcrawlRes)
 print "Result: ",
 print webcrawlRes
-print 'addSite("http://www.google.com", "http://www.espn.com", webcrawlRes)'
-addSite("http://www.google.com", "http://www.espn.com", webcrawlRes)
+print 'addSite("ID-0", "http://www.google.com", "Google", "ID-2", "http://www.espn.com", "ESPN", webcrawlRes)'
+addSite("ID-0", "http://www.google.com", "Google", "ID-2", "http://www.espn.com", "ESPN", webcrawlRes)
 print "Result: ",
 print webcrawlRes
-print 'addSite("http://www.yahoo.com", "http://www.wikipedia.org", webcrawlRes)'
-addSite("http://www.yahoo.com", "http://www.wikipedia.org", webcrawlRes)
+print 'addSite("ID-1", "http://www.yahoo.com", "Yahoo", "ID-3", "http://www.wikipedia.org", "Wikipedia", webcrawlRes)'
+addSite("ID-1", "http://www.yahoo.com", "Yahoo", "ID-3", "http://www.wikipedia.org", "Wikipedia", webcrawlRes)
 print "Result: ",
 print webcrawlRes
-print 'addSite("http://www.espn.com", None, webcrawlRes)'
-addSite("http://www.espn.com", None, webcrawlRes)
+print 'addSite("ID-2", "http://www.espn.com", "ESPN", None, None, None, webcrawlRes)'
+addSite("ID-2", "http://www.espn.com", "ESPN", None, None, None, webcrawlRes)
 print "Result: ",
 print webcrawlRes

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+    <!-- Links to Bootstrap were obtainef from https://getbootstrap.com/docs/4.0/getting-started/introduction/ -->
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <style>
+            #header-image {
+                width: 100%;
+            }
+
+            #numLevels {
+                width: 10em;
+            }
+
+            #stopKeyword {
+                width: 25em;
+            }
+
+            form {
+                padding-top: 15px;
+            }
+        </style>
+
+
+        <title>Web Crawler</title>
+    </head>
+
+    <body>
+        <script>
+            function setTraversalMax(val) {
+                crawlLimit = document.getElementById("numLevels");
+                if(val == "depth-first") {
+                    crawlLimit.max = "25";
+                    if(crawlLimit.value > 25) {
+                        crawlLimit.value = "";
+                    }
+                }
+                else {
+                    crawlLimit.max = "2";
+                    if(crawlLimit.value > 2) {
+                        crawlLimit.value = "";
+                    }
+                }
+            }
+        </script>
+        <header>
+            <div class="page-header">
+                <img src="images/web_crawler_graphic.jpg" id="header_image">
+            </div>
+        </header>
+       
+        <div class="container">
+            <form action="http://web.engr.oregonstate.edu/cgi-bin/cgiwrap/~konturf/webcrawlProg.py" method="post">
+                <div class="form-group">
+                    <label for="startingWebsite">Starting Website for Crawl</label>
+                    <input type="url" class="form-control" id="startingWebsite" name="startingSite" placeholder="Enter starting website" required>
+                </div>
+                <div class="form-group">
+                    <label for="travType">Type of Traversal</label>
+                    <div id="travType">
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="traversalType" id="dft" value="depth-first" onclick="setTraversalMax(this.value)" required>
+                          <label class="form-check-label" for="dft">Depth-First</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="traversalType" id="bft" value="breadth-first" onclick="setTraversalMax(this.value)" required>
+                          <label class="form-check-label" for="bft">Breadth-First</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="crawlLimit">Number of Levels for Traversal</label>
+                    <input type="number" class="form-control" min="0" max="25" id="numLevels" name="crawlLimit" aria-describedby="crawlLimitInstr" placeholder="Number of levels" required>
+                    <small id="crawlLimitInstr" class="form-text text-muted">Choose a limit between 0 and 25 for depth-first traversal or between 0 and 2 for breadth-first traversal.</small>
+                </div>
+                <div class="form-group">
+                    <label for="stopKeyword">Keyword to Stop Traversal</label>
+                    <input type="text" class="form-control" id="stopKeyword" name="kWord" aria-describedby="keywordHelp" placeholder="Enter keyword (Optional)">
+                    <small id="keywordHelp" class="form-text text-muted">OPTIONAL - Web crawl will stop if keyword is encountered on a website.</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>

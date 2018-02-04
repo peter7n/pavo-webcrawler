@@ -18,6 +18,18 @@
             function onSubmitForm() {
                 document.webcrawlInput.action = document.getElementById("formWebsite").value;
             }
+            function setTraversalMax(val) {
+                crawlLimit = document.getElementById("crawlLimit");
+                if(val == "depth-first") {
+                    crawlLimit.max = "25";
+                }
+                else {
+                    crawlLimit.max = "2";
+                    if(crawlLimit.value > 2) {
+                        crawlLimit.value = "";
+                    }
+                }
+            }
         </script>
         <div class = "container">
             <form name="webcrawlInput" onSubmit="return onSubmitForm();" method="post">
@@ -26,14 +38,14 @@
                 <input id="formWebsite" type="text" name="formWebsite" size="75" required><br>
                 <br>
                 Type of traversal<br>
-                <input type="radio" name="traversalType" value="depth-first" required> Depth-First<br>
-                <input type="radio" name="traversalType" value="breadth-first"> Breadth-First<br>
+                <input type="radio" name="traversalType" value="depth-first" onclick="setTraversalMax(this.value)" required> Depth-First<br>
+                <input type="radio" name="traversalType" value="breadth-first" onclick="setTraversalMax(this.value)"> Breadth-First<br>
                 <br>
                 Starting Site:
                 <input type="text" name="startingSite" required><br>
                 <br>
                 Number Limit for Traversal:
-                <input type="number" name="crawlLimit" required><br>
+                <input type="number" name="crawlLimit" id="crawlLimit" max="25" min="0" required><br>
                 <br>
                 Keyword To Stop Traversal (Optional):
                 <input type="text" name="kWord"><br>
