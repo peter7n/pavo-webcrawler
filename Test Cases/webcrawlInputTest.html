@@ -1,0 +1,159 @@
+<!-- For styling, I will use Bootstrap implementation --> 
+<!-- https://www.w3schools.com/bootstrap/bootstrap_get_started.asp -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>Web Crawl Input Tester</title>        
+    </head>
+    
+    <body>
+        <script>
+            
+            function onSubmitForm() {
+                document.webcrawlInput.action = document.getElementById("formWebsite").value;
+            }
+            
+            function setTestCase(val) {
+                var depthFirst = document.getElementById("dft");
+                var breadthFirst = document.getElementById("bft");
+                var startingSite = document.getElementById("start");
+                var crawlLimit = document.getElementById("crawlLimit");
+                var kWord = document.getElementById("kWord");
+                
+                if(val == "one") {
+                    depthFirst.checked = true;
+                    startingSite.value = "http://www.yahoo.com";
+                    crawlLimit.value = 5;
+                    kWord.value = "";
+                }
+                if(val == "two") {
+                    depthFirst.checked = true;
+                    startingSite.value = "http://www.jxdrewmbs.com";
+                    crawlLimit.value = 3;
+                    kWord.value = "";
+                }
+                if(val == "three") {
+                    depthFirst.checked = true;
+                    startingSite.value = "http://web.engr.oregonstate.edu/~konturf/test.html";
+                    crawlLimit.value = 6;
+                    kWord.value = "";
+                }
+                if(val == "four") {
+                    depthFirst.checked = true;
+                    startingSite.value = "ftp://speedtest.tele2.net/";
+                    crawlLimit.value = 7;
+                    kWord.value = "";
+                }
+                if(val == "five") {
+                    depthFirst.checked = true;
+                    startingSite.value = "http://www.gocomics.com";
+                    crawlLimit.value = 0;
+                    kWord.value = "";
+                }
+                if(val == "six") {
+                    depthFirst.checked = true;
+                    startingSite.value = "https://www.vox.com";
+                    crawlLimit.value = 10;
+                    kWord.value = "country";
+                }
+                if(val == "seven") {
+                    depthFirst.checked = true;
+                    startingSite.value = "https://stackoverflow.com";
+                    crawlLimit.value = 4;
+                    kWord.value = "hodiernal";
+                }
+                if(val == "eight") {
+                    depthFirst.checked = true;
+                    startingSite.value = "http://www.hitbullseye.com/acad/quant/Percentage-and-Fraction.php";
+                    crawlLimit.value = 8;
+                    kWord.value = "12.5%";
+                }
+                if(val == "nine") {
+                    breadthFirst.checked = true;
+                    startingSite.value = "https://news.google.com";
+                    crawlLimit.value = 1;
+                    kWord.value = "";
+                }
+                if(val == "ten") {
+                    breadthFirst.checked = true;
+                    startingSite.value = "https://www.amazon.com";
+                    crawlLimit.value = 2;
+                    kWord.value = "";
+                }
+                if(val == "eleven") {
+                    breadthFirst.checked = true;
+                    startingSite.value = "ftp://speedtest.tele2.net/";
+                    crawlLimit.value = 2;
+                    kWord.value = "";
+                }
+                if(val == "twelve") {
+                    breadthFirst.checked = true;
+                    startingSite.value = "https://longform.org";
+                    crawlLimit.value = 2;
+                    kWord.value = "crime";
+                }
+            }
+        </script>
+        <div class = "container">
+            <br>
+            <br>
+            <form name="webcrawlInput" onSubmit="return onSubmitForm();" method="post">
+                
+                Where to send form data:
+                <input id="formWebsite" type="url" name="formWebsite" size="75" required><br>
+                <br>
+                
+                Type of traversal:<br>
+                <input type="radio" name="traversalType" id ="dft" value="depth-first" required> Depth-First<br>
+                <input type="radio" name="traversalType" id="bft" value="breadth-first"> Breadth-First<br>
+                <br>
+                
+                Starting Site:
+                <input type="url" name="startingSite" id="start" size="75" required><br>
+                <br>
+                
+                Number Limit for Traversal:
+                <input type="number" name="crawlLimit" id="crawlLimit" max="25" min="0" required><br>
+                <br>
+                
+                Keyword To Stop Traversal (Optional):
+                <input type="text" name="kWord" id="kWord"><br>
+                <br>
+                
+                Test Case:<br>
+                <input type="radio" name="testCase" value="custom" onclick="setTestCase(this.value)" checked="checked"> Custom<br>
+                <input type="radio" name="testCase" value="one" onclick="setTestCase(this.value)"> Depth-first traversal, no keyword<br>
+                <input type="radio" name="testCase" value="two" onclick="setTestCase(this.value)"> Depth-first traversal, non-existent starting site<br>
+                <input type="radio" name="testCase" value="three" onclick="setTestCase(this.value)"> Depth-first traversal, starting site with no links<br>
+                <input type="radio" name="testCase" value="four" onclick="setTestCase(this.value)"> Depth-first traversal, FTP starting site with zip file links<br>
+                <input type="radio" name="testCase" value="five" onclick="setTestCase(this.value)"> Depth-first traversal, 0 levels<br>
+                <input type="radio" name="testCase" value="six" onclick="setTestCase(this.value)"> Depth-first traversal, commonly-used keyword<br>
+                <input type="radio" name="testCase" value="seven" onclick="setTestCase(this.value)"> Depth-first traversal, little-used keyword<br>
+                <input type="radio" name="testCase" value="eight" onclick="setTestCase(this.value)"> Depth-first traversal, non-word keyword<br>
+                <input type="radio" name="testCase" value="nine" onclick="setTestCase(this.value)"> Breadth-first traversal, 1 level<br>
+                <input type="radio" name="testCase" value="ten" onclick="setTestCase(this.value)"> Breadth-first traversal, 2 levels<br>
+                <input type="radio" name="testCase" value="eleven" onclick="setTestCase(this.value)"> Breadth-first traversal, FTP starting site with zip file links<br>
+                <input type="radio" name="testCase" value="twelve" onclick="setTestCase(this.value)"> Breadth-first traversal with keyword<br>
+                <br>
+                
+                <input type="submit" value="Submit">
+                
+            </form>
+            <br>
+            <br>
+        </div>
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+    </body>
+</html>

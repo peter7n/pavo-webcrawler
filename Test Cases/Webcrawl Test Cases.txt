@@ -28,11 +28,11 @@ startingSite = "ftp://speedtest.tele2.net/"
 numSites = 7
 kWord = None
 
-Test Case #5: Depth-first traversal, 1 level
+Test Case #5: Depth-first traversal, 0 levels
 dft = True
 bft = False
 startingSite = "http://www.gocomics.com/"
-numSites = 1
+numSites = 0
 kWord = None
 
 Test Case #6: Depth-first traversal, commonly-used keyword
@@ -77,7 +77,7 @@ startingSite = "ftp://speedtest.tele2.net/"
 numSites = 2
 kWord = None
 
-Test Case #12: Breadth-first traversal with keywords
+Test Case #12: Breadth-first traversal with keyword
 dft = False
 bft = True
 startingSite = "https://longform.org"

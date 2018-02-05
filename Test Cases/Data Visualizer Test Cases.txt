@@ -4,32 +4,32 @@ Test Case #1: Depth-first traversal, crawl limit of 5
 {
 	"websites":[
 		{
-			"id":"ID-0",
+			"id":"ID-1",
 			"source":"https://www.yahoo.com",
 			"title":"Yahoo",
 			"destinations":[
 				{
-					"id":"ID-1",
+					"id":"ID-2",
 					"source":"https://www.yahoo.com/news/m/a43c4be8-f744-35af-8fe1-25c2d7514ebd/ss_dershowitz%3A-i-wouldn%27t-have.html",
 					"title":"Dershowitz: I Wouldn't Have Campaigned for Obama If I Knew About Farrakhan Pic",
 					"destinations":[
 						{
-							"id":"ID-2",
+							"id":"ID-3",
                						"source":"https://www.yahoo.com/news/york-minnesota-sue-trump-administration-block-healthcare-funding-160310117.html",
                                                         "title":"N.Y., Minnesota sue Trump admin to block healthcare funding cuts",
                                                         "destinations":[
 								{
-									"id":"ID-3",
+									"id":"ID-4",
                								"source":"https://www.yahoo.com/news/host-baller-super-bowl-party-212603654.html",
 									"title":"Host baller Super Bowl party in presidential suite of Philly hotel for low, low price",
           								"destinations":[
 										{
-											"id":"ID-4",
+											"id":"ID-5",
                										"source":"https://www.fool.com/ext-content/bill-gates-admits-holy-grail-technology-could-chan/726/?psource=esacri7410000009&utm_campaign=ai-gatesgrail-rt-slv&campaign=sa-ai&utm_content=300x250&paid=8976&waid=8976&utm_medium=display&utm_source=criteo&wsource=esacri7410000009&cellId=0&testId=gates-grail-advert",
                                                                                         "title":"The Motley Fool: Special FREE Report",
                                                                                         "destinations":[
 												{
-													"id":"ID-5",
+													"id":"ID-6",
                												"source":"https://www.fool.com/legal/privacy-statement/",
 													"title":"Privacy Statement",
 													"destinations":[]
@@ -53,22 +53,22 @@ Test Case #2: Depth-first traversal, keyword found (keyword = "salsa")
 {
 	"websites":[
 		{
-			"id":"ID-0",
+			"id":"ID-1",
  			"source":"http://www.geniuskitchen.com/", 
 			"title":"Genius Kitchen - Have Your Food And Watch It, Too",
 			"destinations":[
 				{
-					"id":"ID-1",
+					"id":"ID-2",
 					"source":"http://www.geniuskitchen.com/recipe/mediterranean-chicken-breasts-with-avocado-tapenade-178249",
 					"title":"Mediterranean Chicken Breasts With Avocado Tapendade - Genius Kitchen",
 					"destinations":[
 						{
-							"id":"ID-2",
+							"id":"ID-3",
                						"source":"http://www.geniuskitchen.com/about/chicken-221",
 							"title":"Chicken - Kitchen Dictionary - Genius Kitchen",
 							"destinations":[
 								{
-									"id":"ID-3",
+									"id":"ID-4",
                								"source":"http://www.geniuskitchen.com/recipe/oven-fried-chicken-chimichangas-28148",
 									"title":"Oven-Fried Chicken Chimichangas Recipe - Genius Kitchen",
 									"destinations":[]
@@ -88,7 +88,7 @@ Test Case #3: Depth-first traversal, crawl limit of 0
 {
 	"websites":[
 		{
-			"id":"ID-0", 
+			"id":"ID-1", 
 			"source":"http://oregonstate.edu/",
 			"title":"Oregon State University | Oregon State University",
 			"destinations": []
