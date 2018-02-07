@@ -9,10 +9,6 @@ import random
 
 MAX_LIMIT = 100
 
-class RandomSingleCrawlItem(scrapy.Item):
-    url_source = scrapy.Field()
-    url_destination = scrapy.Field()
-
 
 class RandomCrawlSpider(scrapy.Spider):
     name = "Random"
@@ -21,6 +17,8 @@ class RandomCrawlSpider(scrapy.Spider):
     limit = 0
     le = LinkExtractor()
     visited = set()
+    keywordWebsite = ''
+    error = ''
 
     def __init__(self, start_url=None, limit=MAX_LIMIT, *args, **kwargs):
         super(RandomCrawlSpider, self).__init__(*args, **kwargs)
@@ -34,9 +32,7 @@ class RandomCrawlSpider(scrapy.Spider):
     def parse(self, response):
 
         if Node.count == self.limit:  # reached the crawl limit
-            #print "############END########"
-            #print json.dumps(RandomCrawlSpider.tree)
-            #print RandomCrawlSpider.tree
+            #RandomCrawlSpider.error = 'testing'
             return
 
         page_url = response.url
@@ -47,15 +43,14 @@ class RandomCrawlSpider(scrapy.Spider):
         except IndexError:
             title = 'No Title'
         except NotSupported:
-            #print json.dumps(RandomCrawlSpider.tree)
-            RandomCrawlSpider.tree['errorMessage'] = 'web page not supported type'
+            RandomCrawlSpider.error = 'web page not supported type'
             return
 
         links = set([i.url for i in self.le.extract_links(response)])
         links -= self.visited  # set difference
 
         if not links:  # if no outgoing links
-            RandomCrawlSpider.tree['errorMessage'] = 'no outgoing links'
+            RandomCrawlSpider.error = 'no outgoing links'
             return
 
         # pick a random link from all links
@@ -104,7 +99,7 @@ class Node(dict):
 
 # main function for the crawl (currently only returns dummy results)
 # dfs/bfs option is represented as boolean
-def run(start_url='', bfs=False, limit=100, keyword=None):
+def run(start_url='', bfs=False, limit=MAX_LIMIT, keyword=None):
 
     # check some of the error cases here
     # if start page is empty or cannot be accessed
@@ -142,12 +137,16 @@ def run_dfs(start_url, limit, keyword):
     process.crawl(RandomCrawlSpider, start_url=start_url, limit=limit)
     process.start()  # blocks until crawl finishes
 
-    # RandomCrawlSpider.tree['errorMessage'] = 'testing'
-    return RandomCrawlSpider.tree
+    return {
+        'websites': RandomCrawlSpider.tree,
+        'keywordWebsite': RandomCrawlSpider.keywordWebsite,
+        'errorMessage': RandomCrawlSpider.error
+    }
 
 
 def run_bfs(start_page, limit, keyword):
     return None
 
 
-print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=False, limit=10)
+if __name__ == '__main__':
+    print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=False, limit=10)
