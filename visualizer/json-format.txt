@@ -1,24 +1,24 @@
 {
 	"websites":[
- 		{ 	
+ 		{
  			"id":"ID-1",
- 			"source":"URL_1",
+ 			"url":"URL_1",
  			"title":"TITLE_1",
  			"destinations":[
  				{
  					"id":"ID-2",
- 					"source":"URL_2",
+ 					"url":"URL_2",
  					"title":"TITLE_2",
  					"destinations":[
  						{
  							"id":"ID-3",
- 							"source":"URL_3",
+ 							"url":"URL_3",
  							"title":"TITLE_3",
  							"destinations":[]
  						},
  						{
  							"id":"ID-4",
- 							"source":"URL_4",
+ 							"url":"URL_4",
  							"title":"TITLE_4",
  							"destinations":[]
  						}
@@ -26,7 +26,7 @@
  				},
  				{
  					"id":"ID-5",
- 					"source":"URL_5",
+ 					"url":"URL_5",
  					"title":"TITLE_5",
  					"destinations":[]
  				}
