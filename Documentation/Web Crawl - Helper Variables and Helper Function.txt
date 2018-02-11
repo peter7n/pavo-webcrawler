@@ -32,8 +32,8 @@ kWord
 kWordWebsite
 # Type: string
 # Default Value: None
-# Description: The URL for the website where the keyword was found. If the keyword was not found or no keyword
-#              was specified, the value is None.
+# Description: The ID of the website where the keyword was found. If the keyword was not found or no keyword was
+#              specified, the value is None.
 
 webcrawlRes
 # Type: dictionary

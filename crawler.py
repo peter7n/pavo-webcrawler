@@ -1,8 +1,11 @@
 import json
 import scrapy
 from scrapy.crawler import CrawlerProcess
+from scrapy.crawler import CrawlerRunner
 from scrapy.exceptions import NotSupported
 from scrapy.linkextractors import LinkExtractor
+from twisted.internet import reactor
+from scrapy.utils.log import configure_logging
 import random
 # from collections import OrderedDict
 
@@ -130,15 +133,18 @@ def run(start_url='', bfs=False, limit=MAX_LIMIT, keyword=None):
 
 
 def run_dfs(start_url, limit, keyword):
-    process = CrawlerProcess({
-        'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
-    })
+    #process = CrawlerProcess()
+    #configure_logging({'LOG_FORMAT': '%(levelname)s: %(message)s'})
+    runner = CrawlerRunner()
 
-    process.crawl(RandomCrawlSpider, start_url=start_url, limit=limit)
-    process.start()  # blocks until crawl finishes
+    d = runner.crawl(RandomCrawlSpider, start_url, limit)
+    d.addBoth(lambda _: reactor.stop())
+    reactor.run() # the script will block here until the crawling is finished
+    
+    websiteList = [RandomCrawlSpider.tree]
 
     return {
-        'websites': RandomCrawlSpider.tree,
+        'websites': websiteList,
         'keywordWebsite': RandomCrawlSpider.keywordWebsite,
         'errorMessage': RandomCrawlSpider.error
     }
@@ -148,5 +154,5 @@ def run_bfs(start_page, limit, keyword):
     return None
 
 
-if __name__ == '__main__':
-    print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=False, limit=10)
+#if __name__ == '__main__':
+#    print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=False, limit=10)

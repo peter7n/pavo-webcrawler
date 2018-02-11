@@ -1,5 +1,10 @@
-#!/usr/bin/python
+#!/nfs/stak/users/konturf/CS467/bin/python
 # -*- coding: UTF-8 -*-
+
+
+activate_this = "/nfs/stak/users/konturf/CS467/bin/activate_this.py"
+execfile(activate_this, dict(__file__=activate_this))
+
 
 # To load this code on your account, follow the guidance on
 # https://it.engineering.oregonstate.edu/setup-publichtml-cgi-scripting
@@ -7,7 +12,9 @@
 import cgi
 import cgitb
 import json
-import crawler
+import urllib
+import os, sys
+import crawler2
 
 # Enable debugging
 cgitb.enable()
@@ -15,6 +22,9 @@ cgitb.enable()
 ###############################################################################
 # Define global variables
 ###############################################################################
+# The URL where the data visualizer can be found
+urlVisualizer = "http://web.engr.oregonstate.edu/~konturf/visualizer-svg-test-2.php"
+
 # Indicates whether or not the user chose to do a depth-first traversal    
 dft = False
 
@@ -31,7 +41,7 @@ crawlLimit = 0
 # the value is None.
 kWord = None
 
-# The URL for the website where the keyword was found. If the keyword was not
+# The ID of the website where the keyword was found. If the keyword was not
 # found or no keyword was specifiied, the value is None.
 kWordWebsite = None
 
@@ -41,6 +51,14 @@ webcrawlRes = []
 # Any error message is passed in this variable.
 errorMsg = None
 
+class HiddenPrints:
+    def __enter__(self):
+        self._original_stdout = sys.stdout
+        sys.stdout = None
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        sys.stdout = self._original_stdout
+        
 def getFormData(formData):
 ###############################################################################
 # Paramters:   formData  The data pulled from the form using 
@@ -80,103 +98,32 @@ def getFormData(formData):
     return dft, bft, startingSite, crawlLimit, kWord
 
 
-def addSite(srcID, srcURL, srcTitle, destID, destURL, destTitle, webcrawlRes):
+def dataTransfer():
 ###############################################################################
-# Parameters:  srcID        The unique ID for the source website
-#              srcURL       The URL for the source website
-#              srcTitle     The title for the source website
-#              destID       The unique ID for the destination website
-#              destURL      The URL for the destination website
-#              destTitle    The title for the destination website
-#              webcrawlRes  The list of dictionaries that holds the results of 
-#                           the web crawl in JSON format
+# Parameters:  None
 # Returns:     Nothing
-# Description: This function adds a source/destination pair to the 
-#              "webcrawlRes" list. It checks to see if the destination is a
-#              new one for the source or if it has already been included, and
-#              it will update the list of websites accordingly.
-# Note:        This function is optional for use. The web crawl program has
-#              the option to implement the JSON formatting using another
-#              method.
+# Description: This function takes the results of the webcrawl and sends them
+#              to the data visualizer program using an HTTP POST request. It
+#              constructs an HTML form and then autosubmits the form with a 
+#              JavaScript submit() command.
 ###############################################################################
-    if not webcrawlRes:
-        srcInfo = {
-            "id" :           srcID,
-            "source" :       srcURL,
-            "title" :        srcTitle,
-            "destinations" : []
-        } 
-        webcrawlRes.append(srcInfo)
-        if destID:
-            destInfo = {
-                "id" :           destID,
-                "source" :       destURL,
-                "title" :        destTitle,
-                "destinations" : []
-            }
-            webcrawlRes[0]["destinations"].append(destInfo)
-        return
+    # Convert the websites dictionary to JSON so it can be processed by the 
+    # visualizer
+    #websitesJSON = json.dumps(webcrawlRes[0])
+    res = crawler2.run(startingSite, bft, crawlLimit, kWord)
+    print '<body>'
+    print '<div style="display: none;">'
+    # Create the form for sending the data
+    print('<form id="webcrawlResForm" action="%s" method="post">' % (urlVisualizer))
+    print('<textarea name="webcrawlResults">%s</textarea>' % (res))
+    print '</form>' 
+    print '</div>'
+    print '<script>'
+    # Autosubmit the form with a JavaScript submit() command
+    print 'document.getElementById("webcrawlResForm").submit();'
+    print '</script>'
+    print '</body>'
     
-    # Find the source website
-    srcWebsite, found = findSrc(srcID, webcrawlRes)
-    if not found:
-        # The source website should have been found
-        print "Site not found"
-    
-    if destID:
-        # Make sure the destination site was not already added
-        alreadyAdded = findDest(destID, srcWebsite["destinations"])
-        if not alreadyAdded:
-            destInfo = {
-                "id" :           destID,
-                "source" :       destURL,
-                "title" :        destTitle,
-                "destinations" : []
-            }
-            srcWebsite["destinations"].append(destInfo)
-    
-
-def findSrc(srcID, webcrawlRes):
-###############################################################################
-# Parameters:  srcID        The unique ID for the source website
-#              webcrawlRes  The list of dictionaries that holds the results of 
-#                          the web crawl in JSON format
-# Returns:     The dictionary corresponding the the source website and a 
-#              boolean indicating whether the source website was found.
-# Description: This function recursively searches the webcrawlRes list of
-#              dictionaries to find the dictionary corresponding the the
-#              source website.
-###############################################################################
-    found = False
-    for x in webcrawlRes:
-        if x["id"] == srcID:
-            found = True
-            return x, found
-        else:
-            # make a recursive call on the current website's destination list
-            y, found = findSrc(srcID, x["destinations"])
-            if found:
-                return y, found
-    # if site was not found, then return nothing
-    return found, None
-
-
-def findDest(destID, destList):
-###############################################################################
-# Parameters:  destID    The unique ID for the destination website
-#              destList  The list of destination websites for the current 
-#                        source website
-# Returns:     True if the destination ID was found in the list of destination
-#              websites and false if not.
-# Description: This function determines if a destination website has already
-#              been added to the list of destination websites.
-###############################################################################
-    found = False
-    for x in destList:
-        if x["id"] == destID:
-            found = True
-            return found
-    return found
 
 
 ###############################################################################
@@ -186,48 +133,8 @@ def findDest(destID, destList):
 formData = cgi.FieldStorage()
 dft, bft, startingSite, crawlLimit, kWord = getFormData(formData)
 
-# Call the webcrawler
-#webcrawler(dft, bft, startingSite, crawlLimit, kWord, webcrawlRes)
-
-# Call the data transfer tool to transfer data to the Visualizer
-#dataTransfer()
-
 # Testing code
-print "Content-Type: text/plain;charset=utf-8"
+print "Content-Type: text/html;charset=utf-8"
 print
-print "This page runs the Python code"
-print "You can test your output by putting it in a Python print statement"
-
-print
-
-print "Here are the variables that have been set based on the form data that was passed:"
-print "dft = ",
-print dft
-print "bft = ",
-print bft
-print "startingSite = ",
-print startingSite
-print "crawlLimit = ",
-print crawlLimit
-print "kWord = ",
-print kWord
-
-print
-
-print "Test the code for creating the JSON format for the output of the webcrawler:"
-print 'addSite("ID-0", "http://www.google.com", "Google", "ID-1", "http://www.yahoo.com", "Yahoo", webcrawlRes)'
-addSite("ID-0", "http://www.google.com", "Google", "ID-1", "http://www.yahoo.com", "Yahoo", webcrawlRes)
-print "Result: ",
-print webcrawlRes
-print 'addSite("ID-0", "http://www.google.com", "Google", "ID-2", "http://www.espn.com", "ESPN", webcrawlRes)'
-addSite("ID-0", "http://www.google.com", "Google", "ID-2", "http://www.espn.com", "ESPN", webcrawlRes)
-print "Result: ",
-print webcrawlRes
-print 'addSite("ID-1", "http://www.yahoo.com", "Yahoo", "ID-3", "http://www.wikipedia.org", "Wikipedia", webcrawlRes)'
-addSite("ID-1", "http://www.yahoo.com", "Yahoo", "ID-3", "http://www.wikipedia.org", "Wikipedia", webcrawlRes)
-print "Result: ",
-print webcrawlRes
-print 'addSite("ID-2", "http://www.espn.com", "ESPN", None, None, None, webcrawlRes)'
-addSite("ID-2", "http://www.espn.com", "ESPN", None, None, None, webcrawlRes)
-print "Result: ",
-print webcrawlRes
+print "<p>Performing the web crawl</p>"
+dataTransfer()
