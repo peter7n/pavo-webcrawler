@@ -89,9 +89,7 @@ def dataTransfer():
 #              constructs an HTML form and then autosubmits the form with a 
 #              JavaScript submit() command.
 ###############################################################################
-    # Convert the websites dictionary to JSON so it can be processed by the 
-    # visualizer
-    #websitesJSON = json.dumps(webcrawlRes[0])
+    # Call the crawler which returns the JSON-formatted results of the crawl
     res = crawler.run(startingSite, bft, crawlLimit, kWord)
     print '<body>'
     print '<div style="display: none;">'
