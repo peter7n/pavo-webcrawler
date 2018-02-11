@@ -1,0 +1,44 @@
+Guide to setting up webcrawler package on your account
+
+1. Enter your Oregon State account through PuTTY or something equivalent. In a folder of your choosing, create
+   a Python virtual environment with the following command "virtualenv name_of_environment" where 
+   name_of_environment is chosen by you.
+
+2. cd into the environment with "cd name_of_enviornment/bin"
+
+3. Activate the environment with "source activate.csh"
+
+4. Upgrade the setup tools with the command "pip install setuptools --upgrade"
+
+5. Install scrapy with the command "pip install scrapy"
+
+6. You can now deactivate the environment with the command "deactivate"
+
+7. Open up a code editor tool to edit the webcrawl.html file. On line 59, change the "~konturf" part of the form
+   action so that it corresponds to your OSU account alias. Save it in a separate place on your computer from 
+   the Github files so that it doesn't get overwritten on a fetch.
+
+8. In the webcrawlProg.py file, make the following changes:
+	a. On lines 1 and 5, change the file path so that "nfs/stak/users/konturf/CS467/bin" corresponds to the 
+           path for the virtual environment you created.
+        b. On line 21, change the "~konturf" part of the URL to correspond to your OSU account alias.
+        c. Save the file in a separate place on your computer from the Github files so that it doesn't get
+           overwritten on a fetch.
+
+9. Open up a file transfer tool such as FileZilla.
+
+10. Transfer the webcrawl.html and visualizer-svg-test-2.php files to your public_html folder. Make sure that both
+    files are given 755 file permissions.
+
+11. If there is not one already, create a folder in your public_html folder named "cgi-bin".
+
+12. Transfer the webcrawlProg.py and crawler.py files to the cgi-bin folder. Make sure that both files are given
+    755 file permissions.
+
+13. In PuTTY, go to the cgi-bin folder and open webcrawlProg.py with "vim webcrawlProg.py". If, on the bottom of
+    the screen, you see [dos], then type ":set ff=unix". Do the same thing with the crawler.py file.
+
+14. Go to http://web.engr.oregonstate.edu/~your_account_alias/webcrawl.html where your_account_alias should be
+    your OSU account alias. You should see the form for entering the webcrawl data. You should be able to enter
+    the data and see the results of the webcrawl.
+
