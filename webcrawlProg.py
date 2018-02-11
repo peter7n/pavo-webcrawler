@@ -5,10 +5,6 @@
 activate_this = "/nfs/stak/users/konturf/CS467/bin/activate_this.py"
 execfile(activate_this, dict(__file__=activate_this))
 
-
-# To load this code on your account, follow the guidance on
-# https://it.engineering.oregonstate.edu/setup-publichtml-cgi-scripting
-
 import cgi
 import cgitb
 import json
