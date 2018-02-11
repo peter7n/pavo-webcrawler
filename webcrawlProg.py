@@ -14,7 +14,7 @@ import cgitb
 import json
 import urllib
 import os, sys
-import crawler2
+import crawler
 
 # Enable debugging
 cgitb.enable()
@@ -110,7 +110,7 @@ def dataTransfer():
     # Convert the websites dictionary to JSON so it can be processed by the 
     # visualizer
     #websitesJSON = json.dumps(webcrawlRes[0])
-    res = crawler2.run(startingSite, bft, crawlLimit, kWord)
+    res = crawler.run(startingSite, bft, crawlLimit, kWord)
     print '<body>'
     print '<div style="display: none;">'
     # Create the form for sending the data

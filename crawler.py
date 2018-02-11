@@ -154,5 +154,5 @@ def run_bfs(start_page, limit, keyword):
     return None
 
 
-#if __name__ == '__main__':
-#    print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=False, limit=10)
+if __name__ == '__main__':
+    print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=False, limit=10)
