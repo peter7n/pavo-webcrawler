@@ -13,7 +13,6 @@ import cgi
 import cgitb
 import json
 import urllib
-import os, sys
 import crawler
 
 # Enable debugging
@@ -41,24 +40,7 @@ crawlLimit = 0
 # the value is None.
 kWord = None
 
-# The ID of the website where the keyword was found. If the keyword was not
-# found or no keyword was specifiied, the value is None.
-kWordWebsite = None
 
-# This list of dictionaries holds the results of the web crawl in JSON format.
-webcrawlRes = []
-
-# Any error message is passed in this variable.
-errorMsg = None
-
-class HiddenPrints:
-    def __enter__(self):
-        self._original_stdout = sys.stdout
-        sys.stdout = None
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        sys.stdout = self._original_stdout
-        
 def getFormData(formData):
 ###############################################################################
 # Paramters:   formData  The data pulled from the form using 
