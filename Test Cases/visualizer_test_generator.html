@@ -12,11 +12,12 @@
         
         <title>Test Generator for Visualizer</title>        
     </head>
-    
+
     <body>
         <div class = "container">
             <br>
-            <form action="http://web.engr.oregonstate.edu/cgi-bin/cgiwrap/~konturf/webcrawlProg.py" method="post">
+            <div id="generatorResults"></div>
+            <div id="testGeneratorSettings">
                 <div class="form-group">
                     <label for="travType">Type of Traversal</label>
                     <div id="travType">
@@ -32,31 +33,31 @@
                 </div>
                 <div class="form-group">
                     <label for="crawlLimit">Number of Levels for Traversal</label>
-                    <input type="number" class="form-control" name="crawlLimit" placeholder="Number of levels" required>
+                    <input type="number" class="form-control" id="numLevels" name="crawlLimit" placeholder="Number of levels" required>
                 </div>
                 <br>
                 <fieldset>
                     <legend>For Breadth-First Traversals</legend>
                     <div class="form-group">
-                        <label for="crawlLimit">Number of Websites to Generate</label>
-                        <input type="number" class="form-control" name="numWebsites" placeholder="Number of websites" required>
+                        <label for="crawlLimit">Approximate Number of Websites to Generate</label>
+                        <input type="number" class="form-control" name="numWebsites" id="numSites" placeholder="Number of websites">
                     </div>
                     <div class="form-group">
                         <label for="dist">Distribution of Websites Across the Branches</label>
                         <div id="dist">
                             <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="websiteDist" id="even" value="even" required>
+                              <input class="form-check-input" type="radio" name="websiteDist" id="even" value="even">
                               <label class="form-check-label" for="even">Evenly Distributed</label>
                             </div>
                             <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="websiteDist" id="random" value="random" required>
+                              <input class="form-check-input" type="radio" name="websiteDist" id="random" value="random">
                               <label class="form-check-label" for="random">Randomly Distributed</label>
                             </div>
                         </div>
                     </div>
                 </fieldset>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                <button onclick="onButtonClick()" class="btn btn-primary">Submit</button>
+            </div>
             <br>
             <br>
         </div>
@@ -66,6 +67,174 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+        <script>
+            var websiteList = [
+                "http://www.google.com",
+                "https://docs.python.org/2/tutorial/",
+                "http://eecs.oregonstate.edu/online-cs-students",
+                "https://www.yahoo.com/news/",
+                "http://store.steampowered.com/",
+                "https://longform.org/best",
+                "http://theblacktapespodcast.com/",
+                "http://www.cplusplus.com/",
+                "https://www.tutorialspoint.com/java/",
+                "https://www.nycgo.com/",
+                "http://www.newsweek.com/end-glitter-brazilian-carnival-802752",
+                "http://chadorzel.steelypips.org/principles/",
+                "http://www.sherlockian.net/sitemap/",
+                "https://www.newyorker.com/books/page-turner/this-is-water",
+                "http://variety.com/2018/film/news/groundhog-day-at-25-bill-murray-1202691391/",
+                "https://www.omscs.gatech.edu/",
+                "https://waitbutwhy.com/",
+                "https://twitter.com/JohnnyCash",
+                "http://www.history.com/topics/machu-picchu",
+                "https://www.khanacademy.org/math/calculus-home"
+            ];
+            
+            var nameList = [
+                "Google",
+                "The Python Tutorial - Python 2.7.14 documentation",
+                "Professional Computer Science B.S. Degree - Online for Post-Bacc Students | Electrical Engineering and Computer Science | Oregon State University",
+                "Yahoo News - Latest News & Headlines",
+                "Welcome to Steam",
+                "Best Articles · Longform",
+                "THE BLACK TAPES The Black Tapes Podcast",
+                "cplusplus.com - The C++ Resources Network",
+                "Java Tutorial",
+                "The Official Guide to New York City | nycgo.com",
+                "Brazil's Carnival: Debate Over Environmental Impact of Glitter Plagues Festivities",
+                "Uncertain Principles Archive - Physics, Politics, Pop Culture; formerly on ScienceBlogs",
+                "Sitemap | Sherlockian.net",
+                "This Is Water | The New Yorker",
+                "'Groundhog Day' at 25: Screenwriter, Actor Remember Comedy Classic - Variety",
+                "Home | OMSCS | Georgia Institute of Technology | Atlanta, GA",
+                "Wait But Why",
+                "Johnny Cash (@JohnnyCash) | Twitter",
+                "Machu Picchu - Facts & Summary - HISTORY.com",
+                "Calculus (all content, first year) | Khan Academy"
+            ];
+            
+            var dft = True;
+            var numLevels = 1;
+            var numWebsites = 1;
+            var evenDist = True;
+            
+            function onButtonClick() {
+                document.getElementById("testGeneratorSettings").style.display = "none";
+                dft = document.getElementById("dft").checked;
+                numLevels = document.getElementById("numLevels").value;
+                if(!dft) {
+                    numWebsites = document.getElementById("numSites").value;
+                    evenDist = document.getElementById("even").checked;
+                }
+                generateTestCase(dft, numLevels, numWebsites, evenDist);
+            }
+            
+            function generateTestCase(dft, numLevels, numWebsites, evenDist) {
+                var jsonRes = {};
+                jsonRes["keywordWebsite"] = "";
+                jsonRes["errorMessage"] = "";
+                jsonRes["websites"] = [];
+                if(dft) {
+                    buildDftTestCase(numLevels, jsonRes["websites"]);
+                }
+                else if(evenDist) {
+                    buildBftTestCaseEven(numLevels, numWebsites, jsonRes["websites"]);
+                }
+                document.getElementById("generatorResults").innerText = JSON.stringify(jsonRes);
+            }
+            
+            function buildDftTestCase(numLevels, websites) {
+                var counter = 1;
+                var source = {};
+                var currList = websites;
+                var ind;
+                if(numLevels >= 0) {
+                    ind = getRndInteger(0, 19);
+                    source["id"] = "ID-1";
+                    source["url"] = websiteList[ind];
+                    source["name"] = nameList[ind];
+                    currList.push(Object.assign({}, source));
+                    for( ; counter <= numLevels; counter++) {
+                        var dest = {};
+                        var destList = [];
+                        ind = getRndInteger(0, 19);
+                        dest["id"] = "ID-" + (counter + 1);
+                        dest["url"] = websiteList[ind];
+                        dest["name"] = nameList[ind];
+                        destList.push(Object.assign({}, dest));
+                        el = currList[0];
+                        el["destinations"] = destList;
+                        currList = destList;
+                        source = dest;
+                    }
+                    source["destinations"] =[];
+                    currList.push(source);
+                }
+            }
+            
+            function buildBftTestCaseEven(numLevels, numWebsites, websites) {
+                if(numLevels < 1) {
+                    buildDftTestCase(numLevels, websites);
+                    return;
+                }
+                var source = {};
+                var ind;
+                var destList = []
+                var numBranches = calcNumBranches(numLevels, numWebsites);
+                
+                ind = getRndInteger(0, 19);
+                source["id"] = "ID-1";
+                source["url"] = websiteList[ind];
+                source["name"] = nameList[ind];
+                destList = buildBftEvenHelper(numLevels - 1, numBranches, 2);
+                source["destinations"] = destList;
+                websites.push(source);
+            }
+            
+            function buildBftEvenHelper(numLevels, numBranches, counter) {
+                var ind;
+                var destList = [];
+                var nestedDestList = [];
+                var origCounter = counter;
+                
+                if(numLevels < 0) {
+                    return nestedDestList;
+                }
+                
+                for(var i = 0; i < numBranches; i++) {
+                    var dest = {};
+                    ind = getRndInteger(0, 19);
+                    dest["id"] = "ID-" + counter;
+                    dest["url"] = websiteList[ind];
+                    dest["name"] = nameList[ind];
+                    nestedDestList = buildBftEvenHelper(numLevels - 1, numBranches, origCounter + (i+1)*numBranches);
+                    dest["destinations"] = nestedDestList;
+                    destList.push(Object.assign({}, dest));
+                    counter++;
+                }
+                return destList;
+            }
+            
+            function calcNumBranches(numLevels, numWebsites) {
+                var numBranches = 0;
+                var currNumWebsites = 0;
+                
+                while(currNumWebsites < numWebsites) {
+                    numBranches++;
+                    currNumWebsites = 0;
+                    for(i = 0; i <= numLevels; i++) {
+                        currNumWebsites += Math.pow(numBranches, numLevels);
+                    }
+                }
+                return numBranches;
+            }
+            
+            function getRndInteger(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) ) + min;
+            }
+        </script>
         
     </body>
 </html>
