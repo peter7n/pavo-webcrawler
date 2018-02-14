@@ -5,12 +5,12 @@ from scrapy.crawler import CrawlerRunner
 from scrapy.exceptions import NotSupported
 from scrapy.linkextractors import LinkExtractor
 from twisted.internet import reactor
-from scrapy.utils.log import configure_logging
 import random
-# from collections import OrderedDict
+from collections import deque
 
 
 MAX_LIMIT = 100
+MAX_DEPTH = 2
 
 
 class RandomCrawlSpider(scrapy.Spider):
@@ -84,6 +84,84 @@ class RandomCrawlSpider(scrapy.Spider):
         )
 
 
+class BreadthCrawlSpider(scrapy.Spider):
+    name = "Breadth"
+    tree = None                 # tree of Nodes
+    depth_limit = 0
+    depth = 0
+    queue = deque()             # queue of url strings and their parent node for BFS-like crawl
+    nodesToNextDepth = 1        # counts the children, 0 signals an increase in depth
+    nextNodesToNextDepth = 0    # counts grandchildren for the depth increase after current level
+    le = LinkExtractor()
+    visited = set()
+    keywordWebsite = ''
+    error = ''
+
+    def __init__(self, start_url=None, depth=MAX_DEPTH, *args, **kwargs):
+        super(BreadthCrawlSpider, self).__init__(*args, **kwargs)
+
+        if not start_url:
+            raise ValueError('No starting webpage')
+
+        self.start_urls = [start_url]
+        self.depth_limit = depth
+        self.queue.append((start_url, None))  # queue stores url string, parent node tuple
+
+    def parse(self, response):
+
+        if self.depth > self.depth_limit:  # reached the crawl limit
+            # BreadthCrawlSpider.error = 'not error just testing'
+            return
+
+        page_url, parent_node = self.queue.popleft()
+
+        self.visited.add(page_url)
+
+        try:
+            title = response.css('title::text').extract_first()
+        except IndexError:
+            title = 'No Title'
+        except NotSupported:
+            BreadthCrawlSpider.error = 'web page not supported type'
+            return
+
+        # get all links on this page
+        links = set([i.url for i in self.le.extract_links(response)])
+        links -= self.visited  # set difference
+
+        self.nextNodesToNextDepth += len(links)
+        self.nodesToNextDepth -= 1
+
+        if self.nodesToNextDepth == 0:  # hit the next depth
+            self.depth += 1
+            if self.depth > self.depth_limit:
+                return
+
+            self.nodesToNextDepth = self.nextNodesToNextDepth
+            self.nextNodesToNextDepth = 0
+
+        # create a node for this page and append to the parent node
+        node = Node(page_url, title)
+
+        if not BreadthCrawlSpider.tree:
+            BreadthCrawlSpider.tree = node
+        else:
+            parent_node.append_child(node)
+
+        for link in links:
+            self.queue.append((link, node))
+
+        if len(self.queue) == 0:
+            return
+
+        # yield a request
+        yield scrapy.Request(
+            url=self.queue[0][0],
+            callback=self.parse,
+            dont_filter=True
+        )
+
+
 class Node(dict):
     count = 0  # counter for limit, also unique id
 
@@ -122,11 +200,7 @@ def run(start_url='', bfs=False, limit=MAX_LIMIT, keyword=None):
         )
 
     if bfs:
-        return json.dumps(
-            {
-                'errorMessage': "Not supported yet"
-            }
-        )
+        return json.dumps(run_bfs(start_url=start_url, depth=limit, keyword=keyword))
 
     else:
         return json.dumps(run_dfs(start_url=start_url, limit=limit, keyword=keyword))
@@ -139,7 +213,7 @@ def run_dfs(start_url, limit, keyword):
 
     d = runner.crawl(RandomCrawlSpider, start_url, limit)
     d.addBoth(lambda _: reactor.stop())
-    reactor.run() # the script will block here until the crawling is finished
+    reactor.run()  # the script will block here until the crawling is finished
     
     websiteList = [RandomCrawlSpider.tree]
 
@@ -150,9 +224,31 @@ def run_dfs(start_url, limit, keyword):
     }
 
 
-def run_bfs(start_page, limit, keyword):
-    return None
+def run_bfs(start_url, depth, keyword):
+
+    runner = CrawlerRunner()
+
+    d = runner.crawl(BreadthCrawlSpider, start_url, depth)
+    d.addBoth(lambda _: reactor.stop())
+    reactor.run()  # the script will block here until the crawling is finished
+
+    """
+    process = CrawlerProcess({
+        'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
+    })
+    process.crawl(BreadthCrawlSpider, start_url=start_url, depth=depth)
+    process.start()
+    """
+
+    websiteList = [BreadthCrawlSpider.tree]
+
+    return {
+        'websites': websiteList,
+        'keywordWebsite': BreadthCrawlSpider.keywordWebsite,
+        'errorMessage': BreadthCrawlSpider.error
+    }
 
 
 if __name__ == '__main__':
-    print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=False, limit=10)
+    #print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=False, limit=10)
+    print run(start_url='https://imgur.com/', bfs=True, limit=1, keyword="circle")
