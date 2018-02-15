@@ -224,8 +224,8 @@
                 while(currNumWebsites < numWebsites) {
                     numBranches++;
                     currNumWebsites = 0;
-                    for(i = 0; i <= numLevels; i++) {
-                        currNumWebsites += Math.pow(numBranches, numLevels);
+                    for(var i = 0; i <= numLevels; i++) {
+                        currNumWebsites += Math.pow(numBranches, i);
                     }
                 }
                 return numBranches;
