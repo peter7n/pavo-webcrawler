@@ -1,0 +1,886 @@
+
+
+{
+  "errorMessage": "",
+  "keywordWebsite": "",
+  "websites": [
+    {
+      "url": "http:\/\/www.sherlockian.net",
+      "destinations": [
+        {
+          "url": "http:\/\/www.sherlockian.net\/adapting\/",
+          "destinations": [
+            {
+              "url": "https:\/\/www.arthur-conan-doyle.com\/index.php?title=Frederic_Dorr_Steele",
+              "destinations": [
+                
+              ],
+              "id": "ID-13",
+              "title": "Frederic Dorr Steele - The Arthur Conan Doyle Encyclopedia"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/adapting\/actors-writers-producers\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-14",
+              "title": "Key Actors, Writers, Producers | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/adapting\/film-video-online\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-15",
+              "title": "Sherlockian Film & Video Online | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/adapting\/pastichesparodiesfanfic\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-16",
+              "title": "Pastiches, Parodies, and Fan Fiction | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/adapting\/plays\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-17",
+              "title": "Plays | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/epguides.com\/SherlockHolmes_1984\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-18",
+              "title": "Sherlock Holmes (1984) (a Titles & Air Dates Guide)"
+            },
+            {
+              "url": "https:\/\/goo.gl\/forms\/L7ayRxEUl9pIWHDD3",
+              "destinations": [
+                
+              ],
+              "id": "ID-19",
+              "title": "Contact Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/sharing\/filk\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-20",
+              "title": "Sherlockian Filk | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.imdb.com\/title\/tt0088109\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-21",
+              "title": "Sherlock Hound (TV Series 1984\u20131985) - IMDb"
+            },
+            {
+              "url": "http:\/\/ignisart.com\/camdenhouse\/main.htm",
+              "destinations": [
+                
+              ],
+              "id": "ID-22",
+              "title": "Camden House: The Complete Sherlock Holmes (Main)"
+            },
+            {
+              "url": "http:\/\/wide.cal.msu.edu",
+              "destinations": [
+                
+              ],
+              "id": "ID-23",
+              "title": "Writing, Information, and Digital Experience :: Home"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/adapting\/curatedpasticheparodyfanfic\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-24",
+              "title": "Curated List of Pastiche, Parody, and Fan Fiction | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/sharing\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-25",
+              "title": "Sharing | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/bakerstreet.wikia.com\/wiki\/Sherlock_Holmes_in_the_22nd_Century",
+              "destinations": [
+                
+              ],
+              "id": "ID-26",
+              "title": "Sherlock Holmes in the 22nd Century | Baker Street Wiki | FANDOM powered by Wikia"
+            },
+            {
+              "url": "http:\/\/herlock.us\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-27",
+              "title": "HERLOCK - HERLOCK"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/investigating\/pastiche-reviews\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-28",
+              "title": "Chris Redmond's Pastiche Reviews | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/adapting\/elementary\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-29",
+              "title": "Elementary | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/adapting\/audiobooks\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-30",
+              "title": "Audiobooks | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/celebrating\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-31",
+              "title": "Celebrating | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/disney.wikia.com\/wiki\/The_Great_Mouse_Detective",
+              "destinations": [
+                
+              ],
+              "id": "ID-32",
+              "title": "The Great Mouse Detective | Disney Wiki | FANDOM powered by Wikia"
+            },
+            {
+              "url": "http:\/\/www.victorianweb.org\/art\/illustration\/pagets\/index.html",
+              "destinations": [
+                
+              ],
+              "id": "ID-33",
+              "title": "Illustrations of Arthur Conan Doyle's Sherlock Holmes stories by Sidney Paget"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/adapting\/comicsgraphicnovels\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-34",
+              "title": "Comics and Graphic Novels | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/teaching\/scholarly\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-35",
+              "title": "Scholarly Articles | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/investigating\/canon\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-36",
+              "title": "Canon | Sherlockian.net"
+            },
+            {
+              "url": "https:\/\/www.theguardian.com\/books\/gallery\/2018\/feb\/05\/illustrating-sherlock-holmes-in-pictures",
+              "destinations": [
+                
+              ],
+              "id": "ID-37",
+              "title": "Illustrating Sherlock Holmes \u2013 in pictures | Books | The Guardian"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-38",
+              "title": "Welcome | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/adapting\/bbc-sherlock\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-39",
+              "title": "BBC Sherlock | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/teaching\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-40",
+              "title": "Teaching | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/adapting\/radioshows\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-41",
+              "title": "Radio Shows | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.nplh.co.uk",
+              "destinations": [
+                
+              ],
+              "id": "ID-42",
+              "title": "No Place Like Holmes - Home"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/investigating\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-43",
+              "title": "Investigating | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/about\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-44",
+              "title": "About | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/adapting\/sherlockian.net\/blog\/sitemap",
+              "destinations": [
+                
+              ],
+              "id": "ID-45",
+              "title": "Sitemap | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/johnhwatsonsociety.com\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-46",
+              "title": "The John H Watson Society - The Open and Inclusive Worldwide Online Sherlockian Society (Really, We're about Having Fun)"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/adapting\/recent-works\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-47",
+              "title": "Recent Works | Sherlockian.net"
+            }
+          ],
+          "id": "ID-2",
+          "title": "Adapting | Sherlockian.net"
+        },
+        {
+          "url": "http:\/\/www.sherlockian.net\/teaching\/",
+          "destinations": [
+            {
+              "url": "https:\/\/aportiaadamsadventure.com\/teachers-guides\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-48",
+              "title": "Teacher\u2019s Guides | A Portia Adams Adventure"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/celebrating\/scholarly\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-49",
+              "title": "Scholarly Articles | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/celebrating\/ownership\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-50",
+              "title": "Ownership of the Sherlock Holmes Stories | Sherlockian.net"
+            },
+            {
+              "url": "https:\/\/sites.google.com\/a\/allegheny.edu\/rachel-o-brien\/home\/courses\/fs-101-first-seminar",
+              "destinations": [
+                
+              ],
+              "id": "ID-51",
+              "title": "FS 101 First Seminar - Rachel O'Brien"
+            },
+            {
+              "url": "https:\/\/www.varsitytutors.com\/englishteacher\/hound-baskervilles-lesson-plans",
+              "destinations": [
+                
+              ],
+              "id": "ID-52",
+              "title": "The Hound of the Baskervilles Lesson Plans"
+            },
+            {
+              "url": "http:\/\/teachers.net\/lessons\/posts\/1700.html",
+              "destinations": [
+                
+              ],
+              "id": "ID-53",
+              "title": "Lesson Plans: A brief biography of Sir Arthur Conan Doyle and Sherlock Hol (Senior, Literature)"
+            },
+            {
+              "url": "https:\/\/goo.gl\/forms\/L7ayRxEUl9pIWHDD3",
+              "destinations": [
+                
+              ],
+              "id": "ID-54",
+              "title": "Contact Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/celebrating\/mystery\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-55",
+              "title": "The Mystery Genre | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.criticalwitpodcast.com\/podcast\/critical-wit-38-%e2%80%93-what-can-sherlock-holmes-teach-us-about-human-thinking\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-56",
+              "title": "Critical Wit Podcast  \u00bb Blog Archive   \u00bb Critical Wit #38 \u2013 What Can Sherlock Holmes Teach Us About Thinking?"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/celebrating\/copyright\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-57",
+              "title": "About Copyright | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/wide.cal.msu.edu",
+              "destinations": [
+                
+              ],
+              "id": "ID-58",
+              "title": "Writing, Information, and Digital Experience :: Home"
+            },
+            {
+              "url": "http:\/\/connection.ebscohost.com\/c\/articles\/90443443\/recovering-classical-common-figures-speech-in-scandal-bohemia",
+              "destinations": [
+                
+              ],
+              "id": "ID-59",
+              "title": "Recovering the Classical in the Common: Figures of Speech in \"A Scandal in Bohemia\""
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/sharing\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-60",
+              "title": "Sharing | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.bakerstreetirregulars.com\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-61",
+              "title": "The Baker Street Irregulars (BSI): Sherlock Holmes Literary Society"
+            },
+            {
+              "url": "http:\/\/ed.ted.com\/on\/bjTrW73r\/discussions\/sherlock-holmes-and-the-scientific-method",
+              "destinations": [
+                
+              ],
+              "id": "ID-62",
+              "title": "Sherlock Holmes and the Scientific Method | TED-Ed"
+            },
+            {
+              "url": "http:\/\/www.yale.edu\/ynhti\/curriculum\/units\/1989\/4\/89.04.04.x.html",
+              "destinations": [
+                
+              ],
+              "id": "ID-63",
+              "title": "89.04.04: Sherlock Holmes: Teaching English Through Detective Fiction"
+            },
+            {
+              "url": "http:\/\/www.nypl.org\/blog\/2011\/04\/22\/sherlock-holmes-reimagined-teen-readers",
+              "destinations": [
+                
+              ],
+              "id": "ID-64",
+              "title": "Sherlock Holmes Reimagined for Middle School and High School Students | The New York Public Library"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/celebrating\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-65",
+              "title": "Celebrating | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/celebrating\/scifi-horror\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-66",
+              "title": "Science Fiction, Horror, & Other | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/teaching\/term-paper\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-67",
+              "title": "How to Write a Term Paper | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/investigating\/canon\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-68",
+              "title": "Canon | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.shmoop.com\/sherlock-holmes\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-69",
+              "title": "The Adventures of Sherlock Holmes"
+            },
+            {
+              "url": "http:\/\/teachersinstitute.yale.edu\/curriculum\/units\/1995\/1\/95.01.07.x.html",
+              "destinations": [
+                
+              ],
+              "id": "ID-70",
+              "title": "95.01.07: It\u2019s A Mystery To Me"
+            },
+            {
+              "url": "https:\/\/www.udemy.com\/creative-writing-the-mystery-suspense-crime-story\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-71",
+              "title": "Online Courses - Anytime, Anywhere | Udemy"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-72",
+              "title": "Welcome | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/rnunn5.wix.com\/nunnfifth#!sherlock-holmes\/ch80",
+              "destinations": [
+                
+              ],
+              "id": "ID-73",
+              "title": "Mr. Nunn Fifth Grade"
+            },
+            {
+              "url": "http:\/\/www.wfu.edu\/~jonesbt\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-74",
+              "title": "Chemical Analysis at Wake Forest University"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/investigating\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-75",
+              "title": "Investigating | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/about\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-76",
+              "title": "About | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.beaconsociety.com\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-77",
+              "title": "The Beacon Society - Home"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/teaching\/sherlockian.net\/blog\/sitemap",
+              "destinations": [
+                
+              ],
+              "id": "ID-78",
+              "title": "Sitemap | Sherlockian.net"
+            }
+          ],
+          "id": "ID-3",
+          "title": "Teaching | Sherlockian.net"
+        },
+        {
+          "url": "http:\/\/www.sherlockian.net\/sharing\/",
+          "destinations": [
+            {
+              "url": "https:\/\/www.livewatch.com\/the-worlds-most-famous-detective-sherlock-holmes",
+              "destinations": [
+                
+              ],
+              "id": "ID-79",
+              "title": "  The Worlds Most Famous Detective Sherlock Holmes\n | LiveWatch Home Security"
+            },
+            {
+              "url": "https:\/\/www.arthur-conan-doyle.com\/index.php?title=Frederic_Dorr_Steele",
+              "destinations": [
+                
+              ],
+              "id": "ID-80",
+              "title": "Frederic Dorr Steele - The Arthur Conan Doyle Encyclopedia"
+            },
+            {
+              "url": "https:\/\/www.sherlockthenetwork.com",
+              "destinations": [
+                
+              ],
+              "id": "ID-81",
+              "title": "Sherlock: The Network app"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/sharing\/sherlockian.net\/blog\/sitemap",
+              "destinations": [
+                
+              ],
+              "id": "ID-82",
+              "title": "Sitemap | Sherlockian.net"
+            },
+            {
+              "url": "https:\/\/boardgamegeek.com\/geeksearch.php?action=search&objecttype=boardgame&q=sherlock%20holmes",
+              "destinations": [
+                
+              ],
+              "id": "ID-83",
+              "title": "BoardGameGeek | Gaming Unplugged Since 2000"
+            },
+            {
+              "url": "http:\/\/nerdist.com\/?s=Sherlock",
+              "destinations": [
+                
+              ],
+              "id": "ID-84",
+              "title": "Sherlock | Nerdist"
+            },
+            {
+              "url": "http:\/\/www.sherlocktron.com\/grand.htm",
+              "destinations": [
+                
+              ],
+              "id": "ID-85",
+              "title": null
+            },
+            {
+              "url": "http:\/\/cbselementary.wikia.com\/wiki\/Elementary_Wiki",
+              "destinations": [
+                
+              ],
+              "id": "ID-86",
+              "title": "Elementary Wiki | FANDOM powered by Wikia"
+            },
+            {
+              "url": "http:\/\/www.criminalelement.com\/blogs\/2013\/09\/holmes-2-0-life-in-the-new-sherlockian-renaissance",
+              "destinations": [
+                
+              ],
+              "id": "ID-87",
+              "title": "Holmes 2.0: Life in the New Sherlockian Renaissance by Lyndsay Faye "
+            },
+            {
+              "url": "http:\/\/www.ihearofsherlock.com",
+              "destinations": [
+                
+              ],
+              "id": "ID-88",
+              "title": "\nI Hear of Sherlock Everywhere\n"
+            },
+            {
+              "url": "https:\/\/www.futilitycloset.com\/2014\/09\/29\/the-real-life-sherlock-holmes\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-89",
+              "title": "Podcast Episode 28: The Real-Life Sherlock Holmes - Futility Closet"
+            },
+            {
+              "url": "https:\/\/en.wikipedia.org\/wiki\/Portal:Sherlock_Holmes",
+              "destinations": [
+                
+              ],
+              "id": "ID-90",
+              "title": "Portal:Sherlock Holmes - Wikipedia"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/sharing\/hounds\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-91",
+              "title": "The Hounds of the Internet | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.text-traeger.info\/SHolmes\/title.html",
+              "destinations": [
+                
+              ],
+              "id": "ID-92",
+              "title": "Sherlock Holmes - Hintergr\u00fcnde - Background - P.C.T."
+            },
+            {
+              "url": "http:\/\/www.garrettwade.com\/1000-piece-murder-mystery-jigsaw-puzzles-gp.html",
+              "destinations": [
+                
+              ],
+              "id": "ID-93",
+              "title": "Sherlock Holmes Jigsaw Puzzle and Detective Whodunit Puzzle - Garrett Wade  - Garrett Wade"
+            },
+            {
+              "url": "https:\/\/goo.gl\/forms\/L7ayRxEUl9pIWHDD3",
+              "destinations": [
+                
+              ],
+              "id": "ID-94",
+              "title": "Contact Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/sharing\/filk\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-95",
+              "title": "Sherlockian Filk | Sherlockian.net"
+            },
+            {
+              "url": "http:\/\/www.sherlockian-sherlock.com",
+              "destinations": [
+                
+              ],
+              "id": "ID-96",
+              "title": "Sherlock, Sherlock Holmes, Sherlockian, Holmesian, Sherlockology"
+            },
+            {
+              "url": "https:\/\/en.wikipedia.org\/wiki\/Category:Video_games_based_on_Sherlock_Holmes",
+              "destinations": [
+                
+              ],
+              "id": "ID-97",
+              "title": "Category:Video games based on Sherlock Holmes - Wikipedia"
+            },
+            {
+              "url": "http:\/\/www.sherlockholmespodcast.com",
+              "destinations": [
+                
+              ],
+              "id": "ID-98",
+              "title": "Sherlock Holmes: Trifles"
+            },
+            {
+              "url": "https:\/\/www.arthur-conan-doyle.com\/index.php?title=Main_Page",
+              "destinations": [
+                
+              ],
+              "id": "ID-99",
+              "title": "The Arthur Conan Doyle Encyclopedia"
+            },
+            {
+              "url": "https:\/\/groups.google.com\/forum\/?hl=en#!forum\/alt.fan.holmes",
+              "destinations": [
+                
+              ],
+              "id": "ID-100",
+              "title": "alt.fan.holmes - Google Groups"
+            },
+            {
+              "url": "http:\/\/www.diogenes-club.com",
+              "destinations": [
+                
+              ],
+              "id": "ID-101",
+              "title": "The Diogenes Club: A Sherlock Holmes WebSite"
+            },
+            {
+              "url": "http:\/\/www.neontommy.com\/news\/2013\/02\/hive-mind-sherlock-holmes-and-adventures-first-fandom",
+              "destinations": [
+                
+              ],
+              "id": "ID-102",
+              "title": "Into The Hive Mind: Sherlock Holmes And The Adventures Of The First Fandom | Neon Tommy"
+            },
+            {
+              "url": "http:\/\/www.fanforum.com\/f391\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-103",
+              "title": "Sherlock - Fan Forum"
+            },
+            {
+              "url": "http:\/\/www.bsiarchivalhistory.org\/BSI_Archival_History\/Hard_Knox.html",
+              "destinations": [
+                
+              ],
+              "id": "ID-104",
+              "title": "The Ronald Knox Myth\nSherlock Holmes Journal, Summer 2011\n\n\u201cI had come to an entirely erroneous conclusion, my dear Watson,\nwhich shows how dangerous it is to reason from insufficient data.\u201d\n\n2011 has been dubbed \u201cthe Year of the Great Game\u201d because it is the 100th anniversary of Ronald Knox giving his paper \u201cStudies in the Literature of Sherlock Holmes\u201d at Oxford University. Holmesians, particularly Baker Street Irregulars, have come to think of this pastime of ours as something of a cult, calling Sherlock Holmes the Master and Dr. Watson\u2019s tales the Sacred Writings, in an affectation of religion believed derived from Ronald Knox\u2019s talk in which he used the tales to satirize German biblical scholarship.\n\n   When did this rather juvenile talk for the age of twenty-three, with its Monsieur Piff-Pouffs, Herr Bilgemanns, and other grotesqueries, come to be regarded as the origin of our scholarship? In 1958, as Edgar W. Smith started assembling The Incunabular Sherlock Holmes, his anthology of early writings, he remarked in that January\u2019s Baker Street Journal that \u201cThe death of Msgr. Ronald Arbuthnot Knox will be mourned by all who look to him as the originator of the Sherlockian critique.\u201d So the notion that Knox was the genesis of our scholarship and movement was afoot fifty years ago (though not, we shall see, in the view of Edgar W. Smith himself).\n\n   Yet probably not many Holmesians had actually read \u201cStudies in the Literature of Sherlock Holmes,\u201d for it had not been much available. Though printed in two limited-circulation student magazines in the \u2019teens, it didn\u2019t appear anywhere Holmes devotees at large could read it until 1928 in England and 1930 in America, when Knox included it in Essays in Satire.[1] After that, \u201cStudies in the Literature\u201d didn\u2019t appear in print again until 1958\u2019s Incunabular Sherlock Holmes.[2] Nor often since, for that matter: in 1967 in James Edward Holroyd\u2019s Seventeen Steps to 221B, in 1980 in Peter Haining\u2019s Sherlock Holmes Compendium, and in 1984 in Philip Shreffler\u2019s Baker Street Reader. No more recently than that, and never in the Sherlock Holmes Journal or Baker Street Journal.\n\n  The Knox legend claims the talk was the beginning of our scholarship and movement, and that Christopher Morley, the BSI\u2019s founder, heard it at Oxford and spread the gospel in America. I grew up in that faith, but when I started researching the BSI\u2019s history in the 1990s, reading dozens of essays and hundreds of letters written in the 1920s and \u201930s by our founding fathers, slowly it dawned upon me that none of them were talking about Ronald Knox. It was someone else they were talking about.\t\n\n\nKnox was not the first to peer beneath the surface of the Sherlock Holmes stories. Two other scholars had done so a decade earlier, Arthur Bartlett Maurice in The Bookman in America and Frank Sidgwick in The Cambridge Review in England, in January 1902 as The Hound of the Baskervilles was appearing serially. Sidgwick\u2019s was a one-time query about inconsistencies in Hound, but Maurice went on writing about the tales in his periodical for 25 years. Smith opened The Incunabular Sherlock Holmes in 1958 with their work, not Knox\u2019s.\n\n    Yet while often skipped over to make Knox seem the Onlie Begetter, we need not agree that Maurice and Sidgwick founded the so-called cult any more than Knox did. It was someone else who shaped our scholarship, and was in the thoughts of the founders of the Baker Street Irregulars and the Sherlock Holmes Society in 1934.\n\n  As for the so-called cultishness, Christopher Morley required no inspiration from others. Morley was inflicting examinations in the Canon upon his helpless younger brothers Felix and Frank long before 1911, and forming, while still a turn-of-the-century schoolboy in Baltimore, Maryland, a Sherlock Holmes club with other youngsters. The gregarious, evangelistic Kit Morley had all the makings of a cult leader from the start, without a relative late-comer like Ronald Knox.[3]\n\n  As for Morley bringing Knox\u2019s paper to America, we don\u2019t even know if Morley heard it while at Oxford as a Rhodes Scholar in 1911.* No diaries or appointment books of Morley\u2019s for 1911-12 exist, and no contemporary letters of his indicate that he did. And on the sole occasion that he referred to it as having been given at Oxford while he was there, in his 1944 book Sherlock Holmes and Dr. Watson: A Textbook of Friendship, Morley did not actually say he heard it. If you look up and not only see but observe the reference, one finds the BSI\u2019s founder indefinite on that point.[4]\n\n    But let us assume that Morley did hear Ronald Knox\u2019s talk in 1911 \u2014 for it reinforces my point that he didn\u2019t bring it to America. By the time Morley arrived in Oxford in October 1910 at age 20, having discovered girls, booze, and ambition, his boyhood Sherlock Holmes enthusiasm had gone dormant[5] \u2014 and by his own admission it was still dormant when he came home in 1913 to begin his career as an editor and writer.\n\n    Only in 1926, said Morley himself in the Saturday Review of Literature that year, was his enthusiasm for Sherlock Holmes rekindled. Not by Knox, but an unnamed English printer (Stanley Morison) he met in New York; and what rekindled it was an impromptu canonical trivia game of the kind Morley often played as a boy with his brothers and chums. \u201cWe found ourselves, I don\u2019t know just how,\u201d reported his May 1st, 1926, \u201cBowling Green\u201d column, \u201cembarked on a mutual questionnaire of famous incidents in the life of Sherlock Holmes\u201d \u2014 the \u201cdelicious minutiae\u201d Morley extolled later in his preface to the first American Complete Sherlock Holmes in 1930, \u201cIn Memoriam Sherlock Holmes,\u201d in which Knox is unmentioned.\n\n   It was a game Morley then took up in a luncheon club of his wherein the BSI gestated (or perhaps marinated) over many liquid lunches in the back room of his favorite Manhattan speakeasy during the final thirsty years of Prohibition. Robert K. Leavitt, one of his proto-Irregulars from the start, gave us an indispensable firsthand account of the BSI\u2019s beginnings in his \u201cThe Origin of 221B Worship,\u201d and tells how competitive examination in the Canon\u2019s minutiae at those lunches in the late 1920s and early 1930s gave birth to the BSI.[6]\n\n   In 1930 \u201cStudies in the Literature\u201d finally came out in America. That doubtless pleased Morley, but it wasn\u2019t his kind of canonical game, and he continued to go his own way. It was Dorothy Sayers who said that \u201cthe rule of the game is that it must be played as solemnly as a county cricket match at Lord\u2019s; the slightest touch of extravagance or burlesque ruins the atmosphere.\u201d[7] Morley played by the same rule: no Herr Bilgemanns or Monsieur Piff-Poufs for him.\n\t\n\nSeveral things prompted Morley at the end of 1933 to found the Baker Street Irregulars.[8] One was Prohibition coming to an end that December, which meant Americans could drink openly once again, no longer only furtively in little back rooms. Another was the publication that October of Vincent Starrett\u2019s enchanting Private Life of Sherlock Holmes, which Morley had been reading in proofs back as far as the previous July \u2014 a rapturous tribute to Sherlock Holmes barely mentioning Knox.[9] And the third, decisive factor prompting the BSI\u2019s founding was another development of which both Morley and Starrett were keenly aware, and would lead to England\u2019s first Sherlock Holmes Society in 1934 as well: a 1931 monograph that riveted Holmes devotees in England and America in a way that Knox\u2019s paper had not.\n\n    Let us investigate how riveting that untrifling monograph of 1931 was. In 1932 T. S. Blakeney\u2019s Sherlock Holmes: Fact or Fiction? said: \u201cA certain body of critical writings has already grown up around Sherlock Holmes and Watson, and it will be evident throughout this work to what extent we are indebted to them.\u201d Knox was one of many named, but what Blakeney noted were Knox\u2019s limitations: that his paper was based on only a portion of the Canon. Who stood out in Blakeney\u2019s mind instead as both source and strawman for canonical scholarship was S. C. Roberts, a Cambridge don and director of Cambridge University Press. Declared Blakeney: \u201cMr. Roberts has achieved for Watson what he and other scholars have accomplished for Boswell.\u201d\n\n  How did Roberts earn this accolade? Two critical works, influential where Knox\u2019s paper was not, except in terms of refutable error. The first, precursor work was a 1929 leaflet, A Note on the Watson Problem, published by Cambridge University Press. To give its proper context, I quote from Edgar Smith\u2019s preface to the 1955 BSI edition of H. W. Bell\u2019s 1934 anthology Baker Street Studies. \u201cIt is true,\u201d said Smith, \u201cthat as far back as 1912 a young priest named Ronald Knox had contributed an article to the Oxford Blue Book entitled \u2018Studies in the Literature of Sherlock Holmes\u2019 in which a tongue-in-cheek probing of some of the esoterica in the Saga was tentatively undertaken.\u201d (A description lending little support to the idea that Knox\u2019s paper was the fountainhead of Irregular scholarship.)\n  \n    Smith continued: \u201cBut if we may judge from the casual tenor of much that the author wrote (including a blatant misquotation of the most famous single passage in the Canon), his essay was not inspired so much by a profound curiosity about the Master\u2019s life and times as by a desire to poke fun for its own sake at [German biblical] Higher Criticism which was then having a European vogue.\u201d\n\n   Smith went on to explain that Knox\u2019s paper, after coming out in Essays in Satire in 1928, \u201celicited a rejoinder in 1929 from S. C. Roberts in his pamphlet A Note on the Watson Problem, and the foundation for what was to follow may be said by that action to have been laid.\u201d[10] The importance of that latter observation by no less a student, contributor, and editor of Holmesian scholarship than Edgar Smith cannot be overstated. Roberts, said Edgar W. Smith, is the foundation of Holmesian scholarship.[11]\n\n    Smith said so because of the longer biographical treatment of Dr. Watson that Roberts had been commissioned the following year to write. As a Boswell expert he was well-suited for it, and his resulting Doctor Watson, published by Faber & Faber in its Criterion Miscellany series in early 1931, had a tremendous impact upon Holmes devotees on both sides of the ocean. It not only educated and entranced, it showed what could be done, prompting much further effort by others \u2014 not least Christopher Morley.\n\n    Roberts\u2019 monograph was in Morley\u2019s hands in America quickly and he wasted no time heralding it at length in the Saturday Review of Literature of March 7, 1931. Though noting certain issues of chronology he would dispute at a later time, he praised it lavishly. We know no earlier example of Morley so much as mentioning Knox\u2019s \u201cStudies in the Literature of Sherlock Holmes.\u201d\n\n    H. W. Bell\u2019s 1932 Sherlock Holmes and Dr. Watson: A Chronology of Their Adventures also gave Roberts first place among students of the Canon, while citing Knox\u2019s paper but once. In 1933 Vincent Starrett\u2019s Private Life discussed Roberts\u2019 treatise in detail while barely mentioning Knox. Dorothy Sayers was also writing landmark papers about the Canon at the time,[12] and to peruse them is to note that while she was well up on all the English sources, she relied upon Roberts, Blakeney and Bell.\n\n    And the BSI\u2019s founders paid even less attention to Knox. In the December 2, 1933, Saturday Review of Literature, Elmer Davis\u2019s review of Starrett\u2019s Private Life discussed Roberts almost more than it did Starrett\u2019s book, without once mentioning Knox. Christopher Morley, for his 1933 essays collection Internal Revenue, added to 1930\u2019s \u201cIn Memoriam\u201d text a lengthy discussion of Roberts\u2019 Doctor Watson; Knox went unmentioned again. And with the BSI launched in 1934, Knox might not have existed to tell from the two essays Morley authored that year. \u201cWas Sherlock Holmes an American?\u201d cited the Canon only, while \u201cDoctor Watson\u2019s Secret,\u201d a jewel of chronological exegesis, simultaneously built upon and challenged Roberts\u2019 Doctor Watson, referring additionally only to H. W. Bell and A. G. Macdonell in Baker Street Studies.[13]\n\n\nA common defense of Knox\u2019s role is to point to the use of religious terminology in Holmesian circles, since Knox was a priest satirizing German biblical scholarship in his 1911 paper. For example, Elmer Davis, a great journalist and author of the BSI\u2019s Constitution & Buy Laws (sic) was also at Oxford in 1911, and his Constitution gives as the BSI\u2019s purpose \u201cthe study of the Sacred Writings.\u201d But Davis was already a Holmes devotee before 1911,[14] and we have no actual evidence that he heard Knox, or that his much later use of \u201cSacred Writings\u201d was due to Knox\u2019s influence. What we know, thanks to Leavitt\u2019s \u201cOrigins of 221B Worship,\u201d is that \u201cthe study of the Sacred Writings is pure Davis-ese,\u201d i.e. not in common use among the BSI\u2019s other founding fathers at the time.\n\n    And while Morley\u2019s 1934 essay \u201cDoctor Watson\u2019s Secret\u201d called the tales \u201cthe canon,\u201d the word was uncapitalized and lacked religious reverberations. It seems simply the term that occurred to the deep-dyed bookman in referring to the literary corpus, as often applied to other, lesser secular works such as Shakespeare. Elmer Davis had already used \u201ccanonical\u201d the same way in reviewing Starrett\u2019s Private Life. Morley was Quaker in upbringing, not given to extravagance of religious expression in any event. Not until 1941, in an unpublished memoir about the BSI\u2019s beginnings, did Morley use a religious term: \u201csince the Baker Street Irregulars refer to [Conan Doyle\u2019s] works as \u2018The Sacred Writings,\u2019 perhaps he may be nominated \u2018The Sacred Writer\u2019\u201d \u2014 but he did so as a nod to his old chum Elmer Davis, saluted by name immediately afterwards.\n\n  That scant possibility aside, there is no suggestion of Knox\u2019s paper in that memoir of Morley\u2019s, or in his rewriting of it in 1946 for the Baker Street Journal\u2019s third issue.[15] Knox is absent from both versions of Morley\u2019s own account of how the BSI came to be. What Morley gave credit to was William Gillette\u2019s Sherlock Holmes Farewell Tour over 1928-32, Roberts\u2019 Doctor Watson, Starrett\u2019s Private Life of Sherlock Holmes, and Elmer Davis\u2019s Roberts-besotted review of Starrett\u2019s book in the Saturday Review of Literature.\n\n  Wherever Morley\u2019s \u201ccanon\u201d came from, it wasn\u2019t Knox, because it doesn\u2019t appear in the latter\u2019s paper. Contrary to a widespread impression, there was little use by Knox of the religious terminology common to Sherlockian circles later. Terms like \u201cthe Canon,\u201d \u201cthe Sacred Writings,\u201d \u201cthe Writings About the Writings,\u201d \u201cthe Master\u201d do not occur in \u201cStudies in the Literature of Sherlock Holmes.\u201d Father Knox was not satirizing religious rites; he was satirizing German scholarship, a very different thing.\n\n   Whatever Davis\u2019s reason for calling the tales \u201cthe Sacred Writings\u201d in 1934, what we see embraced not only by Morley and Starrett, but also by Davis\u2019s review of Starrett (rewritten as \u201cOn the Emotional Geology of Baker Street\u201d for the 1940 BSI anthology 221B: Studies in Sherlock Holmes edited by Starrett), is S. C. Roberts.[16] And while Roberts used Knox\u2019s paper as a point of departure for contrary conclusions about chronology in A Note on the Watson Problem, he employed in it and Doctor Watson a simple secular narrative style others like Morley followed in responding to his arguments.\n\n    Bell\u2019s 1934 anthology Baker Street Studies did contain an paper by Knox, by then well known in England as a mystery writer and Detection Club member, as well as a cleric, but not his 1911 paper. Instead, Knox\u2019s \u201cThe Mystery of Mycroft\u201d was a straight-forward essay following the path Roberts set, with nothing to remind readers of \u201cStudies in the Literature of Sherlock Holmes.\u201d Not a Piff-Pouff nor Bilgemann in sight. It seems that 1911 paper of Knox\u2019s, supposedly epochal in its influence on others, wasn\u2019t much of an influence even upon its own author.\n\n\t\nIn England Americans like me need step carefully around Oxford vs Cambridge passions. I note, however, an unsigned article in The Cambridge Review in 1932, \u201cA Plea for a More Liberal Spirit in the Criticism of the Sherlock Holmes Canon.\u201d[17] It is not mere chauvinism when it calls itself \u201cthe place in which the Higher Criticism of the Holmes saga was first originated by Frank Sidgwick in 1902.\u201d And anyone disputing its declaration that \u201cthe article then published by Sidgwick has determined the whole tendency of this branch of learning,\u201d must acknowledge that \u201che was mainly concerned with pointing out discrepancies \u2014and very serious ones \u2014 in the dates of the Hound of the Baskervilles; and since that time, critics have faithfully followed his method, have concentrated their attention on questions of chronology, of text, of the minutiae of the literary technique.\u201d\n\n    Consider next England\u2019s first Sherlock Holmes Society a year and a half later. Its founding dinner at Canuto\u2019s restaurant in Baker Street on June 6, 1934, was reported at length in the British Medical Journal of August 11, 1934, by R. Ivar Gunn. Morley had known him at Oxford, someone else on the scene in 1911 to be impressed by Knox\u2019s talk. Yet what do we see in Gunn\u2019s report?[18] He names everyone present at the founding dinner, including many still-famous cultists, but not Ronald Knox. Messages from absent friends are read out that night, from Vincent Starrett, Desmond MacCarthy, T. S. Blakeney, and Christopher Morley, but not from Ronald Knox. Attendees discuss the impetus behind their new club: of mention of Ronald Knox there is none, nor in connection with the BSI whose own recent founding is announced and discussed that night. But: \u201cA genial note of welcome was struck by placing in front of each member a copy of Mr. Roberts\u2019 masterly study of Dr. Watson.\u201d And was S. C. Roberts present that night? He was.\n\n\nBy now you have surely been reminded of the famous exchange in Silver Blaze:\n\n\t\u201cIs there any point to which you would wish to draw my attention?\u201d\n\t\u201cTo the curious incident of the dog in the night-time.\u201d\n\t\u201cThe dog did nothing in the night-time.\u201d\n\t\u201cThat was the curious incident.\u201d\t\n\n\u201cStudies in the Literature\u201d was a hit on campus among those who, like poor Knox, were compelled to read the grim German biblical criticism of the day.[19] But as the supposed founder of our scholarship and movement, Knox is only a latter-day saint with no actual role in the bestirring Baker Street Irregularity of the 1920s and \u201930s \u2014 no evidence of having been in Morley\u2019s mind when his zest for Holmesiana was revived in 1926, nor when he turned his existing luncheon club into a Baker Street club, nor when he founded the BSI. Nor does Knox appear to have been much in the minds of the men and women who founded the Sherlock Holmes Society that same year. Only much later was Knox grafted onto our vigorous movement retroactively, assigned a place he had not possessed in the 1920s and \u201930s.\n\n    It was a knoxious thing to do. Our scholarship\u2019s cornerstone is S. C. Roberts\u2019 Doctor Watson, and we should be not only conscious but appreciative of that. Not only was it the work instantly captivating Blakeney and Bell, Starrett and Davis, and others when they read it, it was also true of Christopher Morley \u2014 and earlier than anyone else in America, probably earlier than even most devotees in England, for Morley had an \u201cin\u201d: the Faber & Faber editor who commissioned Roberts to write Doctor Watson was none other than Christopher Morley\u2019s brother Frank.\n\n\nNOTES\n\n[1] The Times on November 2, 1928, gave the book six lines at the bottom of a \u201cShorter Notices\u201d column, the Manchester Guardian of November 22nd have the book considerably more space but without mentioning the Sherlock Holmes essay in it, and the Observer seems not to have gotten around to reviewing the book until April 7, 1929.\n\n[2] Per Ronald De Waal\u2019s Universal Sherlock Holmes.\n\n[3] Said Frank Morley: \u201cMy father got examination papers for his students; very well, as soon as Felix and I could be hurried on for Kit\u2019s tuition, there we were, poor things, studying The Hound of the Baskervilles in order to withstand Kit\u2019s examination . . . . I am not saying that the stuff was difficult to read, but you had seriously to read it. In companionship with Kit in boyhood you had to have specific responses to specific questions.\u201d (\u201cThe Irregular Upbringing and Tastes of Christopher Morley,\u201d in Irregular Memories of the \u2019Thirties, p. 22, where Baker Street Journal editor Steven Rothman continues: \u201cAll the aspects of modern Sherlockiana are present: the clubbishness, the scholarship, the quiz, the desire to disseminate the truth and indoctrinate others.\u201d All years before Oxford, 1911.)\n\n[4] \u201cIt was in 1911 that the Reverend (now Monsignor) R. A. Knox wrote for a club at Trinity College, Oxford, his humorous paper (with shrewd overtones of theological satire) \u2018Studies in the Literature of Sherlock Holmes.\u2019 This new frolic in criticism was welcome at once; those who were students at Oxford in that ancient day remember how Mr. Knox was invited from college to college to read his agreeable lampoon.\u201d (p. 19)\n\n[5] See Helen McK. Oakley\u2019s Three Hours for Lunch: The Life and Times of Christopher Morley (1976), chapters three and four.\n\n[6] Leavitt, \u201cThe Origin of 221B Worship,\u201d Baker Street Journal, September and December 1961, reprinted in Irregular Memories of the \u2019Thirties. See Leavitt also in \u201cCertain Rites, and Also Certain Duties,\u201d pp. 18-19. \n\n[7] In the foreword to her collection of essays Unpopular Opinions (1946).\n\n[8] One must remember how much Sherlock Holmes was in the air. Conan Doyle had died in 1930, putting a Complete Sherlock Holmes in hand at last. In America William Gillette\u2019s Farewell Tour in Sherlock Holmes stretched from 1928 to 1932, and it plus the first Sherlock Holmes radio drama starring Gillette in 1930 led to a radio series in 1932-33. Sherlock Holmes movies starring Clive Brook, Reginald Owen, Raymond Massey, and Arthur Wontner were in the theaters in both America and Britain. And books about the great detective had begun to appear, beginning with T. S. Blakeney\u2019s Sherlock Holmes: Fact or Fiction? in 1932.\n\n[9] Starrett was aware of Knox\u2019s \u201cStudies in the Literature,\u201d and actually had a copy of Essays in Satire, now at the University of Texas, inscribed to him by Knox in 1929. But Starrett\u2019s Private Life of Sherlock Holmes gave more prominence to Ronald\u2019s brother E. V. (\u201cEvoe\u201d), reprinting his \u201cFinal Examination Paper on the Life and Work of Sherlock Holmes\u201d (something more in the Morley vein) from the October 31, 1928, issue of Punch.\n\n[10] While remarking in 1953 (Holmes and Watson: A Miscellany) that \u201cit was Monsignor Knox\u2019s essay that first beckoned me to Baker Street,\u201d Roberts in A Note on the Watson Problem deemed Knox\u2019s paper a \u201csomewhat superficial survey\u201d; noted \u201cflagrant inaccuracies in the chronological tabulation of the Adventures and Memoirs\u201d; said Knox\u2019s \u201cincursions into critical exegesis are not wholly fortunate\u201d; and concluded: \u201cwe should read Knox\u2019s purely literary criticism with greater enjoyment if our confidence in his scholarship were not shaken by the fear that his texts are not wholly above suspicion.\u201d A good thing Father Knox was in the Christian Forgiveness business.\u2028\n[11] Smith repeated those words three years later, following the previously quoted BSJ passage at the time of Knox\u2019s death.\n\n[12] Collected in Unpopular Opinions.\n\n[13] Both appeared in the new BSI\u2019s house organ, Morley\u2019s \u201cBowling Green\u201d column in the Saturday Review of Literature, issues of July 21 and 28, and December 15, respectively.\n\n[14] See Davis\u2019s introduction to the Limited Editions Club Return of Sherlock Holmes (1952). Davis did finally mention Knox in that latter-day essay of his, but said of Roberts\u2019 Doctor Watson that \u201cif superceded in some details [it] will long remain the standard work.\u201d\n\n[15] See \u201cAn Agreeable Amusement,\u201d Irregular Memories of the \u2019Thirties, pp. 9-12. Morley\u2019s rewritten version appeared in his \u201cClinical Notes of a Resident Patient\u201d column in the Baker Street Journal, July 1946 (Irregular Memories of the \u2019Thirties, pp. 14-19).\n\n[16] Starrett sent Roberts a copy of Davis\u2019s review, according to his December 6, 1933, letter to Davis. See \u201cCertain Rites, and Also Certain Duties\u201d for the letter\u2019s full text, along with Davis\u2019s reply and review of The Private Life.\n\n[17] November 11, 1932.\n\n[18] The report appears also in Irregular Memories of the \u2019Thirties.\n\n[19] Morley at Oxford read history, not theology.\n\n\n* A \u201cpost-doctoral\u201d note: The article above remarks at one point \u201cwe don\u2019t even know if Morley heard [Knox\u2019s] talk while at Oxford,\u201d but we now know that he did not, thanks to the research of the Sherlock Holmes Society of London\u2019s Nicholas Utechin, published in his 2010 BSJ Christmas Annual From Piff-Pouff to Backnecke: Ronald Knox and 100 Years of \u201cStudies in the Literature of Sherlock Holmes.\u201d While not the result Mr. Utechin may have wished, it answers that question, and not only for Christopher Morley, but also his friend and fellow Rhodes Scholar Elmer Davis. From Mr. Utechin\u2019s research, it appears Knox\u2019s talk was heard rather fewer times by rather fewer Oxford students than later commentators have supposed.\n\n"
+            },
+            {
+              "url": "http:\/\/tvtropes.org\/pmwiki\/pmwiki.php\/Franchise\/SherlockHolmes?from=Main.SherlockHolmes",
+              "destinations": [
+                
+              ],
+              "id": "ID-105",
+              "title": "Sherlock Holmes (Franchise) - TV Tropes"
+            },
+            {
+              "url": "http:\/\/canonfodderfriday.tumblr.com\/resources",
+              "destinations": [
+                
+              ],
+              "id": "ID-106",
+              "title": "Canon Fodder Friday \u2022 Resources"
+            },
+            {
+              "url": "http:\/\/www.victorianweb.org\/art\/illustration\/pagets\/index.html",
+              "destinations": [
+                
+              ],
+              "id": "ID-107",
+              "title": "Illustrations of Arthur Conan Doyle's Sherlock Holmes stories by Sidney Paget"
+            },
+            {
+              "url": "http:\/\/www.bestofsherlock.com",
+              "destinations": [
+                
+              ],
+              "id": "ID-108",
+              "title": "The Best of Sherlock Holmes & Conan Doyle by Randall Stock"
+            },
+            {
+              "url": "https:\/\/itunes.apple.com\/us\/genre\/ios-games\/id6014?mt=8&letter=S&page=45#page",
+              "destinations": [
+                
+              ],
+              "id": "ID-109",
+              "title": "Games - App Store Downloads on iTunes"
+            },
+            {
+              "url": "http:\/\/www.sherlockian.net\/sharing\/tumblrs\/",
+              "destinations": [
+                
+              ],
+              "id": "ID-110",
+              "title": "Tumblrs | Sherlockian.net"
+            }
+          ],
+          "id": "ID-4",
+          "title": "Sharing | Sherlockian.net"
+        },
+        {
+          "url": "http:\/\/www.sherlockian.net\/investigating\/",
+          "destinations": [
+            
+          ],
+          "id": "ID-5",
+          "title": "Investigating | Sherlockian.net"
+        },
+        {
+          "url": "http:\/\/www.sherlockian.net\/about\/",
+          "destinations": [
+            
+          ],
+          "id": "ID-6",
+          "title": "About | Sherlockian.net"
+        },
+        {
+          "url": "http:\/\/wide.cal.msu.edu",
+          "destinations": [
+            
+          ],
+          "id": "ID-7",
+          "title": "Writing, Information, and Digital Experience :: Home"
+        },
+        {
+          "url": "https:\/\/goo.gl\/forms\/L7ayRxEUl9pIWHDD3",
+          "destinations": [
+            
+          ],
+          "id": "ID-8",
+          "title": "Contact Sherlockian.net"
+        },
+        {
+          "url": "http:\/\/www.sherlockian.net\/",
+          "destinations": [
+            
+          ],
+          "id": "ID-9",
+          "title": "Welcome | Sherlockian.net"
+        },
+        {
+          "url": "http:\/\/www.sherlockian.net\/celebrating\/",
+          "destinations": [
+            
+          ],
+          "id": "ID-10",
+          "title": "Celebrating | Sherlockian.net"
+        },
+        {
+          "url": "http:\/\/www.sherlockian.net\/sherlockian.net\/blog\/sitemap",
+          "destinations": [
+            
+          ],
+          "id": "ID-11",
+          "title": "Sitemap | Sherlockian.net"
+        },
+        {
+          "url": "https:\/\/en.wikipedia.org\/wiki\/Sherlockian_game",
+          "destinations": [
+            
+          ],
+          "id": "ID-12",
+          "title": "Sherlockian game - Wikipedia"
+        }
+      ],
+      "id": "ID-1",
+      "title": "Welcome | Sherlockian.net"
+    }
+  ]
+}
+
+
