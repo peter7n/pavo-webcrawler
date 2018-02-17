@@ -106,11 +106,12 @@ class BreadthCrawlSpider(scrapy.Spider):
         self.start_urls = [start_url]
         self.depth_limit = depth
         self.queue.append((start_url, None))  # queue stores url string, parent node tuple
+        self.queue.append(None)
 
     def parse(self, response):
 
         if self.depth > self.depth_limit:  # reached the crawl limit
-            # BreadthCrawlSpider.error = 'not error just testing'
+            print '1 ' + self.depth + ', ' + self.depth_limit
             return
 
         page_url, parent_node = self.queue.popleft()
@@ -129,6 +130,7 @@ class BreadthCrawlSpider(scrapy.Spider):
         links = set([i.url for i in self.le.extract_links(response)])
         links -= self.visited  # set difference
 
+        """
         self.nextNodesToNextDepth += len(links)
         self.nodesToNextDepth -= 1
 
@@ -139,6 +141,9 @@ class BreadthCrawlSpider(scrapy.Spider):
 
             self.nodesToNextDepth = self.nextNodesToNextDepth
             self.nextNodesToNextDepth = 0
+        """
+
+
 
         # create a node for this page and append to the parent node
         node = Node(page_url, title)
@@ -152,7 +157,21 @@ class BreadthCrawlSpider(scrapy.Spider):
             self.queue.append((link, node))
 
         if len(self.queue) == 0:
+            print '4'
             return
+
+        if not self.queue[0]:
+            self.depth += 1
+            self.queue.append(None)
+            self.queue.popleft()
+
+            if self.depth > self.depth_limit:
+                print '2 ' + self.depth + ', ' + self.depth_limit
+                return
+
+            if not self.queue[0]:  # no more nodes
+                print '3'
+                return
 
         # yield a request
         yield scrapy.Request(
@@ -225,7 +244,7 @@ def run_dfs(start_url, limit, keyword):
 
 
 def run_bfs(start_url, depth, keyword):
-
+    """
     runner = CrawlerRunner()
 
     d = runner.crawl(BreadthCrawlSpider, start_url, depth)
@@ -238,7 +257,7 @@ def run_bfs(start_url, depth, keyword):
     })
     process.crawl(BreadthCrawlSpider, start_url=start_url, depth=depth)
     process.start()
-    """
+    #"""
 
     websiteList = [BreadthCrawlSpider.tree]
 
@@ -251,4 +270,5 @@ def run_bfs(start_url, depth, keyword):
 
 if __name__ == '__main__':
     #print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=False, limit=10)
-    print run(start_url='https://imgur.com/', bfs=True, limit=1, keyword="circle")
+    print run(start_url='http://www.sherlockian.net', bfs=True, limit=2, keyword="circle")
+    #print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=True, limit=1, keyword="circle")
