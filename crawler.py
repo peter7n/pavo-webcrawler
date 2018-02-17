@@ -268,7 +268,7 @@ def run_bfs(start_url, depth, keyword):
     }
 
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
     #print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=False, limit=10)
-    print run(start_url='http://www.sherlockian.net', bfs=True, limit=2, keyword="circle")
+    #print run(start_url='http://www.sherlockian.net', bfs=True, limit=2, keyword="circle")
     #print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=True, limit=1, keyword="circle")

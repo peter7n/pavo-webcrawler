@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <style>
-            #header-image {
+            #headerImage {
                 width: 100%;
             }
 
@@ -32,26 +32,9 @@
     </head>
 
     <body>
-        <script>
-            function setTraversalMax(val) {
-                crawlLimit = document.getElementById("numLevels");
-                if(val == "depth-first") {
-                    crawlLimit.max = "25";
-                    if(crawlLimit.value > 25) {
-                        crawlLimit.value = "";
-                    }
-                }
-                else {
-                    crawlLimit.max = "2";
-                    if(crawlLimit.value > 2) {
-                        crawlLimit.value = "";
-                    }
-                }
-            }
-        </script>
         <header>
             <div class="page-header">
-                <img src="http://web.engr.oregonstate.edu/~konturf/images/web_crawler_graphic.jpg" id="header_image">
+                <img src="http://web.engr.oregonstate.edu/~konturf/images/web_crawler_graphic.jpg" id="headerImage">
             </div>
         </header>
        
@@ -87,6 +70,24 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
+        
+        <script>
+            function setTraversalMax(val) {
+                crawlLimit = document.getElementById("numLevels");
+                if(val == "depth-first") {
+                    crawlLimit.max = "25";
+                    if(crawlLimit.value > 25) {
+                        crawlLimit.value = "";
+                    }
+                }
+                else {
+                    crawlLimit.max = "2";
+                    if(crawlLimit.value > 2) {
+                        crawlLimit.value = "";
+                    }
+                }
+            }
+        </script>
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
