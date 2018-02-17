@@ -43,7 +43,7 @@
         <title>Web Crawler</title>
     </head>
 
-    <body>
+    <body onload="checkCookie()">        
         <header>
             <div class="page-header">
                 <img src="http://web.engr.oregonstate.edu/~konturf/images/web_crawler_graphic.jpg" id="headerImage">
@@ -83,12 +83,12 @@
                     <label for="loadPrevWebsite">Load Previous Starting Website and Keyword</label>
                     <div id="prevWebsites">
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="traversalType" id="dft" value="depth-first" onclick="setTraversalMax(this.value)" required>
-                          <label class="form-check-label" for="dft">Depth-First</label>
+                          <input class="form-check-input" type="radio" name="prevSite" id="df" value="depth-first" required>
+                          <label class="form-check-label" for="df" id="myCheck">Depth-First</label>
                         </div>
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="traversalType" id="bft" value="breadth-first" onclick="setTraversalMax(this.value)" required>
-                          <label class="form-check-label" for="bft">Breadth-First</label>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="prevSite" id="bf" value="breadth-first" required>
+                          <label class="form-check-label" for="bf">Breadth-First</label>
                         </div>
                     </div>
                 </div>
@@ -97,6 +97,7 @@
         </div>
         
         <script>
+            
             function setTraversalMax(val) {
                 crawlLimit = document.getElementById("numLevels");
                 if(val == "depth-first") {
@@ -112,22 +113,38 @@
                     }
                 }
             }
-<<<<<<< HEAD
-=======
             
-            function checkCookie() {
-                var username = getCookie("username");
-                if (username != "") {
-                    alert("Welcome again " + username);
-                } 
-                else {
-                    username = prompt("Please enter your name:", "");
-                    if (username != "" && username != null) {
-                        setCookie("username", username, 365);
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
                     }
                 }
+                return "";
             }
->>>>>>> parent of 2f1ce35... Revert "Website updates"
+            
+            function checkCookie() {
+                document.getElementById("loadWebsite").style.display = "block";
+                document.getElementById("myCheck").innerText = "Check Cookies";
+                var websitesCookie = getCookie("prevWebsites");
+                if(websitesCookie == "") {
+                    document.getElementById("loadWebsite").style.display = "block";
+                    document.getElementById("myCheck").innerText = "No Cookies";
+                    return false;
+                } 
+                else {
+                    document.getElementById("loadWebsite").style.display = "block";
+                    document.getElementById("myCheck").innerText = websitesCookie;
+                    return true;
+                }
+            }
+            
         </script>
         
         <!-- Optional JavaScript -->
