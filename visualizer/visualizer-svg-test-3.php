@@ -144,7 +144,7 @@
 			svg.appendChild(line);
 
 			// set the node where keyword was found to red
-			if (nodeId == "#" + breadthFirstCase2.keywordWebsite) {
+			if (nodeId == "#" + webcrawlResults.keywordWebsite) {
 				urlNode.find(".inner").css({"background":"red"});
 			}
 		}
