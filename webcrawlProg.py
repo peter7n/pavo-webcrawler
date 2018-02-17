@@ -1,9 +1,7 @@
 #!/nfs/stak/users/konturf/CS467/bin/python
 # -*- coding: UTF-8 -*-
 
-# I found information on this website - 
-# https://www.a2hosting.com/kb/developer-corner/python/activating-a-python-virtual-environment-from-a-script-file
-# about activating a virtual environment from a Python CGI script
+
 activate_this = "/nfs/stak/users/konturf/CS467/bin/activate_this.py"
 execfile(activate_this, dict(__file__=activate_this))
 

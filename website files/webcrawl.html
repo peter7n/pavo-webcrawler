@@ -13,14 +13,6 @@
             #header-image {
                 width: 100%;
             }
-            
-            #inputForm {
-                padding-left: 40px;
-            }
-            
-            #startingWebsite {
-                width: 40em;
-            }
 
             #numLevels {
                 width: 10em;
@@ -33,10 +25,6 @@
             form {
                 padding-top: 15px;
             }
-            
-            #loadWebsite {
-                display: none;
-            }
         </style>
 
 
@@ -44,13 +32,30 @@
     </head>
 
     <body>
+        <script>
+            function setTraversalMax(val) {
+                crawlLimit = document.getElementById("numLevels");
+                if(val == "depth-first") {
+                    crawlLimit.max = "25";
+                    if(crawlLimit.value > 25) {
+                        crawlLimit.value = "";
+                    }
+                }
+                else {
+                    crawlLimit.max = "2";
+                    if(crawlLimit.value > 2) {
+                        crawlLimit.value = "";
+                    }
+                }
+            }
+        </script>
         <header>
             <div class="page-header">
                 <img src="http://web.engr.oregonstate.edu/~konturf/images/web_crawler_graphic.jpg" id="header_image">
             </div>
         </header>
        
-        <div id="inputForm" class="pull-right">
+        <div class="container">
             <form action="http://web.engr.oregonstate.edu/cgi-bin/cgiwrap/~konturf/webcrawlProg.py" method="post">
                 <div class="form-group">
                     <label for="startingWebsite">Starting Website for Crawl</label>
@@ -72,60 +77,16 @@
                 <div class="form-group">
                     <label for="crawlLimit">Number of Levels for Traversal</label>
                     <input type="number" class="form-control" min="0" max="25" id="numLevels" name="crawlLimit" aria-describedby="crawlLimitInstr" placeholder="# levels" required>
-                    <small id="crawlLimitInstr" class="form-text text-muted">Choose a limit between 0 and 25 for depth-first traversal or between 0 and 2 for breadth-first traversal.<br>Web crawls involving many sites may take several minutes to load.</small>
+                    <small id="crawlLimitInstr" class="form-text text-muted">Choose a limit between 0 and 25 for depth-first traversal or between 0 and 2 for breadth-first traversal.</small>
                 </div>
                 <div class="form-group">
                     <label for="stopKeyword">Keyword to Stop Traversal</label>
                     <input type="text" class="form-control" id="stopKeyword" name="kWord" aria-describedby="keywordHelp" placeholder="Enter keyword (Optional)">
                     <small id="keywordHelp" class="form-text text-muted">OPTIONAL - Web crawl will stop if keyword is encountered on a website.</small>
                 </div>
-                <div class="form-group" id="loadWebsite">
-                    <label for="loadPrevWebsite">Load Previous Starting Website and Keyword</label>
-                    <div id="prevWebsites">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="traversalType" id="dft" value="depth-first" onclick="setTraversalMax(this.value)" required>
-                          <label class="form-check-label" for="dft">Depth-First</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="traversalType" id="bft" value="breadth-first" onclick="setTraversalMax(this.value)" required>
-                          <label class="form-check-label" for="bft">Breadth-First</label>
-                        </div>
-                    </div>
-                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
-        
-        <script>
-            function setTraversalMax(val) {
-                crawlLimit = document.getElementById("numLevels");
-                if(val == "depth-first") {
-                    crawlLimit.max = "25";
-                    if(crawlLimit.value > 25) {
-                        crawlLimit.value = "";
-                    }
-                }
-                else {
-                    crawlLimit.max = "2";
-                    if(crawlLimit.value > 2) {
-                        crawlLimit.value = "";
-                    }
-                }
-            }
-            
-            function checkCookie() {
-                var username = getCookie("username");
-                if (username != "") {
-                    alert("Welcome again " + username);
-                } 
-                else {
-                    username = prompt("Please enter your name:", "");
-                    if (username != "" && username != null) {
-                        setCookie("username", username, 365);
-                    }
-                }
-            }
-        </script>
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
