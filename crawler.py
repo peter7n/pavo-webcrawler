@@ -1,4 +1,5 @@
 import json
+from urllib2 import Request, urlopen, HTTPError, URLError
 import scrapy
 from scrapy.crawler import CrawlerProcess
 from scrapy.crawler import CrawlerRunner
@@ -84,6 +85,17 @@ class RandomCrawlSpider(scrapy.Spider):
         )
 
 
+def link_exists(link):
+    request = Request(link)
+    request.get_method = lambda : 'HEAD'
+
+    try:
+        urlopen(request)
+    except:
+        return False
+
+    return True
+
 class BreadthCrawlSpider(scrapy.Spider):
     name = "Breadth"
     tree = None                 # tree of Nodes
@@ -96,6 +108,7 @@ class BreadthCrawlSpider(scrapy.Spider):
     visited = set()
     keywordWebsite = ''
     error = ''
+    handle_httpstatus_list = [404, 500]
 
     def __init__(self, start_url=None, depth=MAX_DEPTH, *args, **kwargs):
         super(BreadthCrawlSpider, self).__init__(*args, **kwargs)
@@ -110,75 +123,95 @@ class BreadthCrawlSpider(scrapy.Spider):
 
     def parse(self, response):
 
-        if self.depth > self.depth_limit:  # reached the crawl limit
-            print '1 ' + self.depth + ', ' + self.depth_limit
-            return
-
-        page_url, parent_node = self.queue.popleft()
-
-        self.visited.add(page_url)
-
-        try:
-            title = response.css('title::text').extract_first()
-        except IndexError:
-            title = 'No Title'
-        except NotSupported:
-            BreadthCrawlSpider.error = 'web page not supported type'
-            return
-
-        # get all links on this page
-        links = set([i.url for i in self.le.extract_links(response)])
-        links -= self.visited  # set difference
-
-        """
-        self.nextNodesToNextDepth += len(links)
-        self.nodesToNextDepth -= 1
-
-        if self.nodesToNextDepth == 0:  # hit the next depth
-            self.depth += 1
-            if self.depth > self.depth_limit:
-                return
-
-            self.nodesToNextDepth = self.nextNodesToNextDepth
-            self.nextNodesToNextDepth = 0
-        """
-
-
-
-        # create a node for this page and append to the parent node
-        node = Node(page_url, title)
-
-        if not BreadthCrawlSpider.tree:
-            BreadthCrawlSpider.tree = node
-        else:
-            parent_node.append_child(node)
-
-        for link in links:
-            self.queue.append((link, node))
-
-        if len(self.queue) == 0:
-            print '4'
-            return
-
-        if not self.queue[0]:
-            self.depth += 1
-            self.queue.append(None)
+        if response.status >= 400:
             self.queue.popleft()
 
-            if self.depth > self.depth_limit:
-                print '2 ' + self.depth + ', ' + self.depth_limit
+            if not self.queue[0]:
+                self.depth += 1
+                self.queue.append(None)
+                self.queue.popleft()
+
+                if self.depth > self.depth_limit:
+                    print '2 ' + self.depth + ', ' + self.depth_limit
+                    return
+
+                if not self.queue[0]:  # no more nodes
+                    print '3'
+                    return
+
+            yield scrapy.Request(
+                url=self.queue[0][0],
+                callback=self.parse,
+                dont_filter=True
+            )
+        else:
+            if self.depth > self.depth_limit:  # reached the crawl limit
+                print '1 ' + str(self.depth) + ', ' + str(self.depth_limit)
                 return
 
-            if not self.queue[0]:  # no more nodes
-                print '3'
+            page_url, parent_node = self.queue.popleft()
+
+            self.visited.add(page_url)
+
+            try:
+                title = response.css('title::text').extract_first()
+            except IndexError:
+                title = 'No Title'
+            except NotSupported:
+                BreadthCrawlSpider.error = 'web page not supported type'
                 return
 
-        # yield a request
-        yield scrapy.Request(
-            url=self.queue[0][0],
-            callback=self.parse,
-            dont_filter=True
-        )
+            # get all links on this page
+            links = set([i.url for i in self.le.extract_links(response)])
+            links -= self.visited  # set difference
+
+            """
+            self.nextNodesToNextDepth += len(links)
+            self.nodesToNextDepth -= 1
+        
+            if self.nodesToNextDepth == 0:  # hit the next depth
+                self.depth += 1
+                if self.depth > self.depth_limit:
+                    return
+        
+                self.nodesToNextDepth = self.nextNodesToNextDepth
+                self.nextNodesToNextDepth = 0
+            """
+
+            # create a node for this page and append to the parent node
+            node = Node(page_url, title)
+
+            if not BreadthCrawlSpider.tree:
+                BreadthCrawlSpider.tree = node
+            else:
+                parent_node.append_child(node)
+
+            for link in links:
+                self.queue.append((link, node))
+
+            if len(self.queue) == 0:
+                print '4'
+                return
+
+            if not self.queue[0]:
+                self.depth += 1
+                self.queue.append(None)
+                self.queue.popleft()
+
+                if self.depth > self.depth_limit:
+                    print '2 ' + self.depth + ', ' + self.depth_limit
+                    return
+
+                if not self.queue[0]:  # no more nodes
+                    print '3'
+                    return
+
+            # yield a request
+            yield scrapy.Request(
+                url=self.queue[0][0],
+                callback=self.parse,
+                dont_filter=True,
+            )
 
 
 class Node(dict):
@@ -268,7 +301,7 @@ def run_bfs(start_url, depth, keyword):
     }
 
 
-#if __name__ == '__main__':
+if __name__ == '__main__':
     #print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=False, limit=10)
-    #print run(start_url='http://www.sherlockian.net', bfs=True, limit=2, keyword="circle")
+    print run(start_url='http://www.sherlockian.net', bfs=True, limit=2, keyword="circle")
     #print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=True, limit=1, keyword="circle")
