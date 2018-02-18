@@ -72,7 +72,7 @@
                 <div class="form-group">
                     <label for="crawlLimit">Number of Levels for Traversal</label>
                     <input type="number" class="form-control" min="0" max="25" id="numLevels" name="crawlLimit" aria-describedby="crawlLimitInstr" placeholder="# levels" required>
-                    <small id="crawlLimitInstr" class="form-text text-muted">Choose a limit between 0 and 25 for depth-first traversal and between 0 and 2 for breadth-first traversal.<br>Web crawls involving many sites or starting at smaller websites without much site traffic may take several minutes to load.</small>
+                    <small id="crawlLimitInstr" class="form-text text-muted">Choose a limit between 0 and 25 for depth-first traversal and between 0 and 5 for breadth-first traversal.<br>Web crawls involving many sites or starting at smaller websites without much site traffic may take several minutes to load.</small>
                 </div>
                 <div class="form-group">
                     <label for="stopKeyword">Keyword to Stop Traversal</label>
@@ -101,8 +101,8 @@
                     }
                 }
                 else {
-                    crawlLimit.max = "2";
-                    if(crawlLimit.value > 2) {
+                    crawlLimit.max = "5";
+                    if(crawlLimit.value > 5) {
                         crawlLimit.value = "";
                     }
                 }
