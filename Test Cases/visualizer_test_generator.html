@@ -5,7 +5,7 @@
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta title="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -22,35 +22,35 @@
                     <label for="travType">Type of Traversal</label>
                     <div id="travType">
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="traversalType" id="dft" value="depth-first" required>
+                          <input class="form-check-input" type="radio" title="traversalType" id="dft" value="depth-first" required>
                           <label class="form-check-label" for="dft">Depth-First</label>
                         </div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="traversalType" id="bft" value="breadth-first" required>
+                          <input class="form-check-input" type="radio" title="traversalType" id="bft" value="breadth-first" required>
                           <label class="form-check-label" for="bft">Breadth-First</label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="crawlLimit">Number of Levels for Traversal</label>
-                    <input type="number" class="form-control" id="numLevels" name="crawlLimit" placeholder="Number of levels" required>
+                    <input type="number" class="form-control" id="numLevels" title="crawlLimit" placeholder="Number of levels" required>
                 </div>
                 <br>
                 <fieldset>
                     <legend>For Breadth-First Traversals</legend>
                     <div class="form-group">
                         <label for="crawlLimit">Approximate Number of Websites to Generate</label>
-                        <input type="number" class="form-control" name="numWebsites" id="numSites" placeholder="Number of websites">
+                        <input type="number" class="form-control" title="numWebsites" id="numSites" placeholder="Number of websites">
                     </div>
                     <div class="form-group">
                         <label for="dist">Distribution of Websites Across the Branches</label>
                         <div id="dist">
                             <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="websiteDist" id="even" value="even">
+                              <input class="form-check-input" type="radio" title="websiteDist" id="even" value="even">
                               <label class="form-check-label" for="even">Evenly Distributed</label>
                             </div>
                             <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="websiteDist" id="random" value="random">
+                              <input class="form-check-input" type="radio" title="websiteDist" id="random" value="random">
                               <label class="form-check-label" for="random">Randomly Distributed</label>
                             </div>
                         </div>
@@ -69,6 +69,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         
         <script>
+            var cntr = 1;
             var websiteList = [
                 "http://www.google.com",
                 "https://docs.python.org/2/tutorial/",
@@ -92,7 +93,7 @@
                 "https://www.khanacademy.org/math/calculus-home"
             ];
             
-            var nameList = [
+            var titleList = [
                 "Google",
                 "The Python Tutorial - Python 2.7.14 documentation",
                 "Professional Computer Science B.S. Degree - Online for Post-Bacc Students | Electrical Engineering and Computer Science | Oregon State University",
@@ -115,10 +116,10 @@
                 "Calculus (all content, first year) | Khan Academy"
             ];
             
-            var dft = True;
+            var dft = true;
             var numLevels = 1;
             var numWebsites = 1;
-            var evenDist = True;
+            var evenDist = true;
             
             function onButtonClick() {
                 document.getElementById("testGeneratorSettings").style.display = "none";
@@ -142,6 +143,9 @@
                 else if(evenDist) {
                     buildBftTestCaseEven(numLevels, numWebsites, jsonRes["websites"]);
                 }
+                else {
+                    buildBftTestCaseRandom(numLevels, numWebsites, jsonRes["websites"]);
+                }
                 document.getElementById("generatorResults").innerText = JSON.stringify(jsonRes);
             }
             
@@ -154,7 +158,7 @@
                     ind = getRndInteger(0, 19);
                     source["id"] = "ID-1";
                     source["url"] = websiteList[ind];
-                    source["name"] = nameList[ind];
+                    source["title"] = titleList[ind];
                     currList.push(Object.assign({}, source));
                     for( ; counter <= numLevels; counter++) {
                         var dest = {};
@@ -162,7 +166,7 @@
                         ind = getRndInteger(0, 19);
                         dest["id"] = "ID-" + (counter + 1);
                         dest["url"] = websiteList[ind];
-                        dest["name"] = nameList[ind];
+                        dest["title"] = titleList[ind];
                         destList.push(Object.assign({}, dest));
                         el = currList[0];
                         el["destinations"] = destList;
@@ -181,13 +185,13 @@
                 }
                 var source = {};
                 var ind;
-                var destList = []
+                var destList = [];
                 var numBranches = calcNumBranches(numLevels, numWebsites);
                 
                 ind = getRndInteger(0, 19);
                 source["id"] = "ID-1";
                 source["url"] = websiteList[ind];
-                source["name"] = nameList[ind];
+                source["title"] = titleList[ind];
                 destList = buildBftEvenHelper(numLevels - 1, numBranches, 2);
                 source["destinations"] = destList;
                 websites.push(source);
@@ -208,13 +212,76 @@
                     ind = getRndInteger(0, 19);
                     dest["id"] = "ID-" + counter;
                     dest["url"] = websiteList[ind];
-                    dest["name"] = nameList[ind];
+                    dest["title"] = titleList[ind];
                     nestedDestList = buildBftEvenHelper(numLevels - 1, numBranches, origCounter + (i+1)*numBranches);
                     dest["destinations"] = nestedDestList;
                     destList.push(Object.assign({}, dest));
                     counter++;
                 }
                 return destList;
+            }
+            
+            function buildBftTestCaseRandom(numLevels, numWebsites, websites) {
+                if(numLevels < 1) {
+                    buildDftTestCase(numLevels, websites);
+                    return;
+                }
+                var numNodesOnLevel = [];
+                var numBranches = calcNumBranches(numLevels, numWebsites);
+                var numNodes = [];
+                numNodesOnLevel[0] = [1];
+                for(var i = 0; i < numLevels; i++) {
+                    var sumNodes = 0;
+                    var currNodes = numNodesOnLevel[i];
+                    for(var j = 0; j < currNodes.length; j++) {
+                        sumNodes += currNodes[j];
+                    }
+                    for(var k = 0; k < sumNodes; k++) {
+                        numNodes[k] = normalRandom(numBranches, Math.round(numBranches/2));
+                        if(numNodes[k] < 1) {
+                            numNodes[k] = 1;
+                        }
+                    }
+                    numNodesOnLevel.push(Object.assign([], numNodes));
+                }
+                var source = {};
+                var ind;
+                var destList = [];
+                
+                ind = getRndInteger(0, 19);
+                source["id"] = "ID-1";
+                source["url"] = websiteList[ind];
+                source["title"] = titleList[ind];
+                cntr++;
+                var currLevel = 1;
+                destList = buildBftRandomHelper(numNodesOnLevel, numLevels - 1, currLevel);
+                source["destinations"] = destList;
+                websites.push(source);
+            }
+            
+            function buildBftRandomHelper(numNodesOnLevel, numLevels, currLevel) {
+                var ind;
+                var destList = [];
+                var nestedDestList = [];
+                var currLevelNodes = numNodesOnLevel[currLevel];
+                
+                if(numLevels < 0) {
+                    return nestedDestList;
+                }
+                
+                for(var i = 0; i < currLevelNodes[0]; i++) {
+                    var dest = {};
+                    ind = getRndInteger(0, 19);
+                    dest["id"] = "ID-" + cntr;
+                    cntr++;
+                    dest["url"] = websiteList[ind];
+                    dest["title"] = titleList[ind];
+                    nestedDestList = buildBftRandomHelper(numNodesOnLevel, numLevels - 1, currLevel + 1);
+                    dest["destinations"] = nestedDestList;
+                    destList.push(Object.assign({}, dest));
+                }
+                currLevelNodes.shift();
+                return destList;  
             }
             
             function calcNumBranches(numLevels, numWebsites) {
@@ -233,6 +300,28 @@
             
             function getRndInteger(min, max) {
                 return Math.floor(Math.random() * (max - min + 1) ) + min;
+            }
+            
+            // Taken from http://blog.yjl.im/2010/09/simulating-normal-random-variable-using.html
+            function normalRandom(mean, variance) {
+                if (mean == undefined)
+                    mean = 0.0;
+                if (variance == undefined)
+                    variance = 1.0;
+                var V1, V2, S;
+                do {
+                    var U1 = Math.random();
+                    var U2 = Math.random();
+                    V1 = 2 * U1 - 1;
+                    V2 = 2 * U2 - 1;
+                    S = V1 * V1 + V2 * V2;
+                } while (S > 1);
+
+                X = Math.sqrt(-2 * Math.log(S) / S) * V1;
+                //Y = Math.sqrt(-2 * Math.log(S) / S) * V2;
+                X = Math.round(mean + Math.sqrt(variance) * X);
+                //Y = mean + Math.sqrt(variance) * Y;
+                return X;
             }
         </script>
         
