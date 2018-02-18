@@ -174,29 +174,44 @@
                     prevWebsites = JSON.parse(websitesCookie);
                     prevKeywords = JSON.parse(keywordsCookie);
                     var radioPrevWebsites = document.getElementById("prevWebsites");
-                    var newRadioBtn = "";
+                    var newRadioBtnDiv;
+                    var newRadioBtnInput;
+                    var newRadioBtnLabel;
                     var websiteKeywordStr = "";
                     var keywordStr = "";
                     var ind = "";
                     var websiteInd = "";
-                    var currStr = "";
                     for(var i = 0; i < prevWebsites.length; i++) {
-                        websiteKeywordStr = prevWebsites[i];
-                        if(prevKeywords[i] != "") {
-                            keywordStr = ' (Keyword: "' + prevKeywords[i] + '")';
-                        }
-                        else {
-                            keywordStr = " (Keyword: None)"
-                        }
-                        websiteKeywordStr += keywordStr;
+                        newRadioBtnDiv = document.createElement("div");
+                        newRadioBtnInput = document.createElement("input");
+                        newRadioBtnLabel = document.createElement("label");
                         ind = i.toString();
                         websiteInd = prevWebsites[i] + ind;
-                            
-                        currStr = '<div class="form-check"> <input class="form-check-input" type="radio" name="prevSite" id="' + websiteInd + '" value="' + ind + '" onClick="populateSiteAndKeyword(this.value)"> <label class="form-check-label" for="' + websiteInd + '">' + websiteKeywordStr + '</label> </div>';
+
+                        if(prevKeywords[i] != "") {
+                            keywordStr = '      (Keyword: "' + prevKeywords[i] + '")';
+                        }
+                        else {
+                            keywordStr = "      (Keyword: None)"
+                        }
+                        websiteKeywordStr = prevWebsites[i] + keywordStr;
                         
-                        newRadioBtn += currStr;
+                        newRadioBtnDiv.setAttribute("class", "form-check");
+                        radioPrevWebsites.appendChild(newRadioBtnDiv);
+                        
+                        newRadioBtnInput.setAttribute("class", "form-check-input");
+                        newRadioBtnInput.setAttribute("type", "radio");
+                        newRadioBtnInput.setAttribute("name", "prevSite")
+                        newRadioBtnInput.setAttribute("id", websiteInd);
+                        newRadioBtnInput.setAttribute("value", ind);
+                        newRadioBtnInput.setAttribute("onClick", "populateSiteAndKeyword(this.value)");
+                        newRadioBtnDiv.appendChild(newRadioBtnInput);
+                        
+                        newRadioBtnLabel.setAttribute("class", "form-check-label");
+                        newRadioBtnLabel.setAttribute("for", websiteInd);
+                        newRadioBtnLabel.innerHTML = websiteKeywordStr.replace(/\s/g, '&nbsp;');
+                        newRadioBtnDiv.appendChild(newRadioBtnLabel);
                     }
-                    radioPrevWebsites.innerHTML = newRadioBtn;
                 }
             }
             
