@@ -20,7 +20,7 @@ cgitb.enable()
 # Define global variables
 ###############################################################################
 # The URL where the data visualizer can be found
-urlVisualizer = "http://web.engr.oregonstate.edu/~konturf/visualizer-svg-test-2.php"
+urlVisualizer = "http://web.engr.oregonstate.edu/~konturf/visualizer-svg-test-3.php"
 
 # Indicates whether or not the user chose to do a depth-first traversal    
 dft = False

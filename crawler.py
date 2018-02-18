@@ -277,7 +277,7 @@ def run_dfs(start_url, limit, keyword):
 
 
 def run_bfs(start_url, depth, keyword):
-    #"""
+    """
     runner = CrawlerRunner()
 
     d = runner.crawl(BreadthCrawlSpider, start_url, depth)
@@ -290,7 +290,7 @@ def run_bfs(start_url, depth, keyword):
     })
     process.crawl(BreadthCrawlSpider, start_url=start_url, depth=depth)
     process.start()
-    """
+    #"""
 
     websiteList = [BreadthCrawlSpider.tree]
 

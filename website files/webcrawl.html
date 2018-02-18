@@ -51,7 +51,7 @@
         </header>
        
         <div id="inputForm" class="pull-right">
-            <form action="http://web.engr.oregonstate.edu/cgi-bin/cgiwrap/~konturf/webcrawlProg.py" method="post">
+            <form action="http://web.engr.oregonstate.edu/cgi-bin/cgiwrap/~konturf/webcrawlProg.py" method="post" onSubmit="saveFormInfo()">
                 <div class="form-group">
                     <label for="startingWebsite">Starting Website for Crawl</label>
                     <input type="url" class="form-control" id="startingWebsite" name="startingSite" placeholder="Enter starting website" required>
@@ -80,16 +80,8 @@
                     <small id="keywordHelp" class="form-text text-muted">OPTIONAL - Web crawl will stop if keyword is encountered on a website.</small>
                 </div>
                 <div class="form-group" id="loadWebsite">
-                    <label for="loadPrevWebsite">Load Previous Starting Website and Keyword</label>
+                    <label for="prevWebsites">Load Previous Starting Website and Keyword</label>
                     <div id="prevWebsites">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="prevSite" id="df" value="depth-first" required>
-                          <label class="form-check-label" for="df" id="myCheck">Depth-First</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="prevSite" id="bf" value="breadth-first" required>
-                          <label class="form-check-label" for="bf">Breadth-First</label>
-                        </div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -97,6 +89,8 @@
         </div>
         
         <script>
+            var prevWebsites = [];
+            var prevKeywords = [];
             
             function setTraversalMax(val) {
                 crawlLimit = document.getElementById("numLevels");
@@ -114,10 +108,50 @@
                 }
             }
             
+            function populateSiteAndKeyword(indStr) {
+                var ind = parseInt(indStr);
+                document.getElementById("startingWebsite").value = prevWebsites[ind];
+                document.getElementById("stopKeyword").value = prevKeywords[ind];
+            }
+            
+            function saveFormInfo() {
+                var currWebsite = document.getElementById("startingWebsite").value;
+                var currKeyword = document.getElementById("stopKeyword").value;
+                
+                if(currKeyword == null) {
+                    currKeyword = "";
+                }
+                
+                for(var i = 0; i < prevWebsites.length; i++) {
+                    if(currWebsite == prevWebsites[i]) {
+                        if(currKeyword == prevKeywords[i]) {
+                            return;
+                        }
+                    }
+                }
+                prevWebsites.push(currWebsite);
+                prevKeywords.push(currKeyword);
+                setCookie("prevWebsites", JSON.stringify(prevWebsites), 30);
+                setCookie("prevKeywords", JSON.stringify(prevKeywords), 30);
+            }
+            
+            // setCookie(), getCookie(), and checkCookie() functions were
+            // taken from https://www.w3schools.com/js/js_cookies.asp with
+            // the checkCookie() function being edited to populate the form
+            // information.
+            
+            function setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires="+d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires;
+            }
+            
             function getCookie(cname) {
                 var name = cname + "=";
-                var ca = document.cookie.split(';');
-                for(var i = 0; i < ca.length; i++) {
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i <ca.length; i++) {
                     var c = ca[i];
                     while (c.charAt(0) == ' ') {
                         c = c.substring(1);
@@ -130,18 +164,40 @@
             }
             
             function checkCookie() {
-                document.getElementById("loadWebsite").style.display = "block";
-                document.getElementById("myCheck").innerText = "Check Cookies";
                 var websitesCookie = getCookie("prevWebsites");
+                var keywordsCookie = getCookie("prevKeywords");
                 if(websitesCookie == "") {
-                    document.getElementById("loadWebsite").style.display = "block";
-                    document.getElementById("myCheck").innerText = "No Cookies";
                     return false;
                 } 
                 else {
                     document.getElementById("loadWebsite").style.display = "block";
-                    document.getElementById("myCheck").innerText = websitesCookie;
-                    return true;
+                    prevWebsites = JSON.parse(websitesCookie);
+                    prevKeywords = JSON.parse(keywordsCookie);
+                    var radioPrevWebsites = document.getElementById("prevWebsites");
+                    var newRadioBtn = "";
+                    var websiteKeywordStr = "";
+                    var keywordStr = "";
+                    var ind = "";
+                    var websiteInd = "";
+                    var currStr = "";
+                    for(var i = 0; i < prevWebsites.length; i++) {
+                        websiteKeywordStr = prevWebsites[i];
+                        if(prevKeywords[i] != "") {
+                            keywordStr = ' (Keyword: "' + prevKeywords[i] + '")';
+                        }
+                        else {
+                            keywordStr = " (Keyword: None)"
+                        }
+                        websiteKeywordStr += keywordStr;
+                        ind = i.toString();
+                        websiteInd = prevWebsites[i] + ind;
+                        myTest = '<div>Here is a test</div>';
+                            
+                        currStr = '<div class="form-check"> <input class="form-check-input" type="radio" name="prevSite" id="' + websiteInd + '" value="' + ind + '" onClick="populateSiteAndKeyword(this.value)"> <label class="form-check-label" for="' + websiteInd + '">' + websiteKeywordStr + '</label> </div>';
+                        
+                        newRadioBtn += currStr;
+                    }
+                    radioPrevWebsites.innerHTML = newRadioBtn;
                 }
             }
             
