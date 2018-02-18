@@ -5,9 +5,11 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.crawler import CrawlerRunner
 from scrapy.exceptions import NotSupported
 from scrapy.linkextractors import LinkExtractor
+from scrapy.contrib.spiders import CrawlSpider
 from twisted.internet import reactor
 import random
 from collections import deque
+from datetime import datetime
 
 
 MAX_LIMIT = 100
@@ -85,18 +87,9 @@ class RandomCrawlSpider(scrapy.Spider):
         )
 
 
-def link_exists(link):
-    request = Request(link)
-    request.get_method = lambda : 'HEAD'
+t = []
 
-    try:
-        urlopen(request)
-    except:
-        return False
-
-    return True
-
-class BreadthCrawlSpider(scrapy.Spider):
+class BreadthCrawlSpider(CrawlSpider):
     name = "Breadth"
     tree = None                 # tree of Nodes
     depth_limit = 0
@@ -108,7 +101,8 @@ class BreadthCrawlSpider(scrapy.Spider):
     visited = set()
     keywordWebsite = ''
     error = ''
-    handle_httpstatus_list = [404, 500]
+    handle_httpstatus_list = [404, 500, 999]
+    t.append(datetime.now())
 
     def __init__(self, start_url=None, depth=MAX_DEPTH, *args, **kwargs):
         super(BreadthCrawlSpider, self).__init__(*args, **kwargs)
@@ -122,7 +116,7 @@ class BreadthCrawlSpider(scrapy.Spider):
         self.queue.append(None)
 
     def parse(self, response):
-
+        t.append(datetime.now())
         if response.status >= 400:
             self.queue.popleft()
 
@@ -148,7 +142,7 @@ class BreadthCrawlSpider(scrapy.Spider):
             if self.depth > self.depth_limit:  # reached the crawl limit
                 print '1 ' + str(self.depth) + ', ' + str(self.depth_limit)
                 return
-
+            t.append(datetime.now())
             page_url, parent_node = self.queue.popleft()
 
             self.visited.add(page_url)
@@ -161,10 +155,11 @@ class BreadthCrawlSpider(scrapy.Spider):
                 BreadthCrawlSpider.error = 'web page not supported type'
                 return
 
+            t.append(datetime.now())
             # get all links on this page
             links = set([i.url for i in self.le.extract_links(response)])
             links -= self.visited  # set difference
-
+            t.append(datetime.now())
             """
             self.nextNodesToNextDepth += len(links)
             self.nodesToNextDepth -= 1
@@ -186,9 +181,10 @@ class BreadthCrawlSpider(scrapy.Spider):
             else:
                 parent_node.append_child(node)
 
+            t.append(datetime.now())
             for link in links:
                 self.queue.append((link, node))
-
+            t.append(datetime.now())
             if len(self.queue) == 0:
                 print '4'
                 return
@@ -199,12 +195,18 @@ class BreadthCrawlSpider(scrapy.Spider):
                 self.queue.popleft()
 
                 if self.depth > self.depth_limit:
-                    print '2 ' + self.depth + ', ' + self.depth_limit
+                    print '2 ' + str(self.depth) + ', ' + str(self.depth_limit)
                     return
 
                 if not self.queue[0]:  # no more nodes
                     print '3'
                     return
+            t.append(datetime.now())
+
+            #print [str(t[i] - t[i-1]) for i in range(1, len(t))]
+
+            del t[:]
+            t.append(datetime.now())
 
             # yield a request
             yield scrapy.Request(
@@ -280,7 +282,7 @@ def run_bfs(start_url, depth, keyword):
     """
     runner = CrawlerRunner()
 
-    d = runner.crawl(BreadthCrawlSpider, start_url, depth)
+    d = runner.crawl(BreadthCrawlSpider, start_url=start_url, depth=depth)
     d.addBoth(lambda _: reactor.stop())
     reactor.run()  # the script will block here until the crawling is finished
 
@@ -303,5 +305,8 @@ def run_bfs(start_url, depth, keyword):
 
 if __name__ == '__main__':
     #print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=False, limit=10)
-    print run(start_url='http://www.sherlockian.net', bfs=True, limit=2, keyword="circle")
-    #print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=True, limit=1, keyword="circle")
+    #print run(start_url='http://rheology.org/sor/info/default.htm', bfs=True, limit=2, keyword="circle")
+    #print run(start_url='http://sherlockian.net', bfs=True, limit=2, keyword="circle")
+    #print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=True, limit=2, keyword="circle")
+    #print run(start_url='https://www.twitter.com/', bfs=True, limit=2, keyword="circle")
+    print run(start_url='https://www.uber.com/', bfs=True, limit=2, keyword="circle")
