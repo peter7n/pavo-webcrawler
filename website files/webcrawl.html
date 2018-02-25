@@ -69,16 +69,17 @@
 				top:0px;
 				bottom:0px;
 				left:0px;
+                right:0px;
 			}
 
-			/* tooltipCont container */ 
-			.tooltipCont {
+			/* tooltip container */ 
+			.tooltipcont {
 				position: relative;
                 display: inline-block;
 			}
 
-			/* tooltipCont text */
-			.tooltipConttext {
+			/* tooltip text */
+			.tooltiptext {
 				 visibility: hidden;
 				 width: 600px;
 				 background-color: #555;
@@ -95,7 +96,7 @@
 			}
 
 			/* tooltipCont arrow */
-			.tooltipConttext::after {
+			.tooltiptext::after {
 				 content: "";
 				 position: absolute;
 				 top: 50%;
@@ -106,7 +107,7 @@
 				 border-color: transparent #555 transparent transparent;
 			}
 
-			.tooltipCont:hover .tooltipConttext {
+			.tooltipcont:hover .tooltipConttext {
 				 visibility: visible;
 				 opacity: 1;
 			}
@@ -354,7 +355,6 @@
                     if (offset.top > maxTop)
                         maxTop = offset.top;
                 }
-                maxTop += vis.offsetTop;
 
                 // Create svg element
                 var ns = "http://www.w3.org/2000/svg";
@@ -366,14 +366,14 @@
 
                 // Draw connecting lines between parent and child nodes
                 var vis = document.getElementById("visualizer");
+                var h = $('.inner').css('height');
+                var w = $('.inner').css('width');
+                var height = parseInt(h);
+                var width = parseInt(w);
                 for (var j = 1; j < nodeCounter; j++) {
                     var nodeId = "#ID-" + (j + 1);
                     var urlNode = $(nodeId);
                     var offset = urlNode.offset();
-                    var h = $('.inner').css('height');
-                    var w = $('.inner').css('width');
-                    var height = parseInt(h);
-                    var width = parseInt(w);
                     var parent = $(urlNode.parent());
                     var parentOffset = parent.offset();
                     var line = document.createElementNS(ns, "line"); 
@@ -397,15 +397,15 @@
                 for (var i = 0; i < jsonData.length; i++) {
                     var $divParent = $("<div class='outer'></div>");
                     var $divChild = $("<a target='_blank'></a>");
-                    var $divtooltipCont = $("<div class='tooltipCont'></div>");
+                    var $divtooltipcont = $("<div class='tooltipcont'></div>");
                     var $divInner=$("<div class='inner'></div>");
-                    var $divSpan = $("<span class='tooltipConttext'></span>");
+                    var $divSpan = $("<span class='tooltiptext'></span>");
                     $divParent.attr('id', jsonData[i].id);
                     $divChild.attr('href', jsonData[i].url);
                     $divSpan.text(jsonData[i].title + " | " + jsonData[i].url);
                     $divInner.append($divSpan);
-                    $divtooltipCont.append($divInner);
-                    $divChild.append($divtooltipCont);
+                    $divtooltipcont.append($divInner);
+                    $divChild.append($divtooltipcont);
                     $divParent.append($divChild);
                     if (jsonData[i].destinations) {
                         jsonTreeRecurse($divParent, jsonData[i].destinations);
