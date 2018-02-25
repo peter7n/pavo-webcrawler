@@ -14,6 +14,12 @@
                 width: 100%;
             }
             
+            #errorMessage {
+                display: none;
+                padding-top: 10px;
+                padding-left: 40px;
+            }
+            
             #inputForm {
                 padding-left: 40px;
                 z-index: 2;
@@ -124,6 +130,7 @@
             </div>
         </header>
        
+        <div id="errorMessage"></div>
         <div id="inputForm" class="pull-right">
             <form id="webcrawlForm" onSubmit="saveFormInfo()">
                 <div class="form-group">
@@ -158,7 +165,7 @@
                     <div id="prevWebsites">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="formSubmit" class="btn btn-primary">Submit</button>
             </form>
         </div>
 
@@ -226,7 +233,7 @@
                     setCookie("prevWebsites", JSON.stringify(prevWebsites), 30);
                     setCookie("prevKeywords", JSON.stringify(prevKeywords), 30);
                 }
-                handleFormData();
+                createVisualizer();
             }
             
             // setCookie(), getCookie(), and checkCookie() functions were
@@ -309,20 +316,13 @@
                 }
             }
             
-            function handleFormData() {
-                var sw = document.getElementById("startingWebsite");
-                var df = document.getElementById("dft");
-                var nl = document.getElementById("numLevels");
-                var kw = document.getElementById("stopKeyword");
-                
-                var startingWebsite = sw.value;
-                var traversalType = "breadth-first";
-                if(df.checked) {
-                    var traversalType = "depth-first";
-                }
-                var numLevels = nl.value;
-                var stopKeyword = kw.value;
-                var postData = $("form").serialize();
+            function createVisualizer() {
+                var postDate = "";
+                console.log("ajax called");
+                postData = $("form").serialize();
+                document.getElementById("errorMessage").style.display = "none";
+                document.getElementById("formSubmit").disabled = true;
+                $("errorMessage").empty();
                 $("body").css("cursor", "progress");
                 
                 $.ajax({
@@ -335,6 +335,16 @@
                         document.getElementById("drawing").style.display = "block";
                         var webcrawlResults = JSON.parse(response);
                         displayVisualizer(webcrawlResults);
+                    },
+                    error: function(xhr) {
+                        $("body").css("cursor", "default"); 
+                        document.getElementById("formSubmit").disabled = false;
+                        var errMsg = document.getElementById("errorMessage");
+                        var errMsgTxt = document.createElement("p");
+                        errMsgTxt.setAttribute("class", "bg-primary");
+                        errMsg.style.display = "block";
+                        errMsgTxt.innerHTML = xhr.responseText;
+                        errMsg.appendChild(errMsgTxt);
                     }
                 });
             }
