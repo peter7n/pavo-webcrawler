@@ -20,7 +20,7 @@ cgitb.enable()
 # Define global variables
 ###############################################################################
 # The URL where the data visualizer can be found
-urlVisualizer = "http://web.engr.oregonstate.edu/~konturf/visualizer-svg-test-3.php"
+urlVisualizer = "http://web.engr.oregonstate.edu/~konturf/visualizer-svg-test-fred.php"
 
 # Indicates whether or not the user chose to do a depth-first traversal    
 dft = False
@@ -77,33 +77,6 @@ def getFormData(formData):
     
     return dft, bft, startingSite, crawlLimit, kWord
 
-
-def dataTransfer():
-###############################################################################
-# Parameters:  None
-# Returns:     Nothing
-# Description: This function takes the results of the webcrawl and sends them
-#              to the data visualizer program using an HTTP POST request. It
-#              constructs an HTML form and then autosubmits the form with a 
-#              JavaScript submit() command.
-###############################################################################
-    # Call the crawler which returns the JSON-formatted results of the crawl
-    res = crawler.run(startingSite, bft, crawlLimit, kWord)
-    print '<body>'
-    print '<div style="display: none;">'
-    # Create the form for sending the data
-    print('<form id="webcrawlResForm" action="%s" method="post">' % (urlVisualizer))
-    print('<textarea name="webcrawlResults">%s</textarea>' % (res))
-    print '</form>' 
-    print '</div>'
-    print '<script>'
-    # Autosubmit the form with a JavaScript submit() command
-    print 'document.getElementById("webcrawlResForm").submit();'
-    print '</script>'
-    print '</body>'
-    
-
-
 ###############################################################################
 # Main Function
 ###############################################################################
@@ -112,7 +85,5 @@ formData = cgi.FieldStorage()
 dft, bft, startingSite, crawlLimit, kWord = getFormData(formData)
 
 # Testing code
-print "Content-Type: text/html;charset=utf-8"
-print
-print "<p>Performing the web crawl</p>"
-dataTransfer()
+print "Content-Type: text/html;charset=utf-8\n"
+print crawler.run(startingSite, bft, crawlLimit, kWord)

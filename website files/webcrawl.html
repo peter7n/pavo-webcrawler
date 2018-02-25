@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-    <!-- Links to Bootstrap were obtainef from https://getbootstrap.com/docs/4.0/getting-started/introduction/ -->
+    <!-- Links to Bootstrap were obtained from https://getbootstrap.com/docs/4.0/getting-started/introduction/ -->
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -16,6 +16,7 @@
             
             #inputForm {
                 padding-left: 40px;
+                z-index: 2;
             }
             
             #startingWebsite {
@@ -37,6 +38,78 @@
             #loadWebsite {
                 display: none;
             }
+            
+            div.outer {
+				position: relative;
+				left: 600px;
+				top: 30px;
+				margin-bottom: 10px;
+			}
+
+			div.outer:first-child {
+				left: 30px;
+				margin-left: 30px;
+			}
+
+			div.inner {
+				display: inline-block;
+				background: blue;
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+                vertical-align: top;
+			}
+
+            #visualizer {
+                position: relative;
+            }
+            
+			#overlay {
+				position: absolute;
+				top:0px;
+				bottom:0px;
+				left:0px;
+			}
+
+			/* tooltipCont container */ 
+			.tooltipCont {
+				position: relative;
+                display: inline-block;
+			}
+
+			/* tooltipCont text */
+			.tooltipConttext {
+				 visibility: hidden;
+				 width: 600px;
+				 background-color: #555;
+				 color: #fff;
+				 text-align: center;
+				 padding: 5px 0;
+				 position: absolute;
+				 z-index: 1;
+				 top: -5px;
+				 left: 125%;
+				 opacity: 0;
+				 transition: opacity 0.3s;
+                 vertical-align: top;
+			}
+
+			/* tooltipCont arrow */
+			.tooltipConttext::after {
+				 content: "";
+				 position: absolute;
+				 top: 50%;
+				 right: 100%;
+				 margin-top: -5px;
+				 border-width: 5px;
+				 border-style: solid;
+				 border-color: transparent #555 transparent transparent;
+			}
+
+			.tooltipCont:hover .tooltipConttext {
+				 visibility: visible;
+				 opacity: 1;
+			}
         </style>
 
 
@@ -51,7 +124,7 @@
         </header>
        
         <div id="inputForm" class="pull-right">
-            <form action="http://web.engr.oregonstate.edu/cgi-bin/cgiwrap/~konturf/webcrawlProg.py" method="post" onSubmit="saveFormInfo()">
+            <form id="webcrawlForm" onSubmit="saveFormInfo()">
                 <div class="form-group">
                     <label for="startingWebsite">Starting Website for Crawl</label>
                     <input type="url" class="form-control" id="startingWebsite" name="startingSite" placeholder="Enter starting website" required>
@@ -87,10 +160,25 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
+
+        <div id="visualizer">
+            <div id="drawing"></div>
+            <div id="overlay"></div>
+        </div>
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         
         <script>
             var prevWebsites = [];
             var prevKeywords = [];
+            var nodeCounter = 0; 
+            document.getElementById("webcrawlForm").addEventListener("submit", function(e) {
+                e.preventDefault();
+            });
             
             function setTraversalMax(val) {
                 crawlLimit = document.getElementById("numLevels");
@@ -117,6 +205,7 @@
             function saveFormInfo() {
                 var currWebsite = document.getElementById("startingWebsite").value;
                 var currKeyword = document.getElementById("stopKeyword").value;
+                var found = false;
                 
                 if(currKeyword == null) {
                     currKeyword = "";
@@ -125,14 +214,18 @@
                 for(var i = 0; i < prevWebsites.length; i++) {
                     if(currWebsite == prevWebsites[i]) {
                         if(currKeyword == prevKeywords[i]) {
-                            return;
+                            found = true;
+                            break;
                         }
                     }
                 }
-                prevWebsites.push(currWebsite);
-                prevKeywords.push(currKeyword);
-                setCookie("prevWebsites", JSON.stringify(prevWebsites), 30);
-                setCookie("prevKeywords", JSON.stringify(prevKeywords), 30);
+                if(!found) {
+                    prevWebsites.push(currWebsite);
+                    prevKeywords.push(currKeyword);
+                    setCookie("prevWebsites", JSON.stringify(prevWebsites), 30);
+                    setCookie("prevKeywords", JSON.stringify(prevKeywords), 30);
+                }
+                handleFormData();
             }
             
             // setCookie(), getCookie(), and checkCookie() functions were
@@ -215,13 +308,113 @@
                 }
             }
             
+            function handleFormData() {
+                var sw = document.getElementById("startingWebsite");
+                var df = document.getElementById("dft");
+                var nl = document.getElementById("numLevels");
+                var kw = document.getElementById("stopKeyword");
+                
+                var startingWebsite = sw.value;
+                var traversalType = "breadth-first";
+                if(df.checked) {
+                    var traversalType = "depth-first";
+                }
+                var numLevels = nl.value;
+                var stopKeyword = kw.value;
+                var postData = $("form").serialize();
+                $("body").css("cursor", "progress");
+                
+                $.ajax({
+                    url: "http://web.engr.oregonstate.edu/cgi-bin/cgiwrap/~konturf/webcrawlProg.py",
+                    type: "POST",
+                    data: postData,
+                    success: function(response) {
+                        $("body").css("cursor", "default");
+                        document.getElementById("inputForm").style.display = "none";
+                        document.getElementById("drawing").style.display = "block";
+                        var webcrawlResults = JSON.parse(response);
+                        displayVisualizer(webcrawlResults);
+                    }
+                });
+            }
+            
+            function displayVisualizer(webcrawlResults) {
+                // Create the node elements
+                jsonTreeRecurse($("#overlay"), webcrawlResults.websites);
+
+                // Calculate maximum svg width and height
+                var vis = document.getElementById("visualizer");
+                var maxLeft = 0;
+                var maxTop = 0;
+                for (var i = 1; i < nodeCounter; i++) {
+                    var urlNode = $("#ID-" + (i + 1));
+                    var offset = urlNode.offset();
+                    if (offset.left > maxLeft)
+                        maxLeft = offset.left;
+                    if (offset.top > maxTop)
+                        maxTop = offset.top;
+                }
+                maxTop += vis.offsetTop;
+
+                // Create svg element
+                var ns = "http://www.w3.org/2000/svg";
+                var div = document.getElementById("drawing");
+                var svg = document.createElementNS(ns, "svg");
+                svg.setAttributeNS(null, "width", maxLeft);
+                svg.setAttributeNS(null, "height", maxTop);
+                div.appendChild(svg);
+
+                // Draw connecting lines between parent and child nodes
+                var vis = document.getElementById("visualizer");
+                for (var j = 1; j < nodeCounter; j++) {
+                    var nodeId = "#ID-" + (j + 1);
+                    var urlNode = $(nodeId);
+                    var offset = urlNode.offset();
+                    var h = $('.inner').css('height');
+                    var w = $('.inner').css('width');
+                    var height = parseInt(h);
+                    var width = parseInt(w);
+                    var parent = $(urlNode.parent());
+                    var parentOffset = parent.offset();
+                    var line = document.createElementNS(ns, "line"); 
+                    line.setAttributeNS(null, "x1", offset.left + width/2 - vis.offsetLeft);
+                    line.setAttributeNS(null, "y1", offset.top + height/2 - vis.offsetTop);
+                    line.setAttributeNS(null, "x2", parentOffset.left + width/2 - vis.offsetLeft);
+                    line.setAttributeNS(null, "y2", parentOffset.top + height/2 - vis.offsetTop);
+                    line.setAttributeNS(null, "stroke", "blue");
+                    svg.appendChild(line);
+
+                    // set the node where keyword was found to red
+                    if (nodeId == "#" + webcrawlResults.keywordWebsite) {
+                        urlNode.find(".inner").css({"background":"red"});
+                    }
+                }
+            }
+            
+            // Recursive function that traverses json tree and
+            // appends node elements to the specified container
+            function jsonTreeRecurse(container, jsonData) {
+                for (var i = 0; i < jsonData.length; i++) {
+                    var $divParent = $("<div class='outer'></div>");
+                    var $divChild = $("<a target='_blank'></a>");
+                    var $divtooltipCont = $("<div class='tooltipCont'></div>");
+                    var $divInner=$("<div class='inner'></div>");
+                    var $divSpan = $("<span class='tooltipConttext'></span>");
+                    $divParent.attr('id', jsonData[i].id);
+                    $divChild.attr('href', jsonData[i].url);
+                    $divSpan.text(jsonData[i].title + " | " + jsonData[i].url);
+                    $divInner.append($divSpan);
+                    $divtooltipCont.append($divInner);
+                    $divChild.append($divtooltipCont);
+                    $divParent.append($divChild);
+                    if (jsonData[i].destinations) {
+                        jsonTreeRecurse($divParent, jsonData[i].destinations);
+                    }
+                    container.append($divParent);
+                    nodeCounter++;
+                }
+            }
+            
         </script>
-        
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
     </body>
 </html>
