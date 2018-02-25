@@ -69,7 +69,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         
         <script>
-            var cntr = 1;
+            var cntr = 1; // website counter
             var websiteList = [
                 "http://www.google.com",
                 "https://docs.python.org/2/tutorial/",
@@ -190,6 +190,7 @@
                 
                 ind = getRndInteger(0, 19);
                 source["id"] = "ID-1";
+                cntr++;
                 source["url"] = websiteList[ind];
                 source["title"] = titleList[ind];
                 destList = buildBftEvenHelper(numLevels - 1, numBranches, 2);
@@ -197,11 +198,10 @@
                 websites.push(source);
             }
             
-            function buildBftEvenHelper(numLevels, numBranches, counter) {
+            function buildBftEvenHelper(numLevels, numBranches) {
                 var ind;
                 var destList = [];
                 var nestedDestList = [];
-                var origCounter = counter;
                 
                 if(numLevels < 0) {
                     return nestedDestList;
@@ -210,13 +210,13 @@
                 for(var i = 0; i < numBranches; i++) {
                     var dest = {};
                     ind = getRndInteger(0, 19);
-                    dest["id"] = "ID-" + counter;
+                    dest["id"] = "ID-" + cntr;
                     dest["url"] = websiteList[ind];
                     dest["title"] = titleList[ind];
-                    nestedDestList = buildBftEvenHelper(numLevels - 1, numBranches, origCounter + (i+1)*numBranches);
+                    cntr++;
+                    nestedDestList = buildBftEvenHelper(numLevels - 1, numBranches);
                     dest["destinations"] = nestedDestList;
                     destList.push(Object.assign({}, dest));
-                    counter++;
                 }
                 return destList;
             }
