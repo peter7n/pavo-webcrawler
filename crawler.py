@@ -23,17 +23,18 @@ class RandomCrawlSpider(scrapy.Spider):
     limit = 0
     le = LinkExtractor()
     visited = set()
+    keyword = None
     keywordWebsite = ''
     error = ''
 
-    def __init__(self, start_url=None, limit=MAX_LIMIT, *args, **kwargs):
+    def __init__(self, start_url=None, limit=MAX_LIMIT, keyword=None, *args, **kwargs):
         super(RandomCrawlSpider, self).__init__(*args, **kwargs)
 
         if not start_url:
             raise ValueError('No starting webpage')
-
         self.start_urls = [start_url]
         self.limit = limit
+        self.keyword = keyword.lower() if keyword else keyword
 
     def parse(self, response):
 
@@ -79,6 +80,14 @@ class RandomCrawlSpider(scrapy.Spider):
             RandomCrawlSpider.last_node.append_child(node)
             RandomCrawlSpider.last_node = node
 
+        # if current node contains the keyword, return
+        if self.keyword:
+            # get all visible plaintext from the body of the website
+            plaintext = ' '.join(response.xpath("//body//text()").extract()).strip().lower()
+            if self.keyword in plaintext:
+                RandomCrawlSpider.keywordWebsite = response.url
+                return
+
         # yield a request
         yield scrapy.Request(
             url=destination,
@@ -87,7 +96,7 @@ class RandomCrawlSpider(scrapy.Spider):
         )
 
 
-t = []
+#t = []
 
 class BreadthCrawlSpider(CrawlSpider):
     name = "Breadth"
@@ -99,12 +108,14 @@ class BreadthCrawlSpider(CrawlSpider):
     nextNodesToNextDepth = 0    # counts grandchildren for the depth increase after current level
     le = LinkExtractor()
     visited = set()
+    keyword = None
     keywordWebsite = ''
     error = ''
     handle_httpstatus_list = [404, 500, 999]
-    t.append(datetime.now())
+    #t.append(datetime.now())
+    t0 = datetime.now()
 
-    def __init__(self, start_url=None, depth=MAX_DEPTH, *args, **kwargs):
+    def __init__(self, start_url=None, depth=MAX_DEPTH, keyword=None, *args, **kwargs):
         super(BreadthCrawlSpider, self).__init__(*args, **kwargs)
 
         if not start_url:
@@ -112,11 +123,18 @@ class BreadthCrawlSpider(CrawlSpider):
 
         self.start_urls = [start_url]
         self.depth_limit = depth
+        self.keyword = keyword.lower() if keyword else keyword
         self.queue.append((start_url, None))  # queue stores url string, parent node tuple
         self.queue.append(None)
 
     def parse(self, response):
-        t.append(datetime.now())
+        # terminate if timed out
+        seconds_elapsed = (datetime.now() - BreadthCrawlSpider.t0).total_seconds()
+        if seconds_elapsed >= 180:
+            BreadthCrawlSpider.error = "Timed out - terminating early"
+            return
+
+        #t.append(datetime.now())
         if response.status >= 400:
             self.queue.popleft()
 
@@ -126,11 +144,11 @@ class BreadthCrawlSpider(CrawlSpider):
                 self.queue.popleft()
 
                 if self.depth > self.depth_limit:
-                    print '2 ' + self.depth + ', ' + self.depth_limit
+                    #print '2 ' + str(self.depth) + ', ' + str(self.depth_limit)
                     return
 
                 if not self.queue[0]:  # no more nodes
-                    print '3'
+                    #print '3'
                     return
 
             yield scrapy.Request(
@@ -142,7 +160,7 @@ class BreadthCrawlSpider(CrawlSpider):
             if self.depth > self.depth_limit:  # reached the crawl limit
                 print '1 ' + str(self.depth) + ', ' + str(self.depth_limit)
                 return
-            t.append(datetime.now())
+            #t.append(datetime.now())
             page_url, parent_node = self.queue.popleft()
 
             self.visited.add(page_url)
@@ -155,23 +173,13 @@ class BreadthCrawlSpider(CrawlSpider):
                 BreadthCrawlSpider.error = 'web page not supported type'
                 return
 
-            t.append(datetime.now())
-            # get all links on this page
-            links = set([i.url for i in self.le.extract_links(response)])
-            links -= self.visited  # set difference
-            t.append(datetime.now())
-            """
-            self.nextNodesToNextDepth += len(links)
-            self.nodesToNextDepth -= 1
-        
-            if self.nodesToNextDepth == 0:  # hit the next depth
-                self.depth += 1
-                if self.depth > self.depth_limit:
-                    return
-        
-                self.nodesToNextDepth = self.nextNodesToNextDepth
-                self.nextNodesToNextDepth = 0
-            """
+            #t.append(datetime.now())
+            links = []
+            # get all links on this page if depth is lower than max depth
+            if self.depth < self.depth_limit:
+                links = set([i.url for i in self.le.extract_links(response)])
+                links -= self.visited  # set difference
+            #t.append(datetime.now())
 
             # create a node for this page and append to the parent node
             node = Node(page_url, title)
@@ -181,12 +189,20 @@ class BreadthCrawlSpider(CrawlSpider):
             else:
                 parent_node.append_child(node)
 
-            t.append(datetime.now())
+            # if current node contains the keyword, return
+            if self.keyword:
+                # get all visible plaintext from the body of the website
+                plaintext = ' '.join(response.xpath("//body//text()").extract()).strip().lower()
+                if self.keyword in plaintext:
+                    BreadthCrawlSpider.keywordWebsite = response.url
+                    return
+
+            #t.append(datetime.now())
             for link in links:
                 self.queue.append((link, node))
-            t.append(datetime.now())
+            #t.append(datetime.now())
             if len(self.queue) == 0:
-                print '4'
+                #print '4'
                 return
 
             if not self.queue[0]:
@@ -195,18 +211,18 @@ class BreadthCrawlSpider(CrawlSpider):
                 self.queue.popleft()
 
                 if self.depth > self.depth_limit:
-                    print '2 ' + str(self.depth) + ', ' + str(self.depth_limit)
+                    #print '2 ' + str(self.depth) + ', ' + str(self.depth_limit)
                     return
 
                 if not self.queue[0]:  # no more nodes
-                    print '3'
+                    #print '3'
                     return
-            t.append(datetime.now())
+            #t.append(datetime.now())
 
             #print [str(t[i] - t[i-1]) for i in range(1, len(t))]
 
-            del t[:]
-            t.append(datetime.now())
+            #del t[:]
+            #t.append(datetime.now())
 
             # yield a request
             yield scrapy.Request(
@@ -265,7 +281,7 @@ def run_dfs(start_url, limit, keyword):
     #configure_logging({'LOG_FORMAT': '%(levelname)s: %(message)s'})
     runner = CrawlerRunner()
 
-    d = runner.crawl(RandomCrawlSpider, start_url, limit)
+    d = runner.crawl(RandomCrawlSpider, start_url, limit, keyword)
     d.addBoth(lambda _: reactor.stop())
     reactor.run()  # the script will block here until the crawling is finished
     
@@ -290,7 +306,7 @@ def run_bfs(start_url, depth, keyword):
     process = CrawlerProcess({
         'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
     })
-    process.crawl(BreadthCrawlSpider, start_url=start_url, depth=depth)
+    process.crawl(BreadthCrawlSpider, start_url=start_url, depth=depth, keyword=keyword)
     process.start()
     #"""
 
@@ -309,4 +325,4 @@ if __name__ == '__main__':
     #print run(start_url='http://sherlockian.net', bfs=True, limit=2, keyword="circle")
     #print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=True, limit=2, keyword="circle")
     #print run(start_url='https://www.twitter.com/', bfs=True, limit=2, keyword="circle")
-    print run(start_url='https://www.uber.com/', bfs=True, limit=2, keyword="circle")
+    print run(start_url='https://www.uber.com/', bfs=True, limit=2, keyword="24/7")
