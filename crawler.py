@@ -85,7 +85,7 @@ class RandomCrawlSpider(scrapy.Spider):
             # get all visible plaintext from the body of the website
             plaintext = ' '.join(response.xpath("//body//text()").extract()).strip().lower()
             if self.keyword in plaintext:
-                RandomCrawlSpider.keywordWebsite = response.url
+                RandomCrawlSpider.keywordWebsite = node.id
                 return
 
         # yield a request
@@ -192,10 +192,9 @@ class BreadthCrawlSpider(CrawlSpider):
             # if current node contains the keyword, return
             if self.keyword:
                 # get all visible plaintext from the body of the website
-                plaintext = response.xpath("//body//text()").extract()
-                lowercase_strings = [x.strip().lower() for x in plaintext]
-                if self.keyword in lowercase_strings:
-                    BreadthCrawlSpider.keywordWebsite = response.url
+                plaintext = ' '.join(response.xpath("//body//text()").extract()).strip().lower()
+                if self.keyword in plaintext:
+                    BreadthCrawlSpider.keywordWebsite = node.id
                     return
 
             #t.append(datetime.now())
