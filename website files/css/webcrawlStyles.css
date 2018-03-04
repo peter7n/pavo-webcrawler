@@ -1,3 +1,11 @@
+/******************************************************************************
+* Name:        webcrawlStyles.css
+* Authors:     Frederick Kontur
+* Created:     March 3, 2018
+* Last Edited: March 4, 2018
+* Description: This file contains the styles for the webcrawl.html page not
+*              including the styles for the visualizer.
+******************************************************************************/
 /* Title bar for the page */
 #headerImage {
     width: 100%;
@@ -85,80 +93,4 @@
 /* Text for the error message */ 
 #errMsgTxt {
     padding: 15px;
-}
-
-/******************************************************************************
-Styles for the visualizer
-******************************************************************************/
-div.outer {
-    position: relative;
-    left: 600px;
-    top: 30px;
-    margin-bottom: 10px;
-}
-
-div.outer:first-child {
-    left: 30px;
-    margin-left: 30px;
-}
-
-div.inner {
-    display: inline-block;
-    background: blue;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    vertical-align: top;
-}
-
-#visualizer {
-    position: relative;
-}
-
-#overlay {
-    position: absolute;
-    top:0px;
-    bottom:0px;
-    left:0px;
-    right:0px;
-}
-
-/* tooltip container */ 
-.tooltipcont {
-    position: relative;
-    display: inline-block;
-}
-
-/* tooltip text */
-.tooltiptext {
-     visibility: hidden;
-     width: 600px;
-     background-color: #555;
-     color: #fff;
-     text-align: center;
-     padding: 5px 0;
-     position: absolute;
-     z-index: 1;
-     top: -5px;
-     left: 125%;
-     opacity: 0;
-     transition: opacity 0.3s;
-     vertical-align: top;
-}
-
-/* tooltipCont arrow */
-.tooltiptext::after {
-     content: "";
-     position: absolute;
-     top: 50%;
-     right: 100%;
-     margin-top: -5px;
-     border-width: 5px;
-     border-style: solid;
-     border-color: transparent #555 transparent transparent;
-}
-
-.tooltipcont:hover .tooltiptext {
-     visibility: visible;
-     opacity: 1;
 }

@@ -1,18 +1,21 @@
 /******************************************************************************
 * Name:        webcrawlJavascript.js
-* Authors:     Frederick Kontur and Peter Nguyen
+* Authors:     Frederick Kontur
 * Created:     March 3, 2018
-* Last Edited: March 3, 2018
+* Last Edited: March 4, 2018
 * Description: This file contains the Javascript variables and functions for
-*              the webcrawl.html page.
+*              the webcrawl.html page not including the Javascript for the
+*              visualizer.
 ******************************************************************************/
-/*global $, document */
+
+/*global $, document*/
 
 // Global variables
 var prevWebsites = []; // An array holding the saved websites
 var prevKeywords = []; // An array holding the saved keywords
-var nodeCounter = 0; // A counter for the number of nodes in the web crawl
 var numDaysToSave = 30; // The number of days to save the website/keyword
+
+// URL for the crawler program
 var crawlerProgUrl = "http://web.engr.oregonstate.edu/cgi-bin/cgiwrap/~konturf/webcrawlProg.py";
 
 // Prevent the default behavior for the form submit button
@@ -318,117 +321,6 @@ function displayInput() {
     dataTable.appendChild(dataTableBody);
     userInput.appendChild(dataTable);
     userInput.style.display = "block";
-}
-
-
-function jsonTreeRecurse(container, jsonData) {
-/******************************************************************************
-* Parameters:  container  The div container for holding the nodes
-*              jsonData   The websites data from the web crawl program
-* Returns:     Nothing
-* Description: This is a recursive function that traverses a JSON tree and
-*              appends node elements to the specified container.
-******************************************************************************/
-    "use strict";
-    var i,
-        $divParent,
-        $divChild,
-        $divTooltipcont,
-        $divInner,
-        $divSpan;
-    for (i = 0; i < jsonData.length; i += 1) {
-        $divParent = $("<div class='outer'></div>");
-        $divChild = $("<a target='_blank'></a>");
-        $divTooltipcont = $("<div class='tooltipcont'></div>");
-        $divInner = $("<div class='inner'></div>");
-        $divSpan = $("<span class='tooltiptext'></span>");
-        $divParent.attr('id', jsonData[i].id);
-        $divChild.attr('href', jsonData[i].url);
-        $divSpan.text(jsonData[i].title + " | " + jsonData[i].url);
-        $divInner.append($divSpan);
-        $divTooltipcont.append($divInner);
-        $divChild.append($divTooltipcont);
-        $divParent.append($divChild);
-        if (jsonData[i].destinations) {
-            jsonTreeRecurse($divParent, jsonData[i].destinations);
-        }
-        container.append($divParent);
-        nodeCounter += 1;
-    }
-}
-
-
-function displayVisualizer(webcrawlResults) {
-/******************************************************************************
-* Parameters:  webcrawlResults  The JSON results from the web crawl program
-* Returns:     Nothing
-* Description: This function displays the returned results from the web crawl
-*              program in a node-and-line picture.
-******************************************************************************/
-    "use strict";
-    
-    // Create the node elements
-    jsonTreeRecurse($("#overlay"), webcrawlResults.websites);
-
-    // Calculate maximum svg width and height
-    var h = $('.inner').css('height'),
-        w = $('.inner').css('width'),
-        height = parseInt(h, 10),
-        width = parseInt(w, 10),
-        maxLeft = 0,
-        maxTop = 0,
-        urlNode,
-        nodeId,
-        offset,
-        parent,
-        parentOffset,
-        line,
-        ns,
-        div,
-        svg,
-        vis,
-        i,
-        j;
-    for (i = 1; i < nodeCounter; i += 1) {
-        urlNode = $("#ID-" + (i + 1));
-        offset = urlNode.offset();
-        if (offset.left > maxLeft) {
-            maxLeft = offset.left + width;
-        }
-        if (offset.top > maxTop) {
-            maxTop = offset.top + height;
-        }
-    }
-
-    // Create svg element
-    ns = "http://www.w3.org/2000/svg";
-    div = document.getElementById("drawing");
-    svg = document.createElementNS(ns, "svg");
-    svg.setAttributeNS(null, "width", maxLeft);
-    svg.setAttributeNS(null, "height", maxTop);
-    div.appendChild(svg);
-
-    // Draw connecting lines between parent and child nodes
-    vis = document.getElementById("visualizer");
-    for (j = 1; j < nodeCounter; j += 1) {
-        nodeId = "#ID-" + (j + 1);
-        urlNode = $(nodeId);
-        offset = urlNode.offset();
-        parent = $(urlNode.parent());
-        parentOffset = parent.offset();
-        line = document.createElementNS(ns, "line");
-        line.setAttributeNS(null, "x1", offset.left + (width / 2) - vis.offsetLeft);
-        line.setAttributeNS(null, "y1", offset.top + (height / 2) - vis.offsetTop);
-        line.setAttributeNS(null, "x2", parentOffset.left + (width / 2) - vis.offsetLeft);
-        line.setAttributeNS(null, "y2", parentOffset.top + (height / 2) - vis.offsetTop);
-        line.setAttributeNS(null, "stroke", "blue");
-        svg.appendChild(line);
-
-        // set the node where keyword was found to red
-        if (nodeId === "#" + webcrawlResults.keywordWebsite) {
-            urlNode.find(".inner").css({"background": "red"});
-        }
-    }
 }
 
 

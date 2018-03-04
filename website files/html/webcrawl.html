@@ -11,6 +11,9 @@
         
         <!-- Webcrawl CSS -->
         <link rel="stylesheet" href="css/webcrawlStyles.css">
+        
+        <!-- Visualizer CSS -->
+        <link rel="stylesheet" href="css/webcrawlStyles.css">
 
         <title>Web Crawler</title>
     </head>
@@ -89,6 +92,17 @@
         
         <!-- Placeholder for the visualizer -->
         <div id="visualizer">
+            <div id="control">
+                <div class="slidecontainer">
+                    <input type="range" min="0" max="1200" value="600" class="slider" id="slideRange">
+    			</div>
+                <p>Zoom Control</p>
+                <label class="switch-container">
+                    <input type="checkbox">
+                    <span class="switch round"></span>
+                </label>
+                <p>Show/Hide Labels</p>
+    		</div>
             <div id="drawing"></div>
             <div id="overlay"></div>
         </div>
@@ -98,6 +112,9 @@
         
         <!-- Import webcrawl javascript -->
         <script src="js/webcrawlJavascript.js"></script>
+        
+        <!-- Import visualizer javascript -->
+        <script src="js/visualizer.js"></script>
             
     </body>
 </html>
