@@ -53,16 +53,6 @@ class RandomCrawlSpider(scrapy.Spider):
             RandomCrawlSpider.error = 'web page not supported type'
             return
 
-        links = set([i.url for i in self.le.extract_links(response)])
-        links -= self.visited  # set difference
-
-        if not links:  # if no outgoing links
-            RandomCrawlSpider.error = 'no outgoing links'
-            return
-
-        # pick a random link from all links
-        destination = random.choice(tuple(links))
-
         try:
             title = response.css('title::text').extract_first()
         except IndexError:
@@ -80,6 +70,16 @@ class RandomCrawlSpider(scrapy.Spider):
             RandomCrawlSpider.last_node.append_child(node)
             RandomCrawlSpider.last_node = node
 
+        links = set([i.url for i in self.le.extract_links(response)])
+        links -= self.visited  # set difference
+
+        if not links:  # if no outgoing links
+            RandomCrawlSpider.error = 'no outgoing links'
+            return
+
+        # pick a random link from all links
+        destination = random.choice(tuple(links))
+
         # if current node contains the keyword, return
         if self.keyword:
             # get all visible plaintext from the body of the website
@@ -94,7 +94,6 @@ class RandomCrawlSpider(scrapy.Spider):
             callback=self.parse,
             dont_filter=True
         )
-
 
 #t = []
 
@@ -320,9 +319,9 @@ def run_bfs(start_url, depth, keyword):
 
 
 if __name__ == '__main__':
-    #print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=False, limit=10)
+    print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=False, limit=10)
     #print run(start_url='http://rheology.org/sor/info/default.htm', bfs=True, limit=2, keyword="circle")
     #print run(start_url='http://sherlockian.net', bfs=True, limit=2, keyword="circle")
     #print run(start_url='http://www.reddit.com/r/GameDeals/', bfs=True, limit=2, keyword="circle")
     #print run(start_url='https://www.twitter.com/', bfs=True, limit=2, keyword="circle")
-    print run(start_url='https://www.uber.com/', bfs=True, limit=2, keyword="24/7")
+    #print run(start_url='https://www.uber.com/', bfs=True, limit=2, keyword="24/7")
