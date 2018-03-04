@@ -1,6 +1,17 @@
 #!/nfs/stak/users/konturf/CS467/bin/python
 # -*- coding: UTF-8 -*-
 
+###############################################################################
+# Name:        webcrawlProg.py
+# Author:      Frederick Kontur
+# Created:     January 27, 2018
+# Last Edited: March 3, 2018
+# Description: This file contains the code for handling the data sent from the
+#              front-end form and sending that data to the crawler program. It
+#              then receives the results of the web crawl and sends them back
+#              to the front end for display by the visualizer.
+###############################################################################
+
 # I found information on this website - 
 # https://www.a2hosting.com/kb/developer-corner/python/activating-a-python-virtual-environment-from-a-script-file
 # about activating a virtual environment from a Python CGI script
@@ -10,7 +21,6 @@ execfile(activate_this, dict(__file__=activate_this))
 import cgi
 import cgitb
 import json
-import urllib
 import crawler
 
 # Enable debugging
@@ -19,9 +29,6 @@ cgitb.enable()
 ###############################################################################
 # Define global variables
 ###############################################################################
-# The URL where the data visualizer can be found
-urlVisualizer = "http://web.engr.oregonstate.edu/~konturf/visualizer-svg-test-fred.php"
-
 # Indicates whether or not the user chose to do a depth-first traversal    
 dft = False
 

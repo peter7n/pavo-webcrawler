@@ -5,7 +5,7 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.crawler import CrawlerRunner
 from scrapy.exceptions import NotSupported
 from scrapy.linkextractors import LinkExtractor
-from scrapy.contrib.spiders import CrawlSpider
+from scrapy.spiders import CrawlSpider
 from twisted.internet import reactor
 import random
 from collections import deque
@@ -281,7 +281,7 @@ def run_dfs(start_url, limit, keyword):
     #configure_logging({'LOG_FORMAT': '%(levelname)s: %(message)s'})
     runner = CrawlerRunner()
 
-    d = runner.crawl(RandomCrawlSpider, start_url, limit, keyword)
+    d = runner.crawl(RandomCrawlSpider, start_url, limit + 1, keyword)
     d.addBoth(lambda _: reactor.stop())
     reactor.run()  # the script will block here until the crawling is finished
     
