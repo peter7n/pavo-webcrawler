@@ -32,9 +32,9 @@ function drawLines(webcrawlResults, svg, nodeCount) {
 		var parentOffset = parent.offset();
 		var line = document.createElementNS(ns, "line");
         line.setAttributeNS(null, "x1", offset.left);
-        line.setAttributeNS(null, "y1", offset.top - infoDivHeight - errorDivHeight);
+        line.setAttributeNS(null, "y1", offset.top - infoDivHeight - headerHeight - errorDivHeight);
         line.setAttributeNS(null, "x2", parentOffset.left);
-        line.setAttributeNS(null, "y2", parentOffset.top - infoDivHeight - errorDivHeight);
+        line.setAttributeNS(null, "y2", parentOffset.top - infoDivHeight - headerHeight - errorDivHeight);
 		line.setAttributeNS(null, "stroke", "#4483d5");
 		svg.appendChild(line);
 
