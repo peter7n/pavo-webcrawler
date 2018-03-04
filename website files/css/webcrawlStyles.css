@@ -50,7 +50,7 @@
     text-align: center;
 }
 
-/* The style for the loader was taken from 
+/* The style for the loader was taken from
    https://www.w3schools.com/howto/howto_css_loader.asp */
 .loader {
     border: 16px solid #f3f3f3;
@@ -82,7 +82,7 @@
     padding-left: 40px;
 }
 
-/* Div for the error message that displays if there is an error in the web 
+/* Div for the error message that displays if there is an error in the web
    crawl */
 #errorMessage {
     display: none;
@@ -90,7 +90,11 @@
     padding-left: 40px;
 }
 
-/* Text for the error message */ 
+/* Text for the error message */
 #errMsgTxt {
     padding: 15px;
+}
+
+.table {
+    margin-bottom: 0;
 }

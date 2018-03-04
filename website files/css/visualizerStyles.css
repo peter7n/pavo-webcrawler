@@ -3,6 +3,7 @@
 
 #visualizer {
 	position: relative;
+	margin: 8px;
 }
 
 #overlay {
@@ -125,7 +126,10 @@
 
 /*=================== switch styles ===================*/
 
-/* The switch - the box around the slider */
+label {
+	margin-bottom: 0;
+}
+
 .switch-container {
   position: relative;
   display: inline-block;
@@ -136,7 +140,6 @@
 /* Hide default HTML checkbox */
 .switch-container input {display:none;}
 
-/* The slider */
 .switch {
   position: absolute;
   cursor: pointer;
