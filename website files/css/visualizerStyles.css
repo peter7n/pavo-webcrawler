@@ -59,7 +59,6 @@
 
 /* tooltip text */
 .tooltipcont .tooltiptext {
-	visibility: hidden;
 	width: 1000px;
 	background-color: #555;
 	color: #fff;
@@ -69,7 +68,6 @@
 	z-index: 1;
 	top: -5px;
 	left: 125%;
-	opacity: 0;
 	transition: opacity 0.3s;
 }
 
@@ -85,7 +83,17 @@
 	border-color: transparent #555 transparent transparent;
 }
 
-.tooltipcont:hover .tooltiptext {
+.tooltip-visible .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}
+
+.tooltip-hidden .tooltiptext {
+	visibility: hidden;
+	opacity: 0;
+}
+
+.tooltip-hidden:hover .tooltiptext {
 	visibility: visible;
 	opacity: 1;
 }

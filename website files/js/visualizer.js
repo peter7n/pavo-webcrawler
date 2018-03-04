@@ -57,7 +57,7 @@ function jsonTreeRecurse(container, jsonData) {
 	 for (var i = 0; i < jsonData.length; i++) {
 		  var $divParent = $("<div class='outer'></div>");
 		  var $divChild = $("<a target='_blank'></a>");
-		  var $divtooltipcont = $("<div class='tooltipcont'></div>");
+		  var $divtooltipcont = $("<div class='tooltipcont tooltip-hidden'></div>");
 		  var $divInner=$("<div class='inner'></div>");
 		  var $divSpan = $("<span class='tooltiptext'></span>");
 		  $divParent.attr('id', jsonData[i].id);
@@ -94,14 +94,12 @@ function displayVisualizer(webcrawlResults) {
 
 	 $('input[type=checkbox]').change(function() {
 		 if (this.checked) {
-			 $(".tooltiptext").css("visibility", "visible");
-			 $(".tooltiptext").css("opacity", 1);
+			 $(".tooltipcont").toggleClass("tooltip-hidden");
+			 $(".tooltipcont").toggleClass("tooltip-visible");
 		 }
 		 else {
-			 $(".tooltiptext").css("visibility", "hidden");
-			 $(".tooltiptext").css("opacity", 0);
-			 $(".tooltipcont:hover .tooltiptext").css("visibility", "visible");
-			 $(".tooltipcont:hover .tooltiptext").css("opacity", 1);
+			 $(".tooltipcont").toggleClass("tooltip-visible");
+			 $(".tooltipcont").toggleClass("tooltip-hidden");
 		 }
 	 });
 
