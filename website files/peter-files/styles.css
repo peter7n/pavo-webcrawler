@@ -1,0 +1,238 @@
+/*=================== website styles ===================*/
+body {
+	margin: 8px;
+}
+
+form {
+	padding-top: 15px;
+	margin-bottom: 20px;
+}
+
+.table {
+	margin-bottom: 0;
+}
+
+#headerImage {
+	width: 100%;
+}
+
+#errorMessage {
+	display: none;
+	padding-top: 10px;
+	padding-left: 40px;
+}
+
+#inputForm {
+	padding-left: 40px;
+	z-index: 2;
+}
+
+#startingWebsite {
+	width: 40em;
+}
+
+#numLevels {
+	width: 10em;
+}
+
+#stopKeyword {
+	width: 25em;
+}
+
+#loadWebsite {
+	display: none;
+}
+
+#inputInformation {
+	display: none;
+	padding-left: 40px;
+}
+
+#errMsgTxt {
+	padding: 15px;
+}
+
+/*=================== visualizer styles ===================*/
+
+#visualizer {
+	position: relative;
+}
+
+#overlay {
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	/* line-height: normal; */
+}
+
+#control {
+	display: none;
+	position: fixed;
+	top: 50%;
+	width: 300px;
+	padding: 10px;
+	background: #d5e3f6;
+	border-radius: 10px;
+	z-index: 100;
+}
+
+.outer {
+	position: relative;
+	left: 600px;
+	top: 30px;
+	margin-bottom: 10px;
+	line-height: 1;
+}
+
+.outer::after {
+	content: " ";
+	white-space: pre;
+}
+
+.inner {
+	display: inline-block;
+	background: #4483d5;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	line-height: normal;
+	vertical-align: top;
+}
+
+/*=================== tooltip styles ===================*/
+
+/* tooltip container */
+.tooltipcont {
+	position: relative;
+	display: inline-block;
+}
+
+/* tooltip text */
+.tooltipcont .tooltiptext {
+	visibility: hidden;
+	width: 1000px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	top: -5px;
+	left: 125%;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+/* tooltipCont arrow */
+.tooltiptext::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 100%;
+	margin-top: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent #555 transparent transparent;
+}
+
+.tooltipcont:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}
+
+/*=================== slider styles ===================*/
+
+.slider {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 100%;
+	height: 25px;
+	background: #d3d3d3;
+	outline: none;
+	opacity: 0.7;
+	-webkit-transition: .2s;
+	transition: opacity .2s;
+}
+
+.slider:hover {
+	opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 25px;
+	height: 25px;
+	background: #4483d5;
+	cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+	width: 25px;
+	height: 25px;
+	background: #4483d5;
+	cursor: pointer;
+}
+
+/*=================== switch styles ===================*/
+
+/* The switch - the box around the slider */
+.switch-container {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch-container input {display:none;}
+
+/* The slider */
+.switch {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.switch:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .switch {
+  background-color: #2196F3;
+}
+
+input:focus + .switch {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .switch:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.switch.round {
+  border-radius: 34px;
+}
+
+.switch.round:before {
+  border-radius: 50%;
+}
