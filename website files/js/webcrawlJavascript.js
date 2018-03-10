@@ -2,7 +2,7 @@
 * Name:        webcrawlJavascript.js
 * Authors:     Frederick Kontur
 * Created:     March 3, 2018
-* Last Edited: March 4, 2018
+* Last Edited: March 10, 2018
 * Description: This file contains the Javascript variables and functions for
 *              the webcrawl.html page not including the Javascript for the
 *              visualizer.
@@ -14,6 +14,7 @@
 var prevWebsites = []; // An array holding the saved websites
 var prevKeywords = []; // An array holding the saved keywords
 var numDaysToSave = 30; // The number of days to save the website/keyword
+var nodeCntr = 0; // Count the number of nodes found in the web crawl
 
 // URL for the crawler program
 var crawlerProgUrl = "http://web.engr.oregonstate.edu/cgi-bin/cgiwrap/~konturf/webcrawlProg.py";
@@ -283,6 +284,10 @@ function displayInput() {
         dataTableRow4 = document.createElement("tr"),
         dataTableRow4Col1 = document.createElement("td"),
         dataTableRow4Col2 = document.createElement("td"),
+        dataTableRow5 = document.createElement("tr"),
+        dataTableRow5Col1 = document.createElement("td"),
+        dataTableRow5Col2 = document.createElement("td"),
+        newWebcrawlButton = document.createElement("a"),
         kw = document.getElementById("stopKeyword").value;
 
     dataTableRow1Col1.innerHTML = "Starting Website";
@@ -316,11 +321,40 @@ function displayInput() {
     dataTableRow4.appendChild(dataTableRow4Col1);
     dataTableRow4.appendChild(dataTableRow4Col2);
     dataTableBody.appendChild(dataTableRow4);
+    
+    dataTableRow5Col1.innerHTML = "Number of Links Found in Web Crawl";
+    dataTableRow5Col2.innerHTML = nodeCntr;
+    dataTableRow5.appendChild(dataTableRow5Col1);
+    dataTableRow5.appendChild(dataTableRow5Col2);
+    dataTableBody.appendChild(dataTableRow5);
+    
+    newWebcrawlButton.setAttribute("class", "btn btn-primary");
+    newWebcrawlButton.setAttribute("href", "./webcrawl.html");
+    newWebcrawlButton.innerHTML = "New Web Crawl";
 
     dataTable.setAttribute("class", "table");
     dataTable.appendChild(dataTableBody);
     userInput.appendChild(dataTable);
+    userInput.appendChild(newWebcrawlButton);
     userInput.style.display = "block";
+}
+
+
+function countNodes(websites) {
+/******************************************************************************
+* Parameters:  websites  The websites found in the web crawl
+* Returns:     Nothing
+* Description: This is a recursive function that counts all of the websites
+*              found in the web crawl.
+******************************************************************************/
+    "use strict";
+    var i = 0;
+    for( ; i < websites.length; i += 1) {
+        nodeCntr += 1;
+        if(websites[i].destinations) {
+            countNodes(websites[i].destinations);
+        }
+    }
 }
 
 
@@ -361,6 +395,7 @@ function sendAjaxRequest() {
             if (webcrawlResults.errorMessage) {
                 displayErrorMessage(webcrawlResults.errorMessage);
             }
+            countNodes(webcrawlResults.websites); // Update the nodeCntr
             displayInput();
             displayVisualizer(webcrawlResults);
         },
