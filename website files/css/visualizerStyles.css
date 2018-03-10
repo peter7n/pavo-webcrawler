@@ -18,8 +18,9 @@
 #control {
 	display: none;
 	position: fixed;
-	top: 50%;
+	bottom: 30px;
 	width: 300px;
+	margin-left: 20px;
 	padding: 10px;
 	background: #d5e3f6;
 	border-radius: 10px;
@@ -60,15 +61,17 @@
 /* tooltip text */
 .tooltipcont .tooltiptext {
 	width: 1000px;
-	background-color: #555;
+	background-color: #000;
 	color: #fff;
 	text-align: center;
-	padding: 5px;
+	padding: 8px;
 	position: absolute;
 	z-index: 1;
-	top: -5px;
+	top: -12px;
 	left: 125%;
 	transition: opacity 0.3s;
+	border: 1px solid #fff;
+	border-radius: 5px;
 }
 
 /* tooltipCont arrow */
@@ -80,9 +83,10 @@
 	margin-top: -5px;
 	border-width: 5px;
 	border-style: solid;
-	border-color: transparent #555 transparent transparent;
+	border-color: transparent #000 transparent transparent;
 }
 
+/* classes to show/hide tooltips with javascript */
 .tooltip-visible .tooltiptext {
 	visibility: visible;
 	opacity: 1;
