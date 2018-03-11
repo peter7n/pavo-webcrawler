@@ -1,5 +1,12 @@
+/******************************************************************************
+* Name:        visualizerStyles.css
+* Author:      Peter Nguyen
+* Created:     3/1/18
+* Description: CSS file for the graphical webcrawler visualizer for Team Pavo.
+*              Additional sources used: w3schools.com
+******************************************************************************/
 
-/*=================== visualizer styles ===================*/
+/*=================== main styles ===================*/
 
 #visualizer {
 	position: relative;
@@ -12,7 +19,6 @@
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
-	/* line-height: normal; */
 }
 
 #control {
@@ -51,14 +57,13 @@
 }
 
 /*=================== tooltip styles ===================*/
+/* Source: w3schools.com */
 
-/* tooltip container */
 .tooltipcont {
 	position: relative;
 	display: inline-block;
 }
 
-/* tooltip text */
 .tooltipcont .tooltiptext {
 	width: 1000px;
 	background-color: #000;
@@ -74,7 +79,6 @@
 	border-radius: 5px;
 }
 
-/* tooltipCont arrow */
 .tooltiptext::after {
 	content: "";
 	position: absolute;
@@ -103,15 +107,15 @@
 }
 
 /*=================== slider styles ===================*/
+/* Source: w3schools.com */
 
 .slider {
 	-webkit-appearance: none;
 	appearance: none;
 	width: 100%;
 	height: 25px;
-	background: #d3d3d3;
+	background: #ccc;
 	outline: none;
-	opacity: 0.7;
 	-webkit-transition: .2s;
 	transition: opacity .2s;
 }
@@ -137,6 +141,7 @@
 }
 
 /*=================== switch styles ===================*/
+/* Source: w3schools.com */
 
 label {
 	margin-bottom: 0;
@@ -190,7 +195,6 @@ input:checked + .switch:before {
   transform: translateX(26px);
 }
 
-/* Rounded sliders */
 .switch.round {
   border-radius: 34px;
 }

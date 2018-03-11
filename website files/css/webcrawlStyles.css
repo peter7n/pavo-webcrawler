@@ -92,6 +92,7 @@
 
 /* Text for the error message */
 #errMsgTxt {
+    margin-bottom: 0;
     padding: 15px;
 }
 
