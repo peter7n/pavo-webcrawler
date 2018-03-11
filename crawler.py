@@ -129,7 +129,7 @@ class BreadthCrawlSpider(CrawlSpider):
     def parse(self, response):
         # terminate if timed out
         seconds_elapsed = (datetime.now() - BreadthCrawlSpider.t0).total_seconds()
-        if seconds_elapsed >= 180:
+        if seconds_elapsed >= 110:
             BreadthCrawlSpider.error = "Timed out - terminating early"
             return
 

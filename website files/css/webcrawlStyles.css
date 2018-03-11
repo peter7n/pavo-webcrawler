@@ -79,7 +79,7 @@
 /* Field for displaying the user's input when the visualizer appears */
 #inputInformation {
     display: none;
-    padding-left: 40px;
+    padding-left: 33%;
 }
 
 /* Div for the error message that displays if there is an error in the web
